@@ -29,7 +29,7 @@
       localStorage.setItem(SESSION_KEY, JSON.stringify({
         date: new Date().toDateString(), count: Timer._sessionsToday
       }));
-    } catch (e) {}
+    } catch (e) { }
   }
 
   Timer.setFocusTopic = function (text) {
@@ -92,7 +92,7 @@
       gain.gain.setValueAtTime(0.25, ctx.currentTime);
       gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.9);
       osc.start(); osc.stop(ctx.currentTime + 0.9);
-    } catch (e) {}
+    } catch (e) { }
   };
 
   Timer.start = function () {

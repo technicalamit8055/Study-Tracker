@@ -103,6 +103,14 @@
 
   State.loadProgress = function (examId) {
     var id = examId || State.activeExamId;
+
+    // Guests never get progress restored from localStorage: exploring the
+    // syllabus should always start from a clean, unmarked preview.
+    if (!State.authToken) {
+      State.userState = {};
+      return State.userState;
+    }
+
     var raw = safeGet(State.progressKey(id));
 
     // First run on this exam: adopt progress from the old single-exam app.
@@ -123,10 +131,20 @@
     return State.userState;
   };
 
+  /**
+   * Persist the active exam's progress. Guests are stopped here rather than
+   * upstream so every call site — checkbox, drawer, notes — gets the same
+   * "sign in to save" gate for free instead of re-checking auth itself.
+   */
   State.saveProgress = function (skipCloud) {
+    if (!State.authToken) {
+      State.emit('auth:required');
+      return false;
+    }
     safeSet(State.progressKey(), JSON.stringify(State.userState));
     State.emit('progress:changed');
     if (!skipCloud) State.queueCloudSync();
+    return true;
   };
 
   /* ---------------- active exam ---------------- */
@@ -512,14 +530,40 @@
     State.emit('auth:changed');
   };
 
-  State.clearAuth = function () {
+  /**
+   * Drop the cached identity. `purge` defaults to true (an explicit sign-out
+   * should always scrub the shared device); pass false for defensive paths
+   * where the SDK is merely unavailable/offline and the session may still be
+   * valid once connectivity returns — there, wiping local progress would
+   * destroy edits that were never confirmed to reach the cloud.
+   */
+  State.clearAuth = function (purge) {
     State.authToken = null;
     State.currentUser = null;
     try {
       localStorage.removeItem(KEYS.authToken);
       localStorage.removeItem(KEYS.userInfo);
-    } catch (e) {}
+    } catch (e) { }
+    if (purge !== false) {
+      State.purgeLocalProgress();
+      State.userState = {};
+    }
     State.emit('auth:changed');
+  };
+
+  /**
+   * Wipe every cached exam's progress from localStorage. Run on sign-out so a
+   * shared device never leaks one student's marks into the next guest preview.
+   */
+  State.purgeLocalProgress = function () {
+    try {
+      var toRemove = [];
+      for (var i = 0; i < localStorage.length; i++) {
+        var key = localStorage.key(i);
+        if (key && key.indexOf(KEYS.progressPrefix) === 0) toRemove.push(key);
+      }
+      toRemove.forEach(function (k) { localStorage.removeItem(k); });
+    } catch (e) { }
   };
 
   /* ---------------- Supabase session binding ---------------- */
@@ -536,8 +580,10 @@
     var SB = global.SupabaseAuth;
     if (!SB || !SB.isReady()) {
       // Unconfigured or offline: drop any stale cached identity so the UI
-      // honestly reports local mode instead of pretending to be synced.
-      if (State.authToken) State.clearAuth();
+      // honestly reports signed-out instead of pretending to be synced, but
+      // never touch local progress here — the session may simply be
+      // unreachable right now, not actually over.
+      if (State.authToken) State.clearAuth(false);
       State.emit('auth:changed');
       return false;
     }
@@ -559,8 +605,15 @@
       // A fresh login (or a returning OAuth redirect) should pull whatever the
       // student did on their other devices. A token refresh should not.
       if (event === 'SIGNED_IN' || isNewLogin) {
+        // The guest preview ran with an empty userState (nothing was ever
+        // persisted); now that we have a token, load this user's local cache
+        // for this exam before reconciling it against the cloud.
+        if (State.activeExamId) {
+          State.loadProgress(State.activeExamId);
+          State.emit('progress:replaced');
+          State.fetchCloudProgress(State.activeExamId);
+        }
         State.emit('auth:signedIn', user);
-        if (State.activeExamId) State.fetchCloudProgress(State.activeExamId);
       }
     });
 
@@ -779,7 +832,7 @@
   State.signOut = async function () {
     var SB = global.SupabaseAuth;
     if (SB && SB.isReady()) {
-      try { await SB.signOut(); } catch (e) {}
+      try { await SB.signOut(); } catch (e) { }
     }
     State.clearAuth();
   };

@@ -78,7 +78,7 @@
       });
       tabs.innerHTML =
         '<button class="cat-tab ' + (Catalog.activeCategory === 'all' ? 'active' : '') + '" ' +
-          'onclick="Catalog.setCategory(\'all\')">' + esc(I18n.t('catalog.all')) + ' (' + cat.exams.length + ')</button>' +
+        'onclick="Catalog.setCategory(\'all\')">' + esc(I18n.t('catalog.all')) + ' (' + cat.exams.length + ')</button>' +
         cat.categories.map(function (c) {
           var n = counts[c.id] || 0;
           if (!n) return '';
@@ -139,16 +139,16 @@
 
       return '' +
         '<div class="exam-card ' + (isActive ? 'active' : '') + ' ' + (e.available ? '' : 'unavailable') + '">' +
-          '<div class="ec-cat" style="color:' + esc(c.color) + '">' + c.icon + ' ' + esc(I18n.categoryName(c)) + '</div>' +
-          '<h4 class="ec-title">' + esc(I18n.examTitle(e)) + '</h4>' +
-          '<div class="ec-sub">' + esc(I18n.lang === 'en' ? (e.title || '') : (e.titleEn || '')) + '</div>' +
-          '<div class="ec-tagline">' + esc(e.tagline || '') + '</div>' +
-          '<div class="ec-meta">' +
-            '<span>🎯 ' + e.totalMarks + ' ' + esc(I18n.t('progress.marks')) + '</span>' +
-            (e.totalQuestions ? '<span>❓ ' + e.totalQuestions + '</span>' : '') +
-            (e.durationMinutes ? '<span>⏱ ' + e.durationMinutes + 'm</span>' : '') +
-          '</div>' +
-          pctLine + btn +
+        '<div class="ec-cat" style="color:' + esc(c.color) + '">' + c.icon + ' ' + esc(I18n.categoryName(c)) + '</div>' +
+        '<h4 class="ec-title">' + esc(I18n.examTitle(e)) + '</h4>' +
+        '<div class="ec-sub">' + esc(I18n.lang === 'en' ? (e.title || '') : (e.titleEn || '')) + '</div>' +
+        '<div class="ec-tagline">' + esc(e.tagline || '') + '</div>' +
+        '<div class="ec-meta">' +
+        '<span>🎯 ' + e.totalMarks + ' ' + esc(I18n.t('progress.marks')) + '</span>' +
+        (e.totalQuestions ? '<span>❓ ' + e.totalQuestions + '</span>' : '') +
+        (e.durationMinutes ? '<span>⏱ ' + e.durationMinutes + 'm</span>' : '') +
+        '</div>' +
+        pctLine + btn +
         '</div>';
     }).join('') + '</div>';
   };

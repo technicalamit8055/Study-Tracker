@@ -680,16 +680,19 @@
       '<div class="ob-summary">' + rows + '</div>' +
 
       '<div class="ob-launch-row">' +
+        (State.authToken ?
         '<button class="ob-launch primary" onclick="Onboarding.finish(false)">' +
-          '<span class="ob-launch-title">' + esc(t('ob.s7.guest')) + '</span>' +
-          '<span class="ob-launch-desc">' + esc(t('ob.s7.guestDesc')) + '</span>' +
-        '</button>' +
-        (State.authToken ? '' :
-        '<button class="ob-launch" onclick="Onboarding.finish(true)">' +
+          '<span class="ob-launch-title">' + esc(t('ob.s7.start')) + '</span>' +
+          '<span class="ob-launch-desc">' + esc(t('ob.s7.startDesc')) + '</span>' +
+        '</button>' :
+        '<button class="ob-launch primary" onclick="Onboarding.finish(true)">' +
           '<span class="ob-launch-title">' + esc(t('ob.s7.cloud')) + '</span>' +
           '<span class="ob-launch-desc">' + esc(t('ob.s7.cloudDesc')) + '</span>' +
         '</button>') +
-      '</div>';
+      '</div>' +
+      (State.authToken ? '' :
+      '<button class="ob-preview-link" onclick="Onboarding.finish(false)">' + esc(t('ob.s7.preview')) + '</button>') +
+      '';
   };
 
   global.Onboarding = Onboarding;

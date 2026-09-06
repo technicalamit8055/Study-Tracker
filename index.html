@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>ExamRoadmap — Competitive &amp; Board Exam Preparation Roadmap</title>
-  <meta name="description" content="Multi-exam roadmap: phased syllabus tracker, weightage intelligence, spaced-repetition revision and a focus timer — for STET, CTET, SSC and Board exams. Available in English and Hindi.">
+  <meta name="description"
+    content="Multi-exam roadmap: phased syllabus tracker, weightage intelligence, spaced-repetition revision and a focus timer — for STET, CTET, SSC and Board exams. Available in English and Hindi.">
   <meta name="theme-color" content="#4f46e5">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -30,6 +32,7 @@
   <link rel="stylesheet" href="/css/styles-base.css">
   <link rel="stylesheet" href="/css/styles-roadmap.css">
 </head>
+
 <body>
 
   <div class="offline-banner" id="offlineBanner" data-i18n="app.offline">
@@ -40,7 +43,8 @@
     <div class="header-inner">
       <div class="header-title">
         <div class="exam-switch-bar">
-          <button class="active-exam-badge" onclick="Catalog.open()" data-i18n-title="app.switchExamTitle" title="Pick a different exam roadmap">
+          <button class="active-exam-badge" onclick="Catalog.open()" data-i18n-title="app.switchExamTitle"
+            title="Pick a different exam roadmap">
             <span>🎯</span>
             <span class="aeb-label" id="activeExamBadgeText" data-i18n="app.loadingRoadmap">Loading roadmap…</span>
             <span class="aeb-switch" data-i18n="app.switchExam">Switch</span>
@@ -51,42 +55,35 @@
 
       <div class="header-actions">
         <button class="btn goal-guide-btn" id="goalGuideBtn" onclick="openGoalGuide()"
-                data-i18n-title="goal.buttonTitle" title="View or edit your goal and study plan">
+          data-i18n-title="goal.buttonTitle" title="View or edit your goal and study plan">
           <span data-i18n="goal.button">🎯 My Goal &amp; Guide</span>
         </button>
 
         <button class="btn lang-toggle-btn" id="langToggleBtn" onclick="toggleAppLanguage()"
-                data-i18n-title="ob.langPrompt" title="App language">
+          data-i18n-title="ob.langPrompt" title="App language">
           <span aria-hidden="true">🌐</span>
           <span id="langToggleText">हिंदी</span>
         </button>
 
-        <div id="syncStatusBadge" class="sync-badge local" onclick="openAuthModal()"
-             data-i18n-title="sync.status" title="Cloud sync status">
-          <span class="sync-dot"></span>
-          <span id="syncStatusText" data-i18n="sync.local">Local mode</span>
-        </div>
-
         <div id="userChipContainer" style="display:none;"></div>
 
+        <span id="autosaveIndicator" class="autosave-indicator" data-i18n="auth.savedIndicator">✓ Saved</span>
+
         <button class="btn theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()"
-                data-i18n-title="app.themeToggle" title="Switch theme">
+          data-i18n-title="app.themeToggle" title="Switch theme">
           <span id="themeToggleIcon">☀️</span>
           <span id="themeToggleText" data-i18n="app.themeLight">Light</span>
         </button>
 
         <button class="btn btn-secondary" id="installAppBtn" onclick="installApp()" style="display:none;"
-                data-i18n-title="app.installTitle" title="Install this app" data-i18n="app.install">
+          data-i18n-title="app.installTitle" title="Install this app" data-i18n="app.install">
           📲 Install App
         </button>
 
-        <button class="btn btn-primary" id="authActionBtn" onclick="openAuthModal()" data-i18n="sync.login">
-          ☁ Login / Sync
-        </button>
-
-        <button class="btn btn-secondary" id="manualSyncBtn" onclick="triggerManualSync()" style="display:none;"
-                data-i18n-title="sync.nowTitle" title="Save to the cloud right now" data-i18n="sync.now">
-          ⟳ Sync now
+        <button class="btn btn-primary auth-action-btn" id="authActionBtn" onclick="openAuthModal()"
+          data-i18n-title="auth.signInToTrackTitle" title="Sign in to save your preparation progress"
+          data-i18n="auth.signInToTrack">
+          ⚡ Sign In
         </button>
       </div>
     </div>
@@ -141,7 +138,8 @@
         </div>
       </div>
       <div class="timer-controls">
-        <button class="btn btn-primary" id="timerStartBtn" onclick="Timer.toggle()" data-i18n="timer.start">▶ Start</button>
+        <button class="btn btn-primary" id="timerStartBtn" onclick="Timer.toggle()" data-i18n="timer.start">▶
+          Start</button>
         <button class="btn btn-secondary" onclick="Timer.reset(25)">25</button>
         <button class="btn btn-secondary" onclick="Timer.reset(50)">50</button>
         <button class="btn btn-secondary" onclick="Timer.reset(5)" data-i18n="timer.break">Break 5</button>
@@ -153,7 +151,7 @@
     <div class="toolbar">
       <div class="search-wrap">
         <input type="text" id="searchInput" data-i18n-placeholder="toolbar.searchPh"
-               placeholder="Search topics, units or notes…" oninput="Roadmap.applyFilters()">
+          placeholder="Search topics, units or notes…" oninput="Roadmap.applyFilters()">
       </div>
       <div class="filter-group">
         <select class="filter-select" id="phaseFilter" onchange="Roadmap.applyFilters()">
@@ -176,18 +174,19 @@
           <option value="low_confidence" data-i18n="toolbar.lowConfidence">Low Confidence (≤2★)</option>
         </select>
 
-        <button class="btn btn-secondary" onclick="Roadmap.resetFilters()"
-                data-i18n-title="toolbar.resetFiltersTitle" title="Clear filters" data-i18n="toolbar.resetFilters">↺ Filters</button>
+        <button class="btn btn-secondary" onclick="Roadmap.resetFilters()" data-i18n-title="toolbar.resetFiltersTitle"
+          title="Clear filters" data-i18n="toolbar.resetFilters">↺ Filters</button>
       </div>
 
       <div class="toolbar-actions">
-        <button class="btn btn-secondary" onclick="exportProgressJSON()"
-                data-i18n-title="toolbar.exportTitle" title="Download your progress" data-i18n="toolbar.export">⬇ Export</button>
-        <button class="btn btn-secondary" onclick="triggerImportJSON()"
-                data-i18n-title="toolbar.importTitle" title="Upload a progress file" data-i18n="toolbar.import">⬆ Import</button>
-        <button class="btn btn-danger" onclick="confirmResetAll()"
-                data-i18n-title="toolbar.resetTitle" title="Erase all progress" data-i18n="toolbar.reset">🗑 Reset</button>
-        <input type="file" id="importFileInput" accept="application/json" style="display:none;" onchange="handleImportFile(event)">
+        <button class="btn btn-secondary" onclick="exportProgressJSON()" data-i18n-title="toolbar.exportTitle"
+          title="Download your progress" data-i18n="toolbar.export">⬇ Export</button>
+        <button class="btn btn-secondary" onclick="triggerImportJSON()" data-i18n-title="toolbar.importTitle"
+          title="Upload a progress file" data-i18n="toolbar.import">⬆ Import</button>
+        <button class="btn btn-danger" onclick="confirmResetAll()" data-i18n-title="toolbar.resetTitle"
+          title="Erase all progress" data-i18n="toolbar.reset">🗑 Reset</button>
+        <input type="file" id="importFileInput" accept="application/json" style="display:none;"
+          onchange="handleImportFile(event)">
       </div>
     </div>
 
@@ -203,7 +202,8 @@
   <aside class="study-drawer" id="studyDrawer" data-i18n-aria-label="sd.panelAria" aria-label="Topic study panel">
     <div class="sd-header">
       <h3 data-i18n="sd.panel">📖 Study Panel</h3>
-      <button class="sd-close" onclick="StudyDrawer.close()" data-i18n-aria-label="sd.close" aria-label="Close">✕</button>
+      <button class="sd-close" onclick="StudyDrawer.close()" data-i18n-aria-label="sd.close"
+        aria-label="Close">✕</button>
     </div>
     <div id="studyDrawerBody"></div>
   </aside>
@@ -217,11 +217,11 @@
             <h2 data-i18n="catalog.title">🎯 Choose an Exam Roadmap</h2>
             <p data-i18n="catalog.subtitle">Pick your exam — progress for each one is saved separately.</p>
           </div>
-          <button class="sd-close" onclick="Catalog.close()" data-i18n-aria-label="sd.close" aria-label="Close">✕</button>
+          <button class="sd-close" onclick="Catalog.close()" data-i18n-aria-label="sd.close"
+            aria-label="Close">✕</button>
         </div>
         <input type="text" class="catalog-search" data-i18n-placeholder="catalog.searchPh"
-               placeholder="Search exams (STET, CTET, SSC, Boards…)"
-               oninput="Catalog.setQuery(this.value)">
+          placeholder="Search exams (STET, CTET, SSC, Boards…)" oninput="Catalog.setQuery(this.value)">
       </div>
       <div class="catalog-tabs" id="catalogTabs"></div>
       <div id="catalogBody"></div>
@@ -232,8 +232,10 @@
   <div class="modal-overlay" id="authModal" onclick="if(event.target===this) closeAuthModal()">
     <div class="modal-card">
       <div class="auth-tabs">
-        <button class="auth-tab-btn active" id="tabLoginBtn" onclick="switchAuthTab('login')" data-i18n="auth.tabLogin">Login</button>
-        <button class="auth-tab-btn" id="tabRegisterBtn" onclick="switchAuthTab('register')" data-i18n="auth.tabRegister">Sign Up</button>
+        <button class="auth-tab-btn active" id="tabLoginBtn" onclick="switchAuthTab('login')"
+          data-i18n="auth.tabLogin">Login</button>
+        <button class="auth-tab-btn" id="tabRegisterBtn" onclick="switchAuthTab('register')"
+          data-i18n="auth.tabRegister">Sign Up</button>
       </div>
 
       <p class="auth-help" data-i18n="auth.help">
@@ -245,10 +247,13 @@
       <!-- 1-click Google sign-in: the fastest path for most students -->
       <button type="button" class="btn-google" id="googleLoginBtn" onclick="handleGoogleLogin()">
         <svg class="btn-google-icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
-          <path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.91c1.7-1.57 2.69-3.88 2.69-6.62z"/>
-          <path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.91-2.26c-.81.54-1.84.86-3.05.86-2.35 0-4.34-1.58-5.05-3.71H.96v2.34A9 9 0 0 0 9 18z"/>
-          <path fill="#FBBC05" d="M3.95 10.71a5.41 5.41 0 0 1 0-3.42V4.96H.96a9 9 0 0 0 0 8.09l2.99-2.34z"/>
-          <path fill="#EA4335" d="M9 3.58c1.32 0 2.5.46 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .96 4.96l2.99 2.33C4.66 5.16 6.65 3.58 9 3.58z"/>
+          <path fill="#4285F4"
+            d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.91c1.7-1.57 2.69-3.88 2.69-6.62z" />
+          <path fill="#34A853"
+            d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.91-2.26c-.81.54-1.84.86-3.05.86-2.35 0-4.34-1.58-5.05-3.71H.96v2.34A9 9 0 0 0 9 18z" />
+          <path fill="#FBBC05" d="M3.95 10.71a5.41 5.41 0 0 1 0-3.42V4.96H.96a9 9 0 0 0 0 8.09l2.99-2.34z" />
+          <path fill="#EA4335"
+            d="M9 3.58c1.32 0 2.5.46 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .96 4.96l2.99 2.33C4.66 5.16 6.65 3.58 9 3.58z" />
         </svg>
         <span data-i18n="auth.googleLogin">Continue with Google</span>
       </button>
@@ -259,17 +264,19 @@
         <div class="form-group">
           <label class="form-label" data-i18n="auth.email">Email address</label>
           <input type="email" id="loginEmail" class="form-control" data-i18n-placeholder="auth.emailPh"
-                 placeholder="you@example.com" required autocomplete="email">
+            placeholder="you@example.com" required autocomplete="email">
         </div>
         <div class="form-group">
           <label class="form-label" data-i18n="auth.password">Password</label>
-          <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+          <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required
+            autocomplete="current-password">
           <button type="button" class="auth-link" id="forgotPasswordLink" onclick="handleForgotPassword()"
-                  data-i18n="auth.forgotPassword">Forgot password?</button>
+            data-i18n="auth.forgotPassword">Forgot password?</button>
         </div>
         <div class="form-actions">
           <button type="submit" class="btn btn-primary" id="loginSubmitBtn" data-i18n="auth.doLogin">✓ Log in</button>
-          <button type="button" class="btn btn-secondary" onclick="closeAuthModal()" data-i18n="auth.cancel">Cancel</button>
+          <button type="button" class="btn btn-secondary" onclick="closeAuthModal()"
+            data-i18n="auth.cancel">Cancel</button>
         </div>
       </form>
 
@@ -277,21 +284,23 @@
         <div class="form-group">
           <label class="form-label" data-i18n="auth.yourName">Your name</label>
           <input type="text" id="regName" class="form-control" data-i18n-placeholder="auth.namePh"
-                 placeholder="e.g. Ravi Kumar" autocomplete="name">
+            placeholder="e.g. Ravi Kumar" autocomplete="name">
         </div>
         <div class="form-group">
           <label class="form-label" data-i18n="auth.email">Email address</label>
           <input type="email" id="regEmail" class="form-control" data-i18n-placeholder="auth.emailPh"
-                 placeholder="you@example.com" required autocomplete="email">
+            placeholder="you@example.com" required autocomplete="email">
         </div>
         <div class="form-group">
           <label class="form-label" data-i18n="auth.password">Password</label>
           <input type="password" id="regPassword" class="form-control" data-i18n-placeholder="auth.passwordMin"
-                 placeholder="At least 6 characters" required minlength="6" autocomplete="new-password">
+            placeholder="At least 6 characters" required minlength="6" autocomplete="new-password">
         </div>
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary" id="regSubmitBtn" data-i18n="auth.doRegister">✓ Create account</button>
-          <button type="button" class="btn btn-secondary" onclick="closeAuthModal()" data-i18n="auth.cancel">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="regSubmitBtn" data-i18n="auth.doRegister">✓ Create
+            account</button>
+          <button type="button" class="btn btn-secondary" onclick="closeAuthModal()"
+            data-i18n="auth.cancel">Cancel</button>
         </div>
       </form>
     </div>
@@ -302,7 +311,7 @@
     <div class="modal-card">
       <h3 style="margin-bottom:10px;" data-i18n="reset.title">⚠️ Reset all progress?</h3>
       <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.6; margin-bottom:18px;"
-         data-i18n-html="reset.body">
+        data-i18n-html="reset.body">
         Everything in this roadmap will be erased.
       </p>
       <div class="form-actions">
@@ -313,16 +322,15 @@
   </div>
 
   <!-- Onboarding wizard -->
-  <div class="onboarding-modal" id="onboardingModal" role="dialog" aria-modal="true"
-       aria-labelledby="onboardingTitle">
+  <div class="onboarding-modal" id="onboardingModal" role="dialog" aria-modal="true" aria-labelledby="onboardingTitle">
     <div class="onboarding-card">
       <div class="onboarding-head">
         <div class="ob-brand">
           <span class="ob-brand-mark">🎓</span>
           <span class="ob-brand-name" id="onboardingTitle">ExamRoadmap</span>
         </div>
-        <button class="ob-close" onclick="Onboarding.skip()"
-                data-i18n-aria-label="ob.close" aria-label="Close setup">✕</button>
+        <button class="ob-close" onclick="Onboarding.skip()" data-i18n-aria-label="ob.close"
+          aria-label="Close setup">✕</button>
       </div>
 
       <div class="onboarding-rail" id="onboardingRail"></div>
@@ -350,4 +358,5 @@
   <script src="/js/onboarding-wizard.js"></script>
   <script src="/js/app.js"></script>
 </body>
+
 </html>

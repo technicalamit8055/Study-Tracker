@@ -93,11 +93,11 @@
       var when = I18n.t(tier.whenKey);
       return '' +
         '<button class="rev-tier ' + (doneAt ? 'done' : '') + ' ' + (isDue ? 'due' : '') + '" ' +
-          'onclick="StudyDrawer.toggleTier(\'' + tier.key + '\')" ' +
-          'title="' + esc(doneAt ? I18n.t('sd.doneOn', { date: fmtDate(doneAt) }) : when) + '">' +
-          '<span class="rev-tier-check">' + (doneAt ? '✓' : '○') + '</span>' +
-          '<span class="rev-tier-label">' + esc(I18n.t(tier.labelKey)) + '</span>' +
-          '<span class="rev-tier-when">' + esc(doneAt ? fmtDate(doneAt) : when) + '</span>' +
+        'onclick="StudyDrawer.toggleTier(\'' + tier.key + '\')" ' +
+        'title="' + esc(doneAt ? I18n.t('sd.doneOn', { date: fmtDate(doneAt) }) : when) + '">' +
+        '<span class="rev-tier-check">' + (doneAt ? '✓' : '○') + '</span>' +
+        '<span class="rev-tier-label">' + esc(I18n.t(tier.labelKey)) + '</span>' +
+        '<span class="rev-tier-when">' + esc(doneAt ? fmtDate(doneAt) : when) + '</span>' +
         '</button>';
     }).join('');
 
@@ -119,47 +119,47 @@
       (unit.pyqFocus ? '<div class="sd-pyq">💡 <strong>' + esc(I18n.t('sd.pyqFocus')) + ':</strong> ' + esc(unit.pyqFocus) + '</div>' : '') +
 
       '<div class="sd-section">' +
-        '<label class="sd-label">' + esc(I18n.t('sd.status')) + '</label>' +
-        '<select class="sd-select" onchange="StudyDrawer.setStatus(this.value)">' + statusHtml + '</select>' +
-        '<label class="sd-check-row">' +
-          '<input type="checkbox" ' + (State.isTopicComplete(st) ? 'checked' : '') + ' onchange="StudyDrawer.setComplete(this.checked)">' +
-          '<span>' + esc(I18n.t('sd.markComplete')) + '</span>' +
-        '</label>' +
+      '<label class="sd-label">' + esc(I18n.t('sd.status')) + '</label>' +
+      '<select class="sd-select" onchange="StudyDrawer.setStatus(this.value)">' + statusHtml + '</select>' +
+      '<label class="sd-check-row">' +
+      '<input type="checkbox" ' + (State.isTopicComplete(st) ? 'checked' : '') + ' onchange="StudyDrawer.setComplete(this.checked)">' +
+      '<span>' + esc(I18n.t('sd.markComplete')) + '</span>' +
+      '</label>' +
       '</div>' +
 
       '<div class="sd-section">' +
-        '<label class="sd-label">' + esc(I18n.t('sd.spacedRep')) + '</label>' +
-        '<div class="rev-tier-grid">' + tiersHtml + '</div>' +
-        '<div class="rev-due-msg ' + (due.due ? 'due' : '') + '">' + esc(due.msg) + '</div>' +
+      '<label class="sd-label">' + esc(I18n.t('sd.spacedRep')) + '</label>' +
+      '<div class="rev-tier-grid">' + tiersHtml + '</div>' +
+      '<div class="rev-due-msg ' + (due.due ? 'due' : '') + '">' + esc(due.msg) + '</div>' +
       '</div>' +
 
       '<div class="sd-section">' +
-        '<label class="sd-label">' + esc(I18n.t('sd.confidenceRating')) + '</label>' +
-        '<div class="confidence-stars sd-stars">' + starsHtml +
-          (st.stars ? '<button class="star-clear" onclick="StudyDrawer.setStars(0)" title="' + esc(I18n.t('sd.clearRating')) + '">✕</button>' : '') +
-        '</div>' +
+      '<label class="sd-label">' + esc(I18n.t('sd.confidenceRating')) + '</label>' +
+      '<div class="confidence-stars sd-stars">' + starsHtml +
+      (st.stars ? '<button class="star-clear" onclick="StudyDrawer.setStars(0)" title="' + esc(I18n.t('sd.clearRating')) + '">✕</button>' : '') +
+      '</div>' +
       '</div>' +
 
       '<div class="sd-section">' +
-        '<label class="sd-check-row">' +
-          '<input type="checkbox" ' + (st.pyqDone ? 'checked' : '') + ' onchange="StudyDrawer.setPyq(this.checked)">' +
-          '<span>' + esc(I18n.t('sd.pyqDone')) + '</span>' +
-        '</label>' +
+      '<label class="sd-check-row">' +
+      '<input type="checkbox" ' + (st.pyqDone ? 'checked' : '') + ' onchange="StudyDrawer.setPyq(this.checked)">' +
+      '<span>' + esc(I18n.t('sd.pyqDone')) + '</span>' +
+      '</label>' +
       '</div>' +
 
       '<div class="sd-section">' +
-        '<label class="sd-label">' + esc(I18n.t('sd.notes')) + '</label>' +
-        '<textarea class="sd-notes" id="sdNotes" placeholder="' + esc(I18n.t('sd.notesPh')) + '" ' +
-          'oninput="StudyDrawer.setNotes(this.value)">' + esc(st.notes || '') + '</textarea>' +
-        '<div class="sd-notes-hint" id="sdNotesHint">' + esc(I18n.t('sd.notesAuto')) + '</div>' +
+      '<label class="sd-label">' + esc(I18n.t('sd.notes')) + '</label>' +
+      '<textarea class="sd-notes" id="sdNotes" placeholder="' + esc(I18n.t('sd.notesPh')) + '" ' +
+      'oninput="StudyDrawer.setNotes(this.value)">' + esc(st.notes || '') + '</textarea>' +
+      '<div class="sd-notes-hint" id="sdNotesHint">' + esc(I18n.t('sd.notesAuto')) + '</div>' +
       '</div>' +
 
       '<div class="sd-actions">' +
-        '<a class="sd-yt-btn" target="_blank" rel="noopener noreferrer" href="' + Roadmap.youtubeUrl(unit, topic.text) + '">' +
-          '<svg class="yt-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>' +
-          esc(I18n.t('sd.ytSearch')) +
-        '</a>' +
-        '<button class="sd-timer-btn" onclick="StudyDrawer.startFocus()">' + esc(I18n.t('sd.focusTimer')) + '</button>' +
+      '<a class="sd-yt-btn" target="_blank" rel="noopener noreferrer" href="' + Roadmap.youtubeUrl(unit, topic.text) + '">' +
+      '<svg class="yt-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>' +
+      esc(I18n.t('sd.ytSearch')) +
+      '</a>' +
+      '<button class="sd-timer-btn" onclick="StudyDrawer.startFocus()">' + esc(I18n.t('sd.focusTimer')) + '</button>' +
       '</div>';
   };
 
@@ -168,6 +168,7 @@
   function withTopic(fn) {
     var id = StudyDrawer.currentTopicId;
     if (!id) return;
+    if (!State.authToken) { State.emit('auth:required'); return; }
     fn(State.getTopicState(id), id);
     State.saveProgress();
     Roadmap.refreshTopicRow(id);
@@ -223,6 +224,13 @@
   StudyDrawer.setNotes = function (text) {
     var id = StudyDrawer.currentTopicId;
     if (!id) return;
+    if (!State.authToken) {
+      // Never destroy what was just typed — whether this is a guest who was
+      // never signed in, or a session that expired mid-note, the textarea
+      // keeps showing their text; only persistence is blocked.
+      State.emit('auth:required');
+      return;
+    }
     State.getTopicState(id).notes = text;
     var hint = document.getElementById('sdNotesHint');
     if (hint) hint.innerText = I18n.t('sd.notesSaving');
@@ -235,6 +243,7 @@
   };
 
   StudyDrawer.startFocus = function () {
+    if (!State.authToken) { State.emit('auth:required'); return; }
     var found = State.findTopic(StudyDrawer.currentTopicId);
     if (found && global.Timer) {
       Timer.setFocusTopic(found.topic.text);

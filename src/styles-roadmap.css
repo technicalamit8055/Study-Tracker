@@ -1790,6 +1790,22 @@ body.onboarding-open { overflow: hidden; }
 .ob-launch-title { font-size: 0.98rem; font-weight: 800; }
 .ob-launch-desc { font-size: 0.79rem; opacity: 0.85; line-height: 1.45; }
 
+/* Secondary path off the launch screen: browse without an account. */
+.ob-preview-link {
+  display: block;
+  margin: 14px auto 0;
+  padding: 4px;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.ob-preview-link:hover { color: var(--text-main); }
+
 /* --- footer --- */
 
 .onboarding-footer {

@@ -28,7 +28,7 @@
   function applyLanguageToUI() {
     I18n.applyStatic(document);
     updateThemeUI();
-    updateSyncUI();
+    updateAuthUI();
     updateLangUI();
 
     if (global.Roadmap && State.exam) {
@@ -83,7 +83,7 @@
 
   global.applyTheme = function (theme) {
     document.documentElement.setAttribute('data-theme', theme);
-    try { localStorage.setItem(THEME_KEY, theme); } catch (e) {}
+    try { localStorage.setItem(THEME_KEY, theme); } catch (e) { }
     updateThemeUI(theme);
   };
 
@@ -102,59 +102,61 @@
   }
   global.updateThemeUI = updateThemeUI;
 
-  /* ---------------- sync UI ---------------- */
+  /* ---------------- auth UI ---------------- */
 
-  function updateSyncUI() {
-    var badge = document.getElementById('syncStatusBadge');
-    var text = document.getElementById('syncStatusText');
+  var savedIndicatorTimer = null;
+
+  /**
+   * Flash a minimal "Saved" indicator for 1.5s after a background sync.
+   * There is no more persistent badge to explain sync state — it is either
+   * silently working, or the student is not signed in and nothing syncs.
+   */
+  function flashSavedIndicator() {
+    var el = document.getElementById('autosaveIndicator');
+    if (!el) return;
+    el.classList.add('visible');
+    if (savedIndicatorTimer) clearTimeout(savedIndicatorTimer);
+    savedIndicatorTimer = setTimeout(function () {
+      el.classList.remove('visible');
+    }, 1500);
+  }
+
+  function updateAuthUI() {
     var authBtn = document.getElementById('authActionBtn');
-    var syncBtn = document.getElementById('manualSyncBtn');
     var chip = document.getElementById('userChipContainer');
-    if (!badge || !text) return;
 
     if (!State.authToken) {
-      badge.className = 'sync-badge local';
-      text.innerText = I18n.t('sync.local');
-      if (authBtn) { authBtn.style.display = ''; authBtn.innerText = I18n.t('sync.login'); }
-      if (syncBtn) syncBtn.style.display = 'none';
+      if (authBtn) { authBtn.style.display = ''; authBtn.innerText = I18n.t('auth.signInToTrack'); }
       if (chip) { chip.style.display = 'none'; chip.innerHTML = ''; }
       return;
     }
 
-    if (State.isSyncing) {
-      badge.className = 'sync-badge syncing';
-      text.innerText = I18n.t('sync.syncing');
-    } else {
-      badge.className = 'sync-badge synced';
-      text.innerText = I18n.t(State.lastSyncedAt ? 'sync.synced' : 'sync.connected');
-    }
-
     if (authBtn) authBtn.style.display = 'none';
-    if (syncBtn) syncBtn.style.display = '';
     if (chip) {
       chip.style.display = '';
       var u = State.currentUser || {};
       var name = u.name || u.email || u.username || I18n.t('auth.student');
       // Google gives us a profile picture; email sign-ups fall back to an emoji.
-      var badge = u.avatarUrl
+      var avatar = u.avatarUrl
         ? '<img class="user-chip-avatar" src="' + Roadmap.esc(u.avatarUrl) + '" alt="">'
         : '👤';
       chip.innerHTML = '<span class="user-chip" title="' + Roadmap.esc(u.email || name) + '">' +
-        badge + ' ' + Roadmap.esc(name) +
+        avatar + ' ' + Roadmap.esc(name) +
         ' <button class="logout-btn" onclick="handleLogout()" title="' + Roadmap.esc(I18n.t('auth.logout')) + '">⏻</button></span>';
     }
   }
-  global.updateSyncUI = updateSyncUI;
+  global.updateAuthUI = updateAuthUI;
 
   /* ---------------- auth modal ---------------- */
 
-  global.openAuthModal = function () {
+  global.openAuthModal = function (promptMsg) {
     var m = document.getElementById('authModal');
     if (!m) return;
     m.classList.add('open');
     // Tell the student up-front if cloud sync cannot work, rather than letting
     // them fill in the form and hit a wall on submit.
-    if (State.cloudReady && !State.cloudReady()) guardCloud();
+    if (State.cloudReady && !State.cloudReady()) { guardCloud(); return; }
+    if (promptMsg) showAuthAlert(promptMsg, false);
   };
 
   global.closeAuthModal = function () {
@@ -194,7 +196,7 @@
     closeAuthModal();
     var name = (user && (user.name || user.email)) || I18n.t('auth.student');
     showToast(I18n.t('auth.welcome', { name: name }));
-    updateSyncUI();
+    updateAuthUI();
   }
 
   /** Cloud unavailable (no keys, or CDN blocked): explain, do not fail silently. */
@@ -297,13 +299,9 @@
 
   global.handleLogout = async function () {
     await State.signOut();
-    updateSyncUI();
+    updateAuthUI();
+    if (global.Roadmap && State.exam) Roadmap.render();
     showToast(I18n.t('auth.loggedOut'), 'info');
-  };
-
-  global.triggerManualSync = async function () {
-    if (!State.authToken) return openAuthModal();
-    await State.pushCloudProgress(true);
   };
 
   /* ---------------- import / export / reset ---------------- */
@@ -335,6 +333,11 @@
   global.handleImportFile = function (ev) {
     var file = ev.target.files && ev.target.files[0];
     if (!file) return;
+    if (!State.authToken) {
+      State.emit('auth:required');
+      ev.target.value = '';
+      return;
+    }
     var reader = new FileReader();
     reader.onload = function (e) {
       try {
@@ -347,8 +350,9 @@
           if (!ok) { ev.target.value = ''; return; }
         }
 
-        State.userState = State.mergeProgress(State.userState, incoming);
-        State.saveProgress();
+        var merged = State.mergeProgress(State.userState, incoming);
+        State.userState = merged;
+        if (!State.saveProgress()) throw new Error(I18n.t('io.invalidFile'));
         Roadmap.render();
         showToast(I18n.t('io.imported'));
       } catch (err) {
@@ -370,10 +374,11 @@
   };
 
   global.executeResetAll = function () {
+    closeResetModal();
+    if (!State.authToken) { State.emit('auth:required'); return; }
     State.userState = {};
     State.saveProgress();
     Roadmap.render();
-    closeResetModal();
     showToast(I18n.t('reset.done'), 'info');
   };
 
@@ -418,7 +423,7 @@
     if (State.authToken) State.pushCloudProgress(false);
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.getRegistration().then(function (reg) {
-        if (reg) reg.update().catch(function () {});
+        if (reg) reg.update().catch(function () { });
       });
     }
     if (State.checkForRoadmapUpdate) State.checkForRoadmapUpdate();
@@ -432,7 +437,7 @@
     if (document.visibilityState === 'visible') {
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.getRegistration().then(function (reg) {
-          if (reg) reg.update().catch(function () {});
+          if (reg) reg.update().catch(function () { });
         });
       }
       if (State.checkForRoadmapUpdate) State.checkForRoadmapUpdate();
@@ -461,18 +466,20 @@
     updateOnlineUI();
     updateLangUI();
     State.loadAuth();
-    updateSyncUI();
+    updateAuthUI();
 
     // Keep the UI in step with the state manager.
-    State.on('progress:changed', function () { Roadmap.updateAll(); });
+    State.on('progress:changed', function () { Roadmap.updateAll(); flashSavedIndicator(); });
     State.on('profile:changed', function () {
       if (global.GoalBanner) GoalBanner.render();
       if (State.exam) Roadmap.renderExamHeader();
     });
     State.on('progress:replaced', function () { Roadmap.render(); });
-    State.on('sync:changed', updateSyncUI);
-    State.on('auth:changed', updateSyncUI);
-    State.on('sync:success', function () { showToast(I18n.t('sync.pushed')); });
+    State.on('auth:changed', updateAuthUI);
+    State.on('auth:required', function () {
+      openAuthModal(I18n.t('auth.signInPromptDesc'));
+    });
+    State.on('sync:success', function () { flashSavedIndicator(); });
     State.on('sync:pulled', function () { showToast(I18n.t('sync.pulled')); });
     State.on('sync:expired', function () { showToast(I18n.t('sync.expired'), 'error'); });
     // A Google redirect lands on a *fresh* page load, so no submit handler is
@@ -540,7 +547,7 @@
     // Register the service worker for offline study with auto-update monitoring.
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('/sw.js').then(function (reg) {
-        reg.update().catch(function () {});
+        reg.update().catch(function () { });
         reg.addEventListener('updatefound', function () {
           var newWorker = reg.installing;
           if (newWorker) {

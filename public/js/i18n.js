@@ -43,15 +43,6 @@
       'app.roadmapLoadFailed': 'Could not load the roadmap. Please check your connection.',
 
       /* --- sync / auth --- */
-      'sync.local': 'Local mode',
-      'sync.syncing': 'Syncing…',
-      'sync.synced': 'Cloud synced ✓',
-      'sync.connected': 'Cloud connected',
-      'sync.status': 'Cloud sync status',
-      'sync.login': '☁ Login / Sync',
-      'sync.now': '⟳ Sync now',
-      'sync.nowTitle': 'Save to the cloud right now',
-      'sync.pushed': '✓ Progress synced to the cloud',
       'sync.pulled': '✓ Latest progress loaded from the cloud',
       'sync.expired': 'Session expired — please sign in again',
       'auth.student': 'Student',
@@ -73,7 +64,7 @@
       'auth.loginFailed': 'Login failed',
       'auth.registerFailed': 'Registration failed',
       'auth.welcome': '✓ Welcome, {name}!',
-      'auth.loggedOut': 'You are logged out. Your progress is safe on this device.',
+      'auth.loggedOut': 'You are logged out. Sign in again to continue tracking your progress.',
       'auth.googleLogin': 'Continue with Google',
       'auth.orEmail': 'or continue with email',
       'auth.email': 'Email address',
@@ -84,8 +75,12 @@
       'auth.enterEmailFirst': 'Enter your email address first, then tap "Forgot password?".',
       'auth.confirmEmail': 'Almost there! Check {email} and click the confirmation link to finish signing up.',
       'auth.redirecting': 'Opening Google sign-in…',
-      'auth.notConfigured': 'Cloud sync is not set up yet — your progress keeps saving on this device.',
-      'auth.sdkOffline': 'Cloud sign-in is unavailable right now — your progress keeps saving on this device.',
+      'auth.notConfigured': 'Cloud sign-in is not set up yet — please try again later.',
+      'auth.sdkOffline': 'Cloud sign-in is unavailable right now — please try again later.',
+      'auth.signInToTrack': '⚡ Sign In',
+      'auth.signInToTrackTitle': 'Sign in to save your preparation progress',
+      'auth.signInPromptDesc': 'Sign in with Google or Email to save your preparation progress.',
+      'auth.savedIndicator': '✓ Saved',
 
       /* --- progress card --- */
       'progress.heading': 'Overall Preparation Progress',
@@ -350,15 +345,16 @@
       /* --- onboarding: step 7 --- */
       'ob.s7.title': 'You are all set, {name}!',
       'ob.s7.titleAnon': 'You are all set!',
-      'ob.s7.subtitle': 'Your roadmap for {exam} is ready. Save it to the cloud, or jump straight in.',
+      'ob.s7.subtitle': 'Your roadmap for {exam} is ready.',
       'ob.s7.summaryExam': 'Exam',
       'ob.s7.summaryMedium': 'Medium',
       'ob.s7.summaryDate': 'Target date',
       'ob.s7.summaryHours': 'Daily hours',
-      'ob.s7.cloud': '☁ Save to cloud',
+      'ob.s7.cloud': '⚡ Sign in with Google / Email to Start',
       'ob.s7.cloudDesc': 'Sync across devices, never lose progress.',
-      'ob.s7.guest': '🚀 Start studying now',
-      'ob.s7.guestDesc': 'Everything saves on this device. You can sync later.',
+      'ob.s7.start': '🚀 Start Studying',
+      'ob.s7.startDesc': 'Your progress syncs automatically in the background.',
+      'ob.s7.preview': 'Preview syllabus without signing in',
       'ob.launched': '🎉 Your roadmap is live. Let us get to work!',
       'ob.saved': '✓ Your goal and study plan are updated',
 
@@ -390,15 +386,6 @@
       'app.roadmapLoadFailed': 'रोडमैप लोड नहीं हो सका। कृपया इंटरनेट जांचें।',
 
       /* --- sync / auth --- */
-      'sync.local': 'लोकल मोड',
-      'sync.syncing': 'सिंक हो रहा है…',
-      'sync.synced': 'क्लाउड सिंक ✓',
-      'sync.connected': 'क्लाउड जुड़ा',
-      'sync.status': 'क्लाउड सिंक स्थिति',
-      'sync.login': '☁ लॉगिन / सिंक',
-      'sync.now': '⟳ सिंक करें',
-      'sync.nowTitle': 'तुरंत क्लाउड पर सेव करें',
-      'sync.pushed': '✓ प्रगति क्लाउड पर सिंक हुई',
       'sync.pulled': '✓ क्लाउड से नवीनतम प्रगति लोड हुई',
       'sync.expired': 'सत्र समाप्त — कृपया पुनः लॉगिन करें',
       'auth.student': 'छात्र',
@@ -420,7 +407,7 @@
       'auth.loginFailed': 'लॉगिन विफल',
       'auth.registerFailed': 'रजिस्ट्रेशन विफल',
       'auth.welcome': '✓ स्वागत है, {name}!',
-      'auth.loggedOut': 'आप लॉगआउट हो गए। प्रगति इस डिवाइस पर सुरक्षित है।',
+      'auth.loggedOut': 'आप लॉगआउट हो गए। प्रगति ट्रैक करना जारी रखने के लिए फिर से लॉगिन करें।',
       'auth.googleLogin': 'Google से जारी रखें',
       'auth.orEmail': 'या ईमेल से जारी रखें',
       'auth.email': 'ईमेल पता',
@@ -431,8 +418,12 @@
       'auth.enterEmailFirst': 'पहले अपना ईमेल पता भरें, फिर "पासवर्ड भूल गए?" पर टैप करें।',
       'auth.confirmEmail': 'लगभग हो गया! {email} पर भेजे गए पुष्टि लिंक पर क्लिक करके साइन-अप पूरा करें।',
       'auth.redirecting': 'Google साइन-इन खुल रहा है…',
-      'auth.notConfigured': 'क्लाउड सिंक अभी सेट नहीं है — आपकी प्रगति इस डिवाइस पर सुरक्षित रहती है।',
-      'auth.sdkOffline': 'क्लाउड साइन-इन अभी उपलब्ध नहीं है — आपकी प्रगति इस डिवाइस पर सुरक्षित रहती है।',
+      'auth.notConfigured': 'क्लाउड साइन-इन अभी सेट नहीं है — कृपया बाद में पुनः प्रयास करें।',
+      'auth.sdkOffline': 'क्लाउड साइन-इन अभी उपलब्ध नहीं है — कृपया बाद में पुनः प्रयास करें।',
+      'auth.signInToTrack': '⚡ साइन इन करें',
+      'auth.signInToTrackTitle': 'अपनी तैयारी की प्रगति सेव करने के लिए साइन इन करें',
+      'auth.signInPromptDesc': 'अपनी तैयारी की प्रगति सेव करने के लिए Google या ईमेल से साइन इन करें।',
+      'auth.savedIndicator': '✓ सेव हुआ',
 
       /* --- progress card --- */
       'progress.heading': 'कुल तैयारी प्रगति',
@@ -697,15 +688,16 @@
       /* --- onboarding: step 7 --- */
       'ob.s7.title': 'सब तैयार है, {name}!',
       'ob.s7.titleAnon': 'सब तैयार है!',
-      'ob.s7.subtitle': '{exam} हेतु आपका रोडमैप तैयार है। इसे क्लाउड पर सेव करें या सीधे शुरू करें।',
+      'ob.s7.subtitle': '{exam} हेतु आपका रोडमैप तैयार है।',
       'ob.s7.summaryExam': 'परीक्षा',
       'ob.s7.summaryMedium': 'माध्यम',
       'ob.s7.summaryDate': 'लक्ष्य तिथि',
       'ob.s7.summaryHours': 'दैनिक घंटे',
-      'ob.s7.cloud': '☁ क्लाउड पर सेव करें',
+      'ob.s7.cloud': '⚡ शुरू करने हेतु Google / ईमेल से साइन इन करें',
       'ob.s7.cloudDesc': 'सभी डिवाइस पर सिंक, प्रगति कभी न खोएं।',
-      'ob.s7.guest': '🚀 अभी पढ़ाई शुरू करें',
-      'ob.s7.guestDesc': 'सब कुछ इस डिवाइस पर सेव होगा। बाद में सिंक कर सकते हैं।',
+      'ob.s7.start': '🚀 पढ़ाई शुरू करें',
+      'ob.s7.startDesc': 'आपकी प्रगति बैकग्राउंड में अपने आप सिंक होती रहेगी।',
+      'ob.s7.preview': 'बिना साइन इन किए पाठ्यक्रम देखें',
       'ob.launched': '🎉 आपका रोडमैप तैयार है। चलिए शुरू करते हैं!',
       'ob.saved': '✓ आपका लक्ष्य एवं अध्ययन योजना अपडेट हुई',
 
@@ -742,7 +734,7 @@
   I18n.setLang = function (code, silent) {
     if (!I18n.isSupported(code) || code === I18n.lang) return false;
     I18n.lang = code;
-    try { localStorage.setItem(LANG_KEY, code); } catch (e) {}
+    try { localStorage.setItem(LANG_KEY, code); } catch (e) { }
     document.documentElement.setAttribute('lang', code);
     if (!silent) I18n.emit();
     return true;

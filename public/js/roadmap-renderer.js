@@ -65,13 +65,13 @@
       '<h1 class="exam-title">' + esc(primary) + '</h1>' +
       '<p class="exam-subtitle">' + esc(secondary) + '</p>' +
       '<div class="exam-meta-row">' +
-        '<span class="exam-meta-chip">📚 ' + esc(ex.subject) + '</span>' +
-        '<span class="exam-meta-chip">🎯 ' + ex.totalMarks + ' ' + esc(t('progress.marks')) + '</span>' +
-        (ex.totalQuestions ? '<span class="exam-meta-chip">❓ ' + ex.totalQuestions + ' ' + esc(t('roadmap.questions')) + '</span>' : '') +
-        (ex.durationMinutes ? '<span class="exam-meta-chip">⏱ ' + ex.durationMinutes + ' ' + esc(t('roadmap.minutes')) + '</span>' : '') +
-        (ex.passingMarks ? '<span class="exam-meta-chip">✅ ' + esc(t('roadmap.passing')) + ': ' + ex.passingMarks + '</span>' : '') +
-        (ex.negativeMarking ? '<span class="exam-meta-chip">➖ ' + esc(ex.negativeMarking) + '</span>' : '') +
-        mediumChip +
+      '<span class="exam-meta-chip">📚 ' + esc(ex.subject) + '</span>' +
+      '<span class="exam-meta-chip">🎯 ' + ex.totalMarks + ' ' + esc(t('progress.marks')) + '</span>' +
+      (ex.totalQuestions ? '<span class="exam-meta-chip">❓ ' + ex.totalQuestions + ' ' + esc(t('roadmap.questions')) + '</span>' : '') +
+      (ex.durationMinutes ? '<span class="exam-meta-chip">⏱ ' + ex.durationMinutes + ' ' + esc(t('roadmap.minutes')) + '</span>' : '') +
+      (ex.passingMarks ? '<span class="exam-meta-chip">✅ ' + esc(t('roadmap.passing')) + ': ' + ex.passingMarks + '</span>' : '') +
+      (ex.negativeMarking ? '<span class="exam-meta-chip">➖ ' + esc(ex.negativeMarking) + '</span>' : '') +
+      mediumChip +
       '</div>';
 
     var badge = document.getElementById('activeExamBadgeText');
@@ -101,19 +101,19 @@
 
     return '' +
       '<section class="phase-block" id="phase_' + esc(phase.id) + '" data-phase-id="' + esc(phase.id) + '">' +
-        '<header class="phase-header" onclick="Roadmap.togglePhase(\'' + esc(phase.id) + '\')">' +
-          '<div class="phase-marker"><span class="phase-num">' + (idx + 1) + '</span></div>' +
-          '<div class="phase-head-text">' +
-            '<h2 class="phase-name">' + esc(phase.name) + '</h2>' +
-            '<p class="phase-desc">' + esc(phase.description) + '</p>' +
-          '</div>' +
-          '<div class="phase-head-right">' +
-            '<div class="phase-stat" id="phase_stat_' + esc(phase.id) + '">0%</div>' +
-            '<div class="phase-bar"><div class="phase-bar-fill" id="phase_bar_' + esc(phase.id) + '"></div></div>' +
-            '<span class="phase-chevron" id="phase_chev_' + esc(phase.id) + '">▼</span>' +
-          '</div>' +
-        '</header>' +
-        '<div class="phase-units" id="phase_units_' + esc(phase.id) + '">' + unitsHtml + '</div>' +
+      '<header class="phase-header" onclick="Roadmap.togglePhase(\'' + esc(phase.id) + '\')">' +
+      '<div class="phase-marker"><span class="phase-num">' + (idx + 1) + '</span></div>' +
+      '<div class="phase-head-text">' +
+      '<h2 class="phase-name">' + esc(phase.name) + '</h2>' +
+      '<p class="phase-desc">' + esc(phase.description) + '</p>' +
+      '</div>' +
+      '<div class="phase-head-right">' +
+      '<div class="phase-stat" id="phase_stat_' + esc(phase.id) + '">0%</div>' +
+      '<div class="phase-bar"><div class="phase-bar-fill" id="phase_bar_' + esc(phase.id) + '"></div></div>' +
+      '<span class="phase-chevron" id="phase_chev_' + esc(phase.id) + '">▼</span>' +
+      '</div>' +
+      '</header>' +
+      '<div class="phase-units" id="phase_units_' + esc(phase.id) + '">' + unitsHtml + '</div>' +
       '</section>';
   };
 
@@ -127,33 +127,33 @@
 
     return '' +
       '<article class="unit-card" id="unit_' + esc(unit.id) + '" data-unit-id="' + esc(unit.id) + '" data-priority="' + esc(unit.priority) + '">' +
-        '<div class="unit-header">' +
-          '<div class="unit-title-group">' +
-            '<span class="unit-tag">' + esc(unit.unitNum) + '</span>' +
-            '<span class="unit-title">' + esc(unit.title) + '</span>' +
-            '<span class="badge-priority ' + prio.cls + '">' + prio.label + '</span>' +
-            '<span class="badge-weight" title="' + esc(t('roadmap.estWeightage')) + '">🎯 ' + esc(unit.estMarks) + '</span>' +
-            '<span class="badge-section" title="' + esc(t('roadmap.section')) + '">' + esc(unit.sectionName) + '</span>' +
-          '</div>' +
-          '<div class="unit-header-right">' +
-            '<div class="unit-ring" id="unit_ring_' + esc(unit.id) + '" title="' + esc(t('roadmap.unitCompletion')) + '">' +
-              '<svg viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="15.9"></circle>' +
-              '<circle class="ring-fg" id="unit_ring_fg_' + esc(unit.id) + '" cx="18" cy="18" r="15.9"></circle></svg>' +
-              '<span class="ring-label" id="unit_badge_' + esc(unit.id) + '">0%</span>' +
-            '</div>' +
-            '<span class="unit-status-chip" id="unit_status_' + esc(unit.id) + '">' + esc(t('roadmap.notStarted')) + '</span>' +
-            '<a href="' + ytUrl + '" target="_blank" rel="noopener noreferrer" class="unit-yt-btn" title="' + esc(t('roadmap.classTitle')) + '">' +
-              '<svg class="yt-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>' +
-              esc(t('roadmap.class')) +
-            '</a>' +
-            '<div class="unit-actions">' +
-              '<button class="btn-xs" onclick="Roadmap.markUnit(\'' + esc(unit.id) + '\', true)" title="' + esc(t('roadmap.markAllDoneTitle')) + '">' + esc(t('roadmap.markAllDone')) + '</button>' +
-              '<button class="btn-xs" onclick="Roadmap.markUnit(\'' + esc(unit.id) + '\', false)" title="' + esc(t('roadmap.resetUnitTitle')) + '">' + esc(t('roadmap.resetUnit')) + '</button>' +
-            '</div>' +
-          '</div>' +
-        '</div>' +
-        (unit.pyqFocus ? '<div class="unit-pyq-hint">💡 <strong>' + esc(t('roadmap.pyqHint')) + ':</strong> ' + esc(unit.pyqFocus) + '</div>' : '') +
-        '<div class="topics-list">' + topicsHtml + '</div>' +
+      '<div class="unit-header">' +
+      '<div class="unit-title-group">' +
+      '<span class="unit-tag">' + esc(unit.unitNum) + '</span>' +
+      '<span class="unit-title">' + esc(unit.title) + '</span>' +
+      '<span class="badge-priority ' + prio.cls + '">' + prio.label + '</span>' +
+      '<span class="badge-weight" title="' + esc(t('roadmap.estWeightage')) + '">🎯 ' + esc(unit.estMarks) + '</span>' +
+      '<span class="badge-section" title="' + esc(t('roadmap.section')) + '">' + esc(unit.sectionName) + '</span>' +
+      '</div>' +
+      '<div class="unit-header-right">' +
+      '<div class="unit-ring" id="unit_ring_' + esc(unit.id) + '" title="' + esc(t('roadmap.unitCompletion')) + '">' +
+      '<svg viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="15.9"></circle>' +
+      '<circle class="ring-fg" id="unit_ring_fg_' + esc(unit.id) + '" cx="18" cy="18" r="15.9"></circle></svg>' +
+      '<span class="ring-label" id="unit_badge_' + esc(unit.id) + '">0%</span>' +
+      '</div>' +
+      '<span class="unit-status-chip" id="unit_status_' + esc(unit.id) + '">' + esc(t('roadmap.notStarted')) + '</span>' +
+      '<a href="' + ytUrl + '" target="_blank" rel="noopener noreferrer" class="unit-yt-btn" title="' + esc(t('roadmap.classTitle')) + '">' +
+      '<svg class="yt-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>' +
+      esc(t('roadmap.class')) +
+      '</a>' +
+      '<div class="unit-actions">' +
+      '<button class="btn-xs" onclick="Roadmap.markUnit(\'' + esc(unit.id) + '\', true)" title="' + esc(t('roadmap.markAllDoneTitle')) + '">' + esc(t('roadmap.markAllDone')) + '</button>' +
+      '<button class="btn-xs" onclick="Roadmap.markUnit(\'' + esc(unit.id) + '\', false)" title="' + esc(t('roadmap.resetUnitTitle')) + '">' + esc(t('roadmap.resetUnit')) + '</button>' +
+      '</div>' +
+      '</div>' +
+      '</div>' +
+      (unit.pyqFocus ? '<div class="unit-pyq-hint">💡 <strong>' + esc(t('roadmap.pyqHint')) + ':</strong> ' + esc(unit.pyqFocus) + '</div>' : '') +
+      '<div class="topics-list">' + topicsHtml + '</div>' +
       '</article>';
   };
 
@@ -165,24 +165,24 @@
 
     return '' +
       '<div class="topic-row" id="row_' + esc(topic.id) + '" data-topic-id="' + esc(topic.id) + '" data-priority="' + esc(unit.priority) + '">' +
-        '<div class="topic-main">' +
-          '<input type="checkbox" class="topic-checkbox" id="chk_' + esc(topic.id) + '" ' + (done ? 'checked' : '') +
-            ' onchange="Roadmap.toggleTopic(\'' + esc(topic.id) + '\')" aria-label="' + esc(t('roadmap.topicCheckbox')) + '">' +
-          '<label class="topic-name ' + (done ? 'completed' : '') + '" id="lbl_' + esc(topic.id) + '" for="chk_' + esc(topic.id) + '">' +
-            esc(topic.text) +
-          '</label>' +
-        '</div>' +
-        '<div class="topic-controls">' +
-          '<span class="topic-mini-stat" id="mini_' + esc(topic.id) + '">' +
-            (revs ? '<span class="mini-chip rev" title="' + esc(t('roadmap.revisions')) + '">🔁 ' + revs + '</span>' : '') +
-            (st.stars ? '<span class="mini-chip star" title="' + esc(t('roadmap.confidence')) + '">★ ' + st.stars + '</span>' : '') +
-            (st.pyqDone ? '<span class="mini-chip pyq" title="' + esc(t('roadmap.pyqSolved')) + '">📝 PYQ</span>' : '') +
-            (hasNotes ? '<span class="mini-chip note" title="' + esc(t('roadmap.hasNotes')) + '">🗒</span>' : '') +
-          '</span>' +
-          '<button class="study-btn" onclick="StudyDrawer.open(\'' + esc(topic.id) + '\')" title="' + esc(t('roadmap.studyTitle')) + '">' +
-            esc(t('roadmap.study')) +
-          '</button>' +
-        '</div>' +
+      '<div class="topic-main">' +
+      '<input type="checkbox" class="topic-checkbox" id="chk_' + esc(topic.id) + '" ' + (done ? 'checked' : '') +
+      ' onchange="Roadmap.toggleTopic(\'' + esc(topic.id) + '\')" aria-label="' + esc(t('roadmap.topicCheckbox')) + '">' +
+      '<label class="topic-name ' + (done ? 'completed' : '') + '" id="lbl_' + esc(topic.id) + '" for="chk_' + esc(topic.id) + '">' +
+      esc(topic.text) +
+      '</label>' +
+      '</div>' +
+      '<div class="topic-controls">' +
+      '<span class="topic-mini-stat" id="mini_' + esc(topic.id) + '">' +
+      (revs ? '<span class="mini-chip rev" title="' + esc(t('roadmap.revisions')) + '">🔁 ' + revs + '</span>' : '') +
+      (st.stars ? '<span class="mini-chip star" title="' + esc(t('roadmap.confidence')) + '">★ ' + st.stars + '</span>' : '') +
+      (st.pyqDone ? '<span class="mini-chip pyq" title="' + esc(t('roadmap.pyqSolved')) + '">📝 PYQ</span>' : '') +
+      (hasNotes ? '<span class="mini-chip note" title="' + esc(t('roadmap.hasNotes')) + '">🗒</span>' : '') +
+      '</span>' +
+      '<button class="study-btn" onclick="StudyDrawer.open(\'' + esc(topic.id) + '\')" title="' + esc(t('roadmap.studyTitle')) + '">' +
+      esc(t('roadmap.study')) +
+      '</button>' +
+      '</div>' +
       '</div>';
   };
 
@@ -261,8 +261,13 @@
   /* ---------------- interactions ---------------- */
 
   Roadmap.toggleTopic = function (topicId) {
-    var st = State.getTopicState(topicId);
     var chk = document.getElementById('chk_' + topicId);
+    if (!State.authToken) {
+      if (chk) chk.checked = false;
+      State.emit('auth:required');
+      return;
+    }
+    var st = State.getTopicState(topicId);
     st.completed = chk ? chk.checked : !st.completed;
     if (st.completed) {
       if (st.status === 'not_started') st.status = 'mastered';
@@ -297,6 +302,7 @@
   };
 
   Roadmap.markUnit = function (unitId, complete) {
+    if (!State.authToken) { State.emit('auth:required'); return; }
     var unit = State.findUnit(unitId);
     if (!unit) return;
     unit.topics.forEach(function (t) {
