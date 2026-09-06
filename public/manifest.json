@@ -1,0 +1,48 @@
+{
+  "name": "ExamRoadmap — प्रतियोगी परीक्षा तैयारी",
+  "short_name": "ExamRoadmap",
+  "description": "बहु-परीक्षा रोडमैप: चरणबद्ध सिलेबस ट्रैकर, वेटेज इंटेलिजेंस, स्पेस्ड रिपिटीशन रिवीजन और फोकस टाइमर।",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#0f172a",
+  "theme_color": "#4f46e5",
+  "lang": "hi-IN",
+  "dir": "ltr",
+  "categories": ["education", "productivity"],
+  "icons": [
+    {
+      "src": "/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "परीक्षा बदलें",
+      "short_name": "कैटलॉग",
+      "description": "दूसरा परीक्षा रोडमैप चुनें",
+      "url": "/?action=catalog"
+    },
+    {
+      "name": "फोकस टाइमर",
+      "short_name": "टाइमर",
+      "description": "पोमोडोरो अध्ययन सेशन शुरू करें",
+      "url": "/?action=timer"
+    }
+  ]
+}

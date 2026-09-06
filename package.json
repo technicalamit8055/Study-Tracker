@@ -1,16 +1,22 @@
 {
-  "name": "bihar-stet-2026-tracker",
-  "version": "1.0.0",
-  "description": "Bihar STET 2026 Paper 2 Psychology Syllabus & Weightage Tracker with Vercel Serverless Backend and Cloud Sync",
+  "name": "examroadmap",
+  "version": "2.0.0",
+  "description": "ExamRoadmap — multi-exam phased study roadmap platform (STET, CTET, SSC, Boards) with weightage intelligence, spaced repetition, PWA offline support and cloud sync.",
   "main": "server.js",
   "scripts": {
     "dev": "node server.js",
-    "start": "node server.js"
+    "start": "node server.js",
+    "validate:exams": "node scripts/validate-exams.js"
   },
   "keywords": [
-    "bihar-stet",
-    "psychology",
-    "syllabus-tracker",
+    "exam-preparation",
+    "study-tracker",
+    "roadmap",
+    "spaced-repetition",
+    "pwa",
+    "stet",
+    "ctet",
+    "ssc",
     "vercel",
     "serverless"
   ],
