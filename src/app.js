@@ -347,10 +347,27 @@
     updateOnlineUI();
     showToast(I18n.t('app.backOnline'), 'info');
     if (State.authToken) State.pushCloudProgress(false);
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.getRegistration().then(function (reg) {
+        if (reg) reg.update().catch(function () {});
+      });
+    }
+    if (State.checkForRoadmapUpdate) State.checkForRoadmapUpdate();
   });
   global.addEventListener('offline', function () {
     updateOnlineUI();
     showToast(I18n.t('app.wentOffline'), 'info');
+  });
+
+  document.addEventListener('visibilitychange', function () {
+    if (document.visibilityState === 'visible') {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.getRegistration().then(function (reg) {
+          if (reg) reg.update().catch(function () {});
+        });
+      }
+      if (State.checkForRoadmapUpdate) State.checkForRoadmapUpdate();
+    }
   });
 
   /* ---------------- bootstrap ---------------- */
@@ -394,6 +411,11 @@
       Roadmap.render();
       Timer.clearFocus();
     });
+    State.on('exam:updated', function () {
+      Roadmap.renderExamHeader();
+      Roadmap.render();
+      showToast(I18n.lang === 'hi' ? '✨ पाठ्यक्रम रोडमैप अपडेट हो गया है!' : '✨ Syllabus roadmap updated to latest version!', 'info');
+    });
 
     try {
       await State.fetchCatalog();
@@ -422,10 +444,28 @@
     if (global.Onboarding) Onboarding.init();
     if (State.authToken) State.verifyAuth();
 
-    // Register the service worker for offline study.
+    // Register the service worker for offline study with auto-update monitoring.
     if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/sw.js').catch(function (err) {
+      navigator.serviceWorker.register('/sw.js').then(function (reg) {
+        reg.update().catch(function () {});
+        reg.addEventListener('updatefound', function () {
+          var newWorker = reg.installing;
+          if (newWorker) {
+            newWorker.addEventListener('statechange', function () {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                newWorker.postMessage({ type: 'SKIP_WAITING' });
+              }
+            });
+          }
+        });
+      }).catch(function (err) {
         console.warn('Service worker registration failed:', err.message);
+      });
+
+      navigator.serviceWorker.addEventListener('message', function (event) {
+        if (event.data && event.data.type === 'ROADMAP_UPDATED') {
+          if (State.checkForRoadmapUpdate) State.checkForRoadmapUpdate();
+        }
       });
     }
 

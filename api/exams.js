@@ -1,45 +1,77 @@
 const fs = require('fs');
 const path = require('path');
 
-const DATA_DIR = path.join(__dirname, '..', 'data');
-const EXAMS_DIR = path.join(DATA_DIR, 'exams');
-const CATALOG_FILE = path.join(DATA_DIR, 'exams-catalog.json');
+const ROOT_DATA_DIR = path.join(__dirname, '..', 'data');
+const PUBLIC_DATA_DIR = path.join(__dirname, '..', 'public', 'data');
 
-// Roadmaps are static content, so cache them in the serverless
-// container to avoid re-reading from disk on every warm invocation.
 const cache = {
   catalog: null,
   exams: {}
 };
 
-function readJson(file) {
-  return JSON.parse(fs.readFileSync(file, 'utf8'));
+function resolveDataPath(relPath) {
+  const pRoot = path.join(ROOT_DATA_DIR, relPath);
+  const pPublic = path.join(PUBLIC_DATA_DIR, relPath);
+
+  const existRoot = fs.existsSync(pRoot);
+  const existPublic = fs.existsSync(pPublic);
+
+  if (existRoot && existPublic) {
+    const mRoot = fs.statSync(pRoot).mtimeMs;
+    const mPublic = fs.statSync(pPublic).mtimeMs;
+    return mPublic > mRoot ? pPublic : pRoot;
+  }
+  if (existRoot) return pRoot;
+  if (existPublic) return pPublic;
+  return null;
+}
+
+function readJsonWithStat(relPath) {
+  const file = resolveDataPath(relPath);
+  if (!file) return null;
+  const stat = fs.statSync(file);
+  const content = fs.readFileSync(file, 'utf8');
+  return {
+    data: JSON.parse(content),
+    mtimeMs: stat.mtimeMs,
+    etag: `W/"${stat.size}-${Math.floor(stat.mtimeMs)}"`
+  };
 }
 
 function getCatalog() {
-  if (process.env.NODE_ENV === 'production' && cache.catalog) {
+  const file = resolveDataPath('exams-catalog.json');
+  if (!file) return null;
+  const stat = fs.statSync(file);
+
+  if (cache.catalog && cache.catalog.mtimeMs >= stat.mtimeMs) {
     return cache.catalog;
   }
-  return readJson(CATALOG_FILE);
+
+  const res = readJsonWithStat('exams-catalog.json');
+  if (res) cache.catalog = res;
+  return res;
 }
 
 function getExam(examId) {
-  if (process.env.NODE_ENV === 'production' && cache.exams[examId]) return cache.exams[examId];
+  const catRes = getCatalog();
+  const catalog = catRes ? catRes.data : null;
+  if (!catalog || !catalog.exams) return null;
 
-  const catalog = getCatalog();
   const entry = catalog.exams.find(e => e.id === examId);
   if (!entry || !entry.available) return null;
 
-  // Resolve strictly against the catalog's registered filename so a
-  // crafted examId can never escape the exams directory.
-  const file = path.join(EXAMS_DIR, path.basename(entry.file));
-  if (!fs.existsSync(file)) return null;
+  const relFile = path.join('exams', path.basename(entry.file));
+  const absFile = resolveDataPath(relFile);
+  if (!absFile) return null;
 
-  const exam = readJson(file);
-  if (process.env.NODE_ENV === 'production') {
-    cache.exams[examId] = exam;
+  const stat = fs.statSync(absFile);
+  if (cache.exams[examId] && cache.exams[examId].mtimeMs >= stat.mtimeMs) {
+    return cache.exams[examId];
   }
-  return exam;
+
+  const res = readJsonWithStat(relFile);
+  if (res) cache.exams[examId] = res;
+  return res;
 }
 
 /**
@@ -59,20 +91,37 @@ module.exports = async (req, res) => {
     const examId = (req.query && req.query.examId) || null;
 
     if (examId) {
-      const exam = getExam(examId);
-      if (!exam) {
+      const examRes = getExam(examId);
+      if (!examRes) {
         return res.status(404).json({ error: `Exam roadmap not found: ${examId}` });
       }
-      res.setHeader('Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400');
-      return res.status(200).json({ exam });
+
+      res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+      res.setHeader('ETag', examRes.etag);
+
+      if (req.headers['if-none-match'] === examRes.etag) {
+        return res.status(304).end();
+      }
+
+      return res.status(200).json({ exam: examRes.data });
     }
 
-    const catalog = getCatalog();
-    res.setHeader('Cache-Control', 'public, max-age=3600, stale-while-revalidate=86400');
+    const catRes = getCatalog();
+    if (!catRes) {
+      return res.status(500).json({ error: 'Catalog data unavailable' });
+    }
+
+    res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+    res.setHeader('ETag', catRes.etag);
+
+    if (req.headers['if-none-match'] === catRes.etag) {
+      return res.status(304).end();
+    }
+
     return res.status(200).json({
-      categories: catalog.categories,
-      exams: catalog.exams,
-      updated: catalog.updated
+      categories: catRes.data.categories,
+      exams: catRes.data.exams,
+      updated: catRes.data.updated
     });
   } catch (error) {
     console.error('Exams API error:', error);
@@ -80,5 +129,12 @@ module.exports = async (req, res) => {
   }
 };
 
-module.exports.getExam = getExam;
-module.exports.getCatalog = getCatalog;
+module.exports.getExam = function(id) {
+  const r = getExam(id);
+  return r ? r.data : null;
+};
+module.exports.getCatalog = function() {
+  const r = getCatalog();
+  return r ? r.data : null;
+};
+

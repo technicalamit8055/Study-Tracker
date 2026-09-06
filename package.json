@@ -4,7 +4,10 @@
   "description": "ExamRoadmap — multi-exam phased study roadmap platform (STET, CTET, SSC, Boards) with weightage intelligence, spaced repetition, PWA offline support and cloud sync.",
   "main": "server.js",
   "scripts": {
+    "sync": "node scripts/sync-assets.js",
+    "predev": "node scripts/sync-assets.js",
     "dev": "node server.js",
+    "prestart": "node scripts/sync-assets.js",
     "start": "node server.js",
     "validate:exams": "node scripts/validate-exams.js"
   },

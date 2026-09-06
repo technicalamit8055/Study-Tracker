@@ -6,7 +6,7 @@
  *   - Exam roadmap JSON:   stale-while-revalidate (study offline)
  *   - Auth & progress API: network only (never cache a student's private state)
  */
-const VERSION = 'v4';
+const VERSION = 'v5';
 const SHELL_CACHE = 'examroadmap-shell-' + VERSION;
 const DATA_CACHE = 'examroadmap-data-' + VERSION;
 
@@ -53,6 +53,61 @@ self.addEventListener('activate', event => {
   );
 });
 
+function notifyClients(msg) {
+  self.clients.matchAll({ type: 'window', includeUncontrolled: true }).then(clients => {
+    clients.forEach(client => {
+      try { client.postMessage(msg); } catch (e) {}
+    });
+  });
+}
+
+function networkFirstWithFallback(request, cacheName, timeoutMs) {
+  var timeout = typeof timeoutMs === 'number' ? timeoutMs : 2000;
+  return caches.open(cacheName).then(cache => {
+    return new Promise((resolve) => {
+      var resolved = false;
+
+      var timer = setTimeout(() => {
+        cache.match(request).then(cached => {
+          if (cached && !resolved) {
+            resolved = true;
+            resolve(cached);
+          }
+        });
+      }, timeout);
+
+      fetch(request).then(networkResponse => {
+        clearTimeout(timer);
+        if (networkResponse && networkResponse.status === 200) {
+          cache.put(request, networkResponse.clone());
+        }
+        if (!resolved) {
+          resolved = true;
+          resolve(networkResponse);
+        } else {
+          // Resolved earlier via cache timeout: notify client that fresh roadmap is now cached
+          notifyClients({ type: 'ROADMAP_UPDATED', url: request.url });
+        }
+      }).catch(() => {
+        clearTimeout(timer);
+        if (!resolved) {
+          resolved = true;
+          cache.match(request).then(cached => {
+            if (cached) {
+              resolve(cached);
+            } else {
+              resolve(new Response(JSON.stringify({ error: 'Offline roadmap unavailable' }), {
+                status: 503,
+                headers: { 'Content-Type': 'application/json' }
+              }));
+            }
+          });
+        }
+      });
+    });
+  });
+}
+
 function staleWhileRevalidate(request, cacheName) {
   return caches.open(cacheName).then(cache =>
     cache.match(request).then(cached => {
@@ -81,9 +136,10 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Exam roadmaps: serve cached copies so study works offline.
+  // Exam roadmaps & catalogs: Network-first with fast offline fallback
+  // Ensures updates in codebase appear immediately without clearing cache.
   if (url.pathname.startsWith('/api/exams') || url.pathname.startsWith('/data/')) {
-    event.respondWith(staleWhileRevalidate(req, DATA_CACHE));
+    event.respondWith(networkFirstWithFallback(req, DATA_CACHE, 2000));
     return;
   }
 
@@ -105,5 +161,7 @@ self.addEventListener('fetch', event => {
 });
 
 self.addEventListener('message', event => {
-  if (event.data === 'SKIP_WAITING') self.skipWaiting();
+  if (event.data === 'SKIP_WAITING' || (event.data && event.data.type === 'SKIP_WAITING')) {
+    self.skipWaiting();
+  }
 });

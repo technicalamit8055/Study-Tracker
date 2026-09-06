@@ -181,6 +181,38 @@
   };
 
   /**
+   * Check for live roadmap changes on the server and hot-update without losing progress.
+   */
+  State.checkForRoadmapUpdate = async function (examId) {
+    var id = examId || State.activeExamId;
+    if (!id || !State.exam) return false;
+
+    try {
+      var res = await fetch('/api/exams?examId=' + encodeURIComponent(id) + '&_t=' + Date.now(), {
+        cache: 'no-cache'
+      });
+      if (!res.ok) return false;
+      var data = await res.json();
+      var freshExam = data && data.exam;
+      if (!freshExam || freshExam.id !== id) return false;
+
+      var currentStr = JSON.stringify(State.exam);
+      var freshStr = JSON.stringify(freshExam);
+
+      if (currentStr !== freshStr) {
+        console.log('[state] Roadmap update detected for ' + id + ', hot-updating UI...');
+        State.exam = freshExam;
+        State.emit('exam:updated', freshExam);
+        State.emit('exam:changed', freshExam);
+        return true;
+      }
+    } catch (e) {
+      // Offline or network error - continue silently with existing state
+    }
+    return false;
+  };
+
+  /**
    * Load an exam roadmap and its progress, and make it active.
    */
   State.activateExam = async function (examId) {
@@ -189,6 +221,11 @@
     State.setActiveExamId(examId);
     State.loadProgress(examId);
     State.emit('exam:changed', exam);
+
+    // Non-blocking background re-validation to catch updates made while cached
+    setTimeout(function () {
+      State.checkForRoadmapUpdate(examId);
+    }, 1500);
 
     // Pull this exam's cloud progress in the background if signed in.
     if (State.authToken) {

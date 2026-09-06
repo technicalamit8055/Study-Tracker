@@ -26,6 +26,18 @@ app.all('/api/auth/me', (req, res) => meHandler(req, res));
 app.all('/api/progress', (req, res) => progressHandler(req, res));
 app.all('/api/exams', (req, res) => examsHandler(req, res));
 
+// Custom headers for service worker and data files
+app.use('/sw.js', (req, res, next) => {
+  res.setHeader('Cache-Control', 'public, max-age=0, must-revalidate');
+  res.setHeader('Service-Worker-Allowed', '/');
+  next();
+});
+
+app.use('/data', (req, res, next) => {
+  res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+  next();
+});
+
 // Serve static frontend files
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(__dirname));
