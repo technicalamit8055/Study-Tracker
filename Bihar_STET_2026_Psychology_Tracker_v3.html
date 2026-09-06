@@ -4,6 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>बिहार STET 2026 पेपर 2 (मनोविज्ञान) सिलेबस & वेटेज ट्रैकर | Bihar STET Paper 2 Psychology Tracker</title>
+  <script>
+    // Immediately apply saved theme to prevent FOUC (flash of dark/light theme)
+    (function() {
+      const savedTheme = localStorage.getItem('stet_theme') || 'dark';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    })();
+  </script>
   <style>
     :root {
       --primary: #4f46e5;
@@ -23,6 +30,30 @@
       --high-p: #ef4444;
       --med-p: #f59e0b;
       --std-p: #3b82f6;
+    }
+
+    [data-theme="light"] {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --primary-light: #e0e7ff;
+      --success: #059669;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --info: #0284c7;
+      --yt-red: #dc2626;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --card-border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --input-bg: #f8fafc;
+      --high-p: #dc2626;
+      --med-p: #d97706;
+      --std-p: #2563eb;
+    }
+
+    body, header, .stat-card, .strategy-card, .strat-box, .progress-card, .study-widget, .toolbar, .unit-card, .unit-header, .topic-row, .modal-card, .form-control, .btn {
+      transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease, box-shadow 0.25s ease;
     }
 
     * {
@@ -898,6 +929,399 @@
       gap: 10px;
     }
 
+    .theme-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 13px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: rgba(255, 255, 255, 0.08);
+      color: #fef08a;
+      border: 1px solid rgba(254, 240, 138, 0.3);
+      transition: all 0.2s ease;
+      user-select: none;
+    }
+    .theme-toggle-btn:hover {
+      background-color: rgba(255, 255, 255, 0.18);
+      transform: translateY(-1px);
+    }
+
+    /* Light Mode Comprehensive Overrides */
+    [data-theme="light"] header {
+      background: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    [data-theme="light"] .header-title h1 {
+      color: #0f172a;
+    }
+
+    [data-theme="light"] .header-title p {
+      color: #4f46e5;
+      font-weight: 500;
+    }
+
+    [data-theme="light"] .btn-secondary {
+      background-color: #f1f5f9;
+      color: #334155;
+      border-color: #cbd5e1;
+    }
+
+    [data-theme="light"] .btn-secondary:hover {
+      background-color: #e2e8f0;
+      color: #0f172a;
+      border-color: #94a3b8;
+    }
+
+    [data-theme="light"] .btn-danger {
+      background-color: #fef2f2;
+      color: #dc2626;
+      border-color: #fecaca;
+    }
+
+    [data-theme="light"] .btn-danger:hover {
+      background-color: #fee2e2;
+      border-color: #f87171;
+    }
+
+    [data-theme="light"] .theme-toggle-btn {
+      background-color: #eef2ff;
+      color: #4338ca;
+      border-color: #c7d2fe;
+    }
+
+    [data-theme="light"] .theme-toggle-btn:hover {
+      background-color: #e0e7ff;
+      color: #312e81;
+    }
+
+    [data-theme="light"] .stat-card {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    [data-theme="light"] .strategy-card {
+      background: linear-gradient(135deg, #ffffff 0%, #f5f7ff 100%);
+      border: 1px solid #c7d2fe;
+      border-left: 4px solid #4f46e5;
+      box-shadow: 0 4px 14px rgba(79, 70, 229, 0.06);
+    }
+
+    [data-theme="light"] .strategy-header h3 {
+      color: #1e1b4b;
+    }
+
+    [data-theme="light"] .strategy-body {
+      color: #334155;
+    }
+
+    [data-theme="light"] .strat-box {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+    }
+
+    [data-theme="light"] .strat-box-title[style*="#f87171"] {
+      color: #dc2626 !important;
+    }
+
+    [data-theme="light"] .strat-box-title[style*="#2dd4bf"] {
+      color: #0d9488 !important;
+    }
+
+    [data-theme="light"] .strat-box-title[style*="#fcd34d"] {
+      color: #b45309 !important;
+    }
+
+    [data-theme="light"] .progress-card {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    [data-theme="light"] .progress-bar-bg {
+      background-color: #e2e8f0;
+    }
+
+    [data-theme="light"] .progress-percentage {
+      color: #4f46e5;
+    }
+
+    [data-theme="light"] .study-widget {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    [data-theme="light"] .timer-clock {
+      color: #0284c7;
+    }
+
+    [data-theme="light"] .toolbar {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    }
+
+    [data-theme="light"] .search-box input {
+      background-color: #f8fafc;
+      border: 1px solid #cbd5e1;
+      color: #0f172a;
+    }
+
+    [data-theme="light"] .search-box input:focus {
+      border-color: #4f46e5;
+      background-color: #ffffff;
+    }
+
+    [data-theme="light"] .filter-select {
+      background-color: #f8fafc;
+      border: 1px solid #cbd5e1;
+      color: #0f172a;
+    }
+
+    [data-theme="light"] .filter-select:focus {
+      border-color: #4f46e5;
+    }
+
+    [data-theme="light"] .filter-select option {
+      background-color: #ffffff;
+      color: #0f172a;
+    }
+
+    [data-theme="light"] .section-header {
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+    }
+
+    [data-theme="light"] .section-header:hover {
+      background: #e2e8f0;
+    }
+
+    [data-theme="light"] .section-name {
+      color: #0f172a;
+    }
+
+    [data-theme="light"] .unit-card {
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+    }
+
+    [data-theme="light"] .unit-card:hover {
+      border-color: #a5b4fc;
+      box-shadow: 0 4px 14px rgba(99, 102, 241, 0.08);
+    }
+
+    [data-theme="light"] .unit-header {
+      background-color: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    [data-theme="light"] .unit-tag {
+      background-color: #e2e8f0;
+      color: #475569;
+    }
+
+    [data-theme="light"] .unit-title {
+      color: #0f172a;
+    }
+
+    [data-theme="light"] .badge-priority.high {
+      background: #fee2e2;
+      color: #b91c1c;
+      border-color: #fca5a5;
+    }
+
+    [data-theme="light"] .badge-priority.medium {
+      background: #fef3c7;
+      color: #b45309;
+      border-color: #fcd34d;
+    }
+
+    [data-theme="light"] .badge-priority.standard {
+      background: #dbeafe;
+      color: #1d4ed8;
+      border-color: #93c5fd;
+    }
+
+    [data-theme="light"] .badge-weight {
+      background: #d1fae5;
+      color: #047857;
+      border-color: #6ee7b7;
+    }
+
+    [data-theme="light"] .unit-progress-badge {
+      background: #e0e7ff;
+      color: #4338ca;
+    }
+
+    [data-theme="light"] .unit-yt-btn {
+      background: #fee2e2;
+      border-color: #fca5a5;
+      color: #dc2626;
+    }
+
+    [data-theme="light"] .unit-yt-btn:hover {
+      background: #dc2626;
+      color: #ffffff;
+      border-color: #dc2626;
+    }
+
+    [data-theme="light"] .btn-xs {
+      background-color: #f1f5f9;
+      border-color: #cbd5e1;
+      color: #475569;
+    }
+
+    [data-theme="light"] .btn-xs:hover {
+      background-color: #e2e8f0;
+      color: #0f172a;
+    }
+
+    [data-theme="light"] .unit-pyq-hint {
+      background-color: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+      color: #475569;
+    }
+
+    [data-theme="light"] .unit-pyq-hint strong {
+      color: #1e293b;
+    }
+
+    [data-theme="light"] .topic-row {
+      border-bottom: 1px solid #f1f5f9;
+    }
+
+    [data-theme="light"] .topic-row:hover {
+      background-color: #f8fafc;
+    }
+
+    [data-theme="light"] .topic-name {
+      color: #1e293b;
+    }
+
+    [data-theme="light"] .topic-name.completed {
+      color: #94a3b8;
+    }
+
+    [data-theme="light"] .yt-resource-btn {
+      background: #fee2e2;
+      border-color: #fca5a5;
+      color: #b91c1c;
+    }
+
+    [data-theme="light"] .yt-resource-btn:hover {
+      background: #dc2626;
+      border-color: #dc2626;
+      color: #ffffff;
+    }
+
+    [data-theme="light"] .status-select {
+      background-color: #ffffff;
+      border-color: #cbd5e1;
+      color: #1e293b;
+    }
+
+    [data-theme="light"] .status-select.not_started {
+      color: #64748b;
+      border-color: #cbd5e1;
+      background: #f8fafc;
+    }
+
+    [data-theme="light"] .status-select.in_progress {
+      color: #b45309;
+      border-color: #fcd34d;
+      background: #fffbeb;
+    }
+
+    [data-theme="light"] .status-select.notes_done {
+      color: #0284c7;
+      border-color: #7dd3fc;
+      background: #f0f9ff;
+    }
+
+    [data-theme="light"] .status-select.mcqs_done {
+      color: #7e22ce;
+      border-color: #d8b4fe;
+      background: #faf5ff;
+    }
+
+    [data-theme="light"] .status-select.mastered {
+      color: #047857;
+      border-color: #6ee7b7;
+      background: #ecfdf5;
+    }
+
+    [data-theme="light"] .rev-counter {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    [data-theme="light"] .rev-label {
+      color: #64748b;
+    }
+
+    [data-theme="light"] .rev-val {
+      color: #4f46e5;
+    }
+
+    [data-theme="light"] .rev-btn {
+      color: #64748b;
+    }
+
+    [data-theme="light"] .rev-btn:hover {
+      color: #0f172a;
+      background: #e2e8f0;
+    }
+
+    [data-theme="light"] .star-btn {
+      color: #cbd5e1;
+    }
+
+    [data-theme="light"] .star-btn.active {
+      color: #f59e0b;
+    }
+
+    [data-theme="light"] .notes-toggle-btn {
+      background: #ffffff;
+      border-color: #cbd5e1;
+      color: #64748b;
+    }
+
+    [data-theme="light"] .notes-toggle-btn:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+
+    [data-theme="light"] .notes-toggle-btn.has-notes {
+      border-color: #0284c7;
+      color: #0284c7;
+      background: #f0f9ff;
+    }
+
+    [data-theme="light"] .topic-notes-drawer {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    [data-theme="light"] .topic-notes-drawer textarea {
+      color: #0f172a;
+    }
+
+    [data-theme="light"] .modal-overlay {
+      background: rgba(15, 23, 42, 0.5);
+    }
+
+    [data-theme="light"] .modal-card {
+      background: #ffffff;
+      border-color: #e2e8f0;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    }
+
+    [data-theme="light"] .modal-card h3 {
+      color: #0f172a;
+    }
+
+    [data-theme="light"] .modal-card p {
+      color: #475569;
+    }
+
     /* Print styles */
     @media print {
       header, .toolbar, .study-widget, .unit-actions, .topic-controls, .btn, .unit-yt-btn, .yt-resource-btn, .strategy-card {
@@ -928,6 +1352,12 @@
         <p>उच्च माध्यमिक शिक्षक (कक्षा 11वीं - 12वीं) | 150 प्रश्न • 150 अंक • वेटेज व प्राथमिकता ट्रैकर</p>
       </div>
       <div class="header-actions">
+        <!-- Theme Toggle Button -->
+        <button class="btn theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="थीम बदलें (Light/Dark Mode)">
+          <span id="themeToggleIcon">☀️</span>
+          <span id="themeToggleText">लाइट मोड</span>
+        </button>
+
         <button class="btn btn-secondary" onclick="exportProgressJSON()">
           <span>💾</span> बैकअप / Export
         </button>
@@ -1109,6 +1539,48 @@
     // User State stored in LocalStorage
     const STORAGE_KEY = 'bihar_stet_2026_psychology_tracker_v2';
     let userState = {};
+
+    // Theme Management (Light / Dark Mode)
+    const THEME_KEY = 'stet_theme';
+
+    function getCurrentTheme() {
+      return document.documentElement.getAttribute('data-theme') || localStorage.getItem(THEME_KEY) || 'dark';
+    }
+
+    function applyTheme(theme) {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem(THEME_KEY, theme);
+      updateThemeUI(theme);
+    }
+
+    function toggleTheme() {
+      const current = getCurrentTheme();
+      const nextTheme = (current === 'light') ? 'dark' : 'light';
+      applyTheme(nextTheme);
+      showToast(nextTheme === 'light' ? '☀️ लाइट मोड चालू किया गया' : '🌙 डार्क मोड चालू किया गया', 'info');
+    }
+
+    function updateThemeUI(theme) {
+      const currentTheme = theme || getCurrentTheme();
+      const icon = document.getElementById('themeToggleIcon');
+      const text = document.getElementById('themeToggleText');
+      const btn = document.getElementById('themeToggleBtn');
+      if (!icon || !text) return;
+
+      if (currentTheme === 'light') {
+        icon.innerText = '🌙';
+        text.innerText = 'डार्क मोड';
+        if (btn) btn.title = 'डार्क मोड में बदलें (Switch to Dark Mode)';
+      } else {
+        icon.innerText = '☀️';
+        text.innerText = 'लाइट मोड';
+        if (btn) btn.title = 'लाइट मोड में बदलें (Switch to Light Mode)';
+      }
+    }
+
+    function showToast(message, type = 'info') {
+      alert(message);
+    }
 
     // Helper to generate optimized YouTube search URL
     function getYoutubeSearchUrl(secId, unitTitle, topicText) {
@@ -1683,6 +2155,7 @@
 
     // Initialize App
     window.addEventListener('DOMContentLoaded', () => {
+      updateThemeUI();
       loadState();
       renderSyllabus();
       updateTimerDisplay();
