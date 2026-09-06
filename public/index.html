@@ -242,15 +242,30 @@
 
       <div id="authAlert" class="auth-alert"></div>
 
+      <!-- 1-click Google sign-in: the fastest path for most students -->
+      <button type="button" class="btn-google" id="googleLoginBtn" onclick="handleGoogleLogin()">
+        <svg class="btn-google-icon" viewBox="0 0 18 18" aria-hidden="true" focusable="false">
+          <path fill="#4285F4" d="M17.64 9.2c0-.64-.06-1.25-.16-1.84H9v3.48h4.84a4.14 4.14 0 0 1-1.8 2.72v2.26h2.91c1.7-1.57 2.69-3.88 2.69-6.62z"/>
+          <path fill="#34A853" d="M9 18c2.43 0 4.47-.8 5.96-2.18l-2.91-2.26c-.81.54-1.84.86-3.05.86-2.35 0-4.34-1.58-5.05-3.71H.96v2.34A9 9 0 0 0 9 18z"/>
+          <path fill="#FBBC05" d="M3.95 10.71a5.41 5.41 0 0 1 0-3.42V4.96H.96a9 9 0 0 0 0 8.09l2.99-2.34z"/>
+          <path fill="#EA4335" d="M9 3.58c1.32 0 2.5.46 3.44 1.35l2.58-2.58C13.46.89 11.43 0 9 0A9 9 0 0 0 .96 4.96l2.99 2.33C4.66 5.16 6.65 3.58 9 3.58z"/>
+        </svg>
+        <span data-i18n="auth.googleLogin">Continue with Google</span>
+      </button>
+
+      <div class="auth-divider"><span data-i18n="auth.orEmail">or continue with email</span></div>
+
       <form id="loginForm" onsubmit="submitLoginForm(event)">
         <div class="form-group">
-          <label class="form-label" data-i18n="auth.username">Username</label>
-          <input type="text" id="loginUsername" class="form-control" data-i18n-placeholder="auth.usernamePh"
-                 placeholder="e.g. exam_aspirant" required autocomplete="username">
+          <label class="form-label" data-i18n="auth.email">Email address</label>
+          <input type="email" id="loginEmail" class="form-control" data-i18n-placeholder="auth.emailPh"
+                 placeholder="you@example.com" required autocomplete="email">
         </div>
         <div class="form-group">
           <label class="form-label" data-i18n="auth.password">Password</label>
           <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+          <button type="button" class="auth-link" id="forgotPasswordLink" onclick="handleForgotPassword()"
+                  data-i18n="auth.forgotPassword">Forgot password?</button>
         </div>
         <div class="form-actions">
           <button type="submit" class="btn btn-primary" id="loginSubmitBtn" data-i18n="auth.doLogin">✓ Log in</button>
@@ -261,17 +276,18 @@
       <form id="registerForm" style="display:none;" onsubmit="submitRegisterForm(event)">
         <div class="form-group">
           <label class="form-label" data-i18n="auth.yourName">Your name</label>
-          <input type="text" id="regName" class="form-control" data-i18n-placeholder="auth.namePh" placeholder="e.g. Ravi Kumar">
+          <input type="text" id="regName" class="form-control" data-i18n-placeholder="auth.namePh"
+                 placeholder="e.g. Ravi Kumar" autocomplete="name">
         </div>
         <div class="form-group">
-          <label class="form-label" data-i18n="auth.username">Username</label>
-          <input type="text" id="regUsername" class="form-control" data-i18n-placeholder="auth.usernamePh"
-                 placeholder="e.g. exam_aspirant" required minlength="3" autocomplete="username">
+          <label class="form-label" data-i18n="auth.email">Email address</label>
+          <input type="email" id="regEmail" class="form-control" data-i18n-placeholder="auth.emailPh"
+                 placeholder="you@example.com" required autocomplete="email">
         </div>
         <div class="form-group">
           <label class="form-label" data-i18n="auth.password">Password</label>
           <input type="password" id="regPassword" class="form-control" data-i18n-placeholder="auth.passwordMin"
-                 placeholder="At least 4 characters" required minlength="4" autocomplete="new-password">
+                 placeholder="At least 6 characters" required minlength="6" autocomplete="new-password">
         </div>
         <div class="form-actions">
           <button type="submit" class="btn btn-primary" id="regSubmitBtn" data-i18n="auth.doRegister">✓ Create account</button>
@@ -317,7 +333,14 @@
 
   <div class="toast-container" id="toastContainer"></div>
 
+  <!-- Supabase Auth SDK. Loaded before our modules so SupabaseAuth can
+       initialise on first use; if it fails (offline / blocked), the app falls
+       back to local-only mode instead of breaking. -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script src="/js/i18n.js"></script>
+  <script src="/js/supabase-config.js"></script>
+  <script src="/js/supabase-client.js"></script>
   <script src="/js/state.js"></script>
   <script src="/js/timer.js"></script>
   <script src="/js/roadmap-renderer.js"></script>

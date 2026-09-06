@@ -40,16 +40,57 @@ npm install
 npm run dev          # http://localhost:3005
 ```
 
-Cloud sync and accounts are optional — with no `MONGODB_URI` the API falls back
-to a local JSON store, and with no login at all the app runs entirely on
-`localStorage`.
+Accounts and cloud sync are optional. Supabase credentials ship in
+`src/supabase-config.js`, so sign-in works out of the box; with none configured
+the app runs entirely on `localStorage` and says so in the auth modal.
 
 ```bash
-cp .env.example .env   # set MONGODB_URI and JWT_SECRET for real cloud sync
+cp .env.example .env   # optional: point at a different Supabase project
 npm run validate:exams # schema-check every roadmap
 ```
 
 Deploy to Vercel as-is; `vercel.json` maps the serverless routes.
+
+## Authentication (Supabase)
+
+Auth is handled entirely by [Supabase Auth](https://supabase.com): Google
+1-click sign-in, email + password, password recovery, and silent token refresh.
+Sessions persist across reloads, so students stay signed in.
+
+**First-time project setup**
+
+1. Run `scripts/supabase_schema.sql` in the Supabase dashboard
+   (**SQL Editor → New query → paste → Run**). It creates `user_progress` with
+   Row Level Security, so the browser's public anon key can only ever read and
+   write the signed-in student's own rows.
+2. **Authentication → URL Configuration** — set the Site URL and add every
+   redirect URL you use (`http://localhost:3005` and your production domain).
+3. Email/password needs nothing further. While testing, turn off
+   **Authentication → Providers → Email → Confirm email** to skip the
+   confirmation step.
+
+**Enabling Google sign-in**
+
+1. Google Cloud Console → **Credentials → Create OAuth client ID → Web
+   application**.
+2. Add the authorised redirect URI from your Supabase dashboard:
+   `https://<project-ref>.supabase.co/auth/v1/callback`.
+3. Paste the Client ID and Secret into **Supabase → Authentication → Providers →
+   Google**, and enable it.
+
+Until Google is enabled in the dashboard, the button renders but Supabase
+rejects the request with a clear message in the modal — email sign-in still
+works.
+
+**Pointing at a different project**
+
+Set `SUPABASE_URL` and `SUPABASE_ANON_KEY` in `.env` (or in the Vercel
+dashboard). `/api/config` serves them to the browser at boot and they override
+the bundled defaults, so no rebuild is needed. `SUPABASE_URL` must be the bare
+project URL — a pasted `/rest/v1` suffix is trimmed automatically.
+
+Both values are public by design. What protects student data is RLS on the
+table, not secrecy of the anon key; never ship the service-role key.
 
 ## Layout
 
@@ -65,12 +106,16 @@ lib/
   db.js                        # MongoDB + local-file fallback
   auth.js                      # bcrypt + JWT
 src/
+  supabase-config.js           # public project URL + anon key (env-overridable)
+  supabase-client.js           # auth helpers: Google, email, reset, session
   state.js                     # active exam, progress, stats, cloud sync
   roadmap-renderer.js          # phase / unit / topic rendering + filters
   study-drawer.js              # per-topic panel, spaced repetition
   catalog-modal.js             # exam browser and switcher
   timer.js                     # Pomodoro
   app.js                       # theme, auth, import/export, bootstrap
+scripts/
+  supabase_schema.sql          # user_progress table + RLS policies
   styles-*.css
 public/
   manifest.json  sw.js  icons/ # PWA
@@ -102,12 +147,13 @@ coming soon.
 | `GET`  | `/api/progress?examId=<id>` | Progress for one exam |
 | `GET`  | `/api/progress?all=1` | Progress across all exams |
 | `POST` | `/api/progress` | `{ examId, userState, stats, timer }` |
-| `POST` | `/api/auth/register` · `/api/auth/login` | → `{ token, user }` |
-| `GET`  | `/api/auth/me` | Verify token |
+| `GET`  | `/api/config` | Public Supabase URL + anon key for the browser |
 | `GET`  | `/api/health` | Status + which datastore is live |
 
-Progress documents are keyed by `(userId, examId)`, so exams never collide.
-Authenticated calls send `Authorization: Bearer <token>`.
+The browser no longer calls `/api/auth/*` or `/api/progress`: it talks to
+Supabase directly, upserting `user_progress` rows keyed by
+`(user_id, exam_id)` under RLS. The legacy JWT/MongoDB endpoints remain in
+`api/` for the old mobile client and are safe to delete once it migrates.
 
 ### Sync conflicts
 

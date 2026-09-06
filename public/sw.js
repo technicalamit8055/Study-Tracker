@@ -4,9 +4,10 @@
  * Strategy:
  *   - App shell & scripts: stale-while-revalidate (instant load, fresh next time)
  *   - Exam roadmap JSON:   stale-while-revalidate (study offline)
- *   - Auth & progress API: network only (never cache a student's private state)
+ *   - Auth, config & progress: network only (never cache a student's private
+ *                          state, nor credentials that change on redeploy)
  */
-const VERSION = 'v5';
+const VERSION = 'v6';
 const SHELL_CACHE = 'examroadmap-shell-' + VERSION;
 const DATA_CACHE = 'examroadmap-data-' + VERSION;
 
@@ -17,6 +18,8 @@ const SHELL_ASSETS = [
   '/css/styles-base.css',
   '/css/styles-roadmap.css',
   '/js/i18n.js',
+  '/js/supabase-config.js',
+  '/js/supabase-client.js',
   '/js/state.js',
   '/js/roadmap-renderer.js',
   '/js/study-drawer.js',
@@ -132,7 +135,8 @@ self.addEventListener('fetch', event => {
   // Private, user-specific data must always come from the network.
   if (url.pathname.startsWith('/api/progress') ||
       url.pathname.startsWith('/api/auth') ||
-      url.pathname.startsWith('/api/health')) {
+      url.pathname.startsWith('/api/health') ||
+      url.pathname.startsWith('/api/config')) {
     return;
   }
 

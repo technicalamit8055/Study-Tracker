@@ -183,11 +183,104 @@ STET-2 TRACKER/
 
 ---
 
+### Phase 6: Admin Security, RBAC & Storage Foundation
+**Objective:** Establish secure role-based access control and dual-storage (MongoDB + Local Filesystem) for exam roadmaps.
+
+- **Tasks:**
+  1. Add `role: 'student' | 'admin' | 'superadmin'` to user documents in `lib/db.js` and `api/auth/register.js`.
+  2. Implement `lib/admin-auth.js` middleware verifying admin privileges on API routes.
+  3. Implement `lib/exam-storage.js` supporting dual-write to MongoDB collections (`exams`, `catalog`) and local files (`data/exams/`, `data/exams-catalog.json`), with cache invalidation for `api/exams.js`.
+  4. Scaffold `public/admin.html` and `src/admin/admin.js` with responsive glassmorphic navigation shell.
+
+- **Acceptance Criteria:**
+  - Non-admins cannot access `/api/admin/*` routes.
+  - Updating an exam immediately invalidates the `/api/exams` cache.
+
+---
+
+### Phase 7: Personal AI Prompt Studio & Bulk Sanitization Engine
+**Objective:** Enable zero-API prompt generation and resilient bulk intake for personal ChatGPT/Claude/Gemini responses.
+
+- **Tasks:**
+  1. Build **Prompt Studio** (`src/admin/prompt-studio.js`) with 1-click clipboard prompt generator embedding strict 3-Phase schema rules, section marks balance rule, and topic ID constraints.
+  2. Implement client-side **Bulk Sanitizer & Auto-Repair Engine** (`src/admin/sanitizer.js`):
+     - Auto-strips markdown fences (````json ... ````) and conversational AI preambles.
+     - Auto-fixes trailing commas and syntax quirks.
+     - Auto-reindexes topic IDs strictly to `${unitId}_t0`, `${unitId}_t1`, etc.
+     - Normalizes priorities to `high`, `medium`, or `standard`.
+     - Verifies `sectionMarksSum === totalMarks` with a 1-click "⚡ Auto-Balance Marks" action.
+  3. Implement `api/admin/validate.js` matching `scripts/validate-exams.js` standards.
+
+- **Acceptance Criteria:**
+  - Raw pasted text from personal AI chats with markdown fences parses and validates without manual cleanup.
+  - Discrepancies in marks or missing IDs are automatically repaired or clearly highlighted.
+
+---
+
+### Phase 8: Split-Screen Visual Reviewer & Live Simulator
+**Objective:** Provide side-by-side verification and in-line tweaking before publishing.
+
+- **Tasks:**
+  1. Build split-screen layout in `src/admin/admin.js`:
+     - Left: Sanitized JSON editor with real-time lint status and auto-fix actions.
+     - Right: Live interactive student simulator embedding `src/roadmap-renderer.js`.
+  2. Add visual in-line quick editing:
+     - Click-to-edit topic names directly in the simulator.
+     - Add/delete subtopics without raw JSON manipulation.
+     - Move units between Phase 1, Phase 2, and Phase 3 with up/down controls.
+  3. Implement 1-click **"🚀 Save & Publish"**:
+     - Persists to database/storage via `POST /api/admin/exams`.
+     - Automatically updates catalog and busts client caches.
+
+- **Acceptance Criteria:**
+  - Changes in simulator update the underlying JSON in real time.
+  - Published exams immediately appear in the student app catalog without server restart.
+
+---
+
+### Phase 9: Visual Exam Catalog & Tree Editor (Full CRUD)
+**Objective:** Complete visual management of existing exam roadmaps (editing, cloning, archiving, deleting).
+
+- **Tasks:**
+  1. Build **Catalog Manager** (`src/admin/catalog-manager.js`) with search, category filtering, and status badges (`available`, `featured`).
+  2. Implement **Visual Tree Editor** for exam metadata, sections, 3 phases, units, and topics.
+  3. Implement 1-click **Duplicate Exam** (clones an existing roadmap with a new slug) and **Export JSON**.
+  4. Implement **Category Manager** (create/edit categories with custom emojis and theme colors).
+
+- **Acceptance Criteria:**
+  - Admins can duplicate, edit, feature, and archive exams visually.
+  - All changes pass `node scripts/validate-exams.js`.
+
+---
+
+### Phase 10: Student Directory, Platform Insights & System Hub
+**Objective:** Administer students, monitor learning bottlenecks, and manage system operations.
+
+- **Tasks:**
+  1. Build **Student Directory** (`api/admin/users.js` & `src/admin/user-manager.js`) showing registered users, active exams, completion rates, and Pomodoro focus hours.
+  2. Implement **Platform Insights** (`api/admin/analytics.js`):
+     - Active enrollments per exam.
+     - Difficult units detector (units where student confidence stars or completion rates are lowest).
+  3. Build **System Hub** (`api/admin/system.js`):
+     - MongoDB connection status and collection counts.
+     - 1-click **Asset Re-sync** (runs `scripts/sync-assets.js` logic).
+     - 1-click **Full Platform Backup** (downloads all exams and catalog as a single backup package).
+
+- **Acceptance Criteria:**
+  - Admins can inspect student progress and identify difficult units across exams.
+  - One-click backup and asset sync execute cleanly.
+
+---
+
 ## Instructions for Running via Claude Code CLI
 
 When running Claude Code in the terminal, prompt it step-by-step:
 
 ```bash
+# ==========================================
+# PHASE 1 - 5 (CORE MULTI-EXAM FOUNDATION)
+# ==========================================
+
 # Step 1
 claude "Read CLAUDE_IMPLEMENTATION_PLAN.md and execute Phase 1: Create the universal exam schema and extract Bihar STET into data/exams/bihar-stet-psychology.json along with exams-catalog.json."
 
@@ -202,4 +295,24 @@ claude "Read CLAUDE_IMPLEMENTATION_PLAN.md and execute Phase 4: Update backend a
 
 # Step 5
 claude "Read CLAUDE_IMPLEMENTATION_PLAN.md and execute Phase 5: Add PWA manifest, service worker, and mobile responsiveness."
+
+# ==========================================
+# PHASE 6 - 10 (SUPER ADMIN & AI INGESTION)
+# ==========================================
+
+# Step 6
+claude "Read CLAUDE_IMPLEMENTATION_PLAN.md and execute Phase 6: Admin Security, RBAC & Storage Foundation (user roles, lib/admin-auth.js, lib/exam-storage.js, and public/admin.html shell)."
+
+# Step 7
+claude "Read CLAUDE_IMPLEMENTATION_PLAN.md and execute Phase 7: Personal AI Prompt Studio & Bulk Sanitization Engine (clipboard prompt generator, markdown/syntax auto-repair, and schema validator)."
+
+# Step 8
+claude "Read CLAUDE_IMPLEMENTATION_PLAN.md and execute Phase 8: Split-Screen Visual Reviewer & Live Simulator (dual-pane raw JSON editor, live student simulator, in-line topic editor, and 1-click publish)."
+
+# Step 9
+claude "Read CLAUDE_IMPLEMENTATION_PLAN.md and execute Phase 9: Visual Exam Catalog & Tree Editor (catalog manager table, visual hierarchy editor, duplicate exam, and category manager)."
+
+# Step 10
+claude "Read CLAUDE_IMPLEMENTATION_PLAN.md and execute Phase 10: Student Directory, Platform Insights & System Hub (user progress inspector, difficulty bottleneck detector, asset sync, and backup export)."
 ```
+

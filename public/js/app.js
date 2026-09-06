@@ -133,8 +133,14 @@
     if (syncBtn) syncBtn.style.display = '';
     if (chip) {
       chip.style.display = '';
-      var name = (State.currentUser && (State.currentUser.name || State.currentUser.username)) || I18n.t('auth.student');
-      chip.innerHTML = '<span class="user-chip">👤 ' + Roadmap.esc(name) +
+      var u = State.currentUser || {};
+      var name = u.name || u.email || u.username || I18n.t('auth.student');
+      // Google gives us a profile picture; email sign-ups fall back to an emoji.
+      var badge = u.avatarUrl
+        ? '<img class="user-chip-avatar" src="' + Roadmap.esc(u.avatarUrl) + '" alt="">'
+        : '👤';
+      chip.innerHTML = '<span class="user-chip" title="' + Roadmap.esc(u.email || name) + '">' +
+        badge + ' ' + Roadmap.esc(name) +
         ' <button class="logout-btn" onclick="handleLogout()" title="' + Roadmap.esc(I18n.t('auth.logout')) + '">⏻</button></span>';
     }
   }
@@ -144,7 +150,11 @@
 
   global.openAuthModal = function () {
     var m = document.getElementById('authModal');
-    if (m) m.classList.add('open');
+    if (!m) return;
+    m.classList.add('open');
+    // Tell the student up-front if cloud sync cannot work, rather than letting
+    // them fill in the form and hit a wall on submit.
+    if (State.cloudReady && !State.cloudReady()) guardCloud();
   };
 
   global.closeAuthModal = function () {
@@ -175,28 +185,55 @@
     el.innerText = msg;
   }
 
-  async function afterAuth(data) {
-    State.setAuth(data.token, data.user);
+  /**
+   * Runs after a session exists. State.initSupabaseAuth's listener has already
+   * stored the identity and kicked off the progress pull, so this only closes
+   * the modal and greets the student.
+   */
+  function afterAuth(user) {
     closeAuthModal();
-    showToast(I18n.t('auth.welcome', { name: (data.user && (data.user.name || data.user.username)) || I18n.t('auth.student') }));
+    var name = (user && (user.name || user.email)) || I18n.t('auth.student');
+    showToast(I18n.t('auth.welcome', { name: name }));
     updateSyncUI();
-    await State.fetchCloudProgress(State.activeExamId);
   }
+
+  /** Cloud unavailable (no keys, or CDN blocked): explain, do not fail silently. */
+  function guardCloud() {
+    if (State.cloudReady && State.cloudReady()) return true;
+    var msg = (global.SupabaseAuth && SupabaseAuth.unavailableMessage()) ||
+      I18n.t('auth.notConfigured');
+    showAuthAlert(msg, true);
+    return false;
+  }
+
+  global.handleGoogleLogin = async function () {
+    if (!guardCloud()) return;
+    var btn = document.getElementById('googleLoginBtn');
+    if (btn) { btn.disabled = true; btn.classList.add('is-loading'); }
+    showAuthAlert(I18n.t('auth.redirecting'), false);
+    try {
+      var res = await SupabaseAuth.signInWithGoogle();
+      // On success the browser navigates away, so only failures land here.
+      if (!res.ok) showAuthAlert(res.error || I18n.t('auth.loginFailed'), true);
+    } catch (e) {
+      showAuthAlert(e.message, true);
+    } finally {
+      if (btn) { btn.disabled = false; btn.classList.remove('is-loading'); }
+    }
+  };
 
   global.submitLoginForm = async function (ev) {
     ev.preventDefault();
+    if (!guardCloud()) return;
+
     var btn = document.getElementById('loginSubmitBtn');
-    var u = document.getElementById('loginUsername').value.trim();
-    var p = document.getElementById('loginPassword').value;
+    var email = document.getElementById('loginEmail').value.trim();
+    var pass = document.getElementById('loginPassword').value;
     if (btn) { btn.disabled = true; btn.innerText = I18n.t('auth.loggingIn'); }
     try {
-      var res = await fetch('/api/auth/login', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ username: u, password: p })
-      });
-      var data = await res.json();
-      if (!res.ok) throw new Error(data.error || I18n.t('auth.loginFailed'));
-      await afterAuth(data);
+      var res = await SupabaseAuth.signInWithEmail(email, pass);
+      if (!res.ok) throw new Error(res.error || I18n.t('auth.loginFailed'));
+      afterAuth(res.user);
     } catch (e) {
       showAuthAlert(e.message, true);
     } finally {
@@ -206,19 +243,28 @@
 
   global.submitRegisterForm = async function (ev) {
     ev.preventDefault();
+    if (!guardCloud()) return;
+
     var btn = document.getElementById('regSubmitBtn');
     var name = document.getElementById('regName').value.trim();
-    var u = document.getElementById('regUsername').value.trim();
-    var p = document.getElementById('regPassword').value;
+    var email = document.getElementById('regEmail').value.trim();
+    var pass = document.getElementById('regPassword').value;
     if (btn) { btn.disabled = true; btn.innerText = I18n.t('auth.creating'); }
     try {
-      var res = await fetch('/api/auth/register', {
-        method: 'POST', headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: name, username: u, password: p })
-      });
-      var data = await res.json();
-      if (!res.ok) throw new Error(data.error || I18n.t('auth.registerFailed'));
-      await afterAuth(data);
+      var res = await SupabaseAuth.signUpWithEmail(email, pass, name);
+      if (!res.ok) throw new Error(res.error || I18n.t('auth.registerFailed'));
+
+      // With "Confirm email" enabled there is no session yet — the student must
+      // click the link first, so keep the modal open with the instruction.
+      if (res.needsConfirmation) {
+        showAuthAlert(I18n.t('auth.confirmEmail', { email: email }), false);
+        return;
+      }
+      // Carry the name they just typed into the local profile too.
+      if (name && State.getProfile && State.getProfile()) {
+        State.saveProfile({ name: name });
+      }
+      afterAuth(res.user);
     } catch (e) {
       showAuthAlert(e.message, true);
     } finally {
@@ -226,8 +272,31 @@
     }
   };
 
-  global.handleLogout = function () {
-    State.clearAuth();
+  global.handleForgotPassword = async function () {
+    if (!guardCloud()) return;
+
+    var field = document.getElementById('loginEmail');
+    var email = (field && field.value.trim()) || '';
+    if (!email) {
+      showAuthAlert(I18n.t('auth.enterEmailFirst'), true);
+      if (field) field.focus();
+      return;
+    }
+    var link = document.getElementById('forgotPasswordLink');
+    if (link) link.setAttribute('aria-disabled', 'true');
+    try {
+      var res = await SupabaseAuth.sendPasswordReset(email);
+      if (!res.ok) throw new Error(res.error || I18n.t('auth.resetFailed'));
+      showAuthAlert(I18n.t('auth.resetSent'), false);
+    } catch (e) {
+      showAuthAlert(e.message, true);
+    } finally {
+      if (link) link.removeAttribute('aria-disabled');
+    }
+  };
+
+  global.handleLogout = async function () {
+    await State.signOut();
     updateSyncUI();
     showToast(I18n.t('auth.loggedOut'), 'info');
   };
@@ -406,6 +475,20 @@
     State.on('sync:success', function () { showToast(I18n.t('sync.pushed')); });
     State.on('sync:pulled', function () { showToast(I18n.t('sync.pulled')); });
     State.on('sync:expired', function () { showToast(I18n.t('sync.expired'), 'error'); });
+    // A Google redirect lands on a *fresh* page load, so no submit handler is
+    // around to greet the student — the auth listener has to do it. Restoring
+    // an existing session on an ordinary reload must stay silent, and Supabase
+    // marks that case by leaving the OAuth fragment out of the URL.
+    var returningFromOAuth = /[#?&](access_token|code|error)=/.test(
+      global.location.hash + global.location.search
+    );
+    State.on('auth:signedIn', function (user) {
+      var m = document.getElementById('authModal');
+      if ((m && m.classList.contains('open')) || returningFromOAuth) {
+        returningFromOAuth = false;
+        afterAuth(user);
+      }
+    });
     State.on('exam:changed', function () {
       Roadmap.renderExamHeader();
       Roadmap.render();
@@ -416,6 +499,17 @@
       Roadmap.render();
       showToast(I18n.lang === 'hi' ? '✨ पाठ्यक्रम रोडमैप अपडेट हो गया है!' : '✨ Syllabus roadmap updated to latest version!', 'info');
     });
+
+    // Let a deployment's env vars override the bundled credentials. This must
+    // finish before the client is first constructed; offline it is a no-op.
+    if (global.SupabaseConfig && SupabaseConfig.refreshFromServer) {
+      await SupabaseConfig.refreshFromServer();
+    }
+
+    // Supabase owns the session from here: this attaches the listener that
+    // restores it, completes any OAuth redirect and refreshes tokens silently.
+    // It runs after the listeners above so the first SIGNED_IN is not missed.
+    State.initSupabaseAuth();
 
     try {
       await State.fetchCatalog();
@@ -442,7 +536,6 @@
     Timer.updateDisplay();
     if (global.GoalBanner) GoalBanner.init();
     if (global.Onboarding) Onboarding.init();
-    if (State.authToken) State.verifyAuth();
 
     // Register the service worker for offline study with auto-update monitoring.
     if ('serviceWorker' in navigator) {

@@ -31,6 +31,10 @@
       "destination": "/api/health.js"
     },
     {
+      "source": "/api/config",
+      "destination": "/api/config.js"
+    },
+    {
       "source": "/((?!api/|css/|js/|data/|icons/|manifest.json|sw.js).*)",
       "destination": "/index.html"
     }

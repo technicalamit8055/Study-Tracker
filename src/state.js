@@ -490,6 +490,11 @@
 
   /* ---------------- cloud sync ---------------- */
 
+  /**
+   * Read the cached identity so the header renders signed-in immediately on
+   * reload. Supabase then confirms (or revokes) it via onAuthStateChange —
+   * this cache exists only to avoid a "Local mode" flash on every load.
+   */
   State.loadAuth = function () {
     State.authToken = safeGet(KEYS.authToken);
     try {
@@ -502,8 +507,8 @@
   State.setAuth = function (token, user) {
     State.authToken = token;
     State.currentUser = user;
-    safeSet(KEYS.authToken, token);
-    safeSet(KEYS.userInfo, JSON.stringify(user));
+    safeSet(KEYS.authToken, token || '');
+    safeSet(KEYS.userInfo, JSON.stringify(user || null));
     State.emit('auth:changed');
   };
 
@@ -517,8 +522,63 @@
     State.emit('auth:changed');
   };
 
+  /* ---------------- Supabase session binding ---------------- */
+
+  /**
+   * Hand session management to Supabase.
+   *
+   * The listener is the single source of truth for who is signed in: it fires
+   * once on load with the restored session, again after an OAuth redirect, and
+   * on every silent token refresh — so `State.authToken` is always a live
+   * access token rather than something we have to renew ourselves.
+   */
+  State.initSupabaseAuth = function () {
+    var SB = global.SupabaseAuth;
+    if (!SB || !SB.isReady()) {
+      // Unconfigured or offline: drop any stale cached identity so the UI
+      // honestly reports local mode instead of pretending to be synced.
+      if (State.authToken) State.clearAuth();
+      State.emit('auth:changed');
+      return false;
+    }
+
+    State._unsubscribeAuth = SB.onAuthStateChange(function (event, session, user) {
+      if (event === 'SIGNED_OUT' || !session) {
+        var wasSignedIn = !!State.authToken;
+        State.clearAuth();
+        if (wasSignedIn && event === 'SIGNED_OUT') State.emit('auth:signedOut');
+        return;
+      }
+
+      var isNewLogin = State.currentUser === null ||
+        !State.currentUser ||
+        State.currentUser.id !== (user && user.id);
+
+      State.setAuth(session.access_token, user);
+
+      // A fresh login (or a returning OAuth redirect) should pull whatever the
+      // student did on their other devices. A token refresh should not.
+      if (event === 'SIGNED_IN' || isNewLogin) {
+        State.emit('auth:signedIn', user);
+        if (State.activeExamId) State.fetchCloudProgress(State.activeExamId);
+      }
+    });
+
+    return true;
+  };
+
+  /** Name of the progress table, defaulting if the config module is absent. */
+  function progressTable() {
+    return (global.SupabaseConfig && global.SupabaseConfig.progressTable) || 'user_progress';
+  }
+
+  /** Whether cloud sync can actually be used right now. */
+  State.cloudReady = function () {
+    return !!(global.SupabaseAuth && global.SupabaseAuth.isReady());
+  };
+
   State.queueCloudSync = function () {
-    if (!State.authToken) { State.emit('sync:changed'); return; }
+    if (!State.authToken || !State.cloudReady()) { State.emit('sync:changed'); return; }
     State.isSyncing = true;
     State.emit('sync:changed');
     if (State._syncTimer) clearTimeout(State._syncTimer);
@@ -527,36 +587,55 @@
     }, 1500);
   };
 
+  /**
+   * Upsert this exam's progress straight into Supabase.
+   *
+   * RLS on `user_progress` scopes the write to the signed-in user, so the
+   * browser can own this round-trip with no API layer in between. The unique
+   * (user_id, exam_id) constraint makes the upsert idempotent.
+   */
   State.pushCloudProgress = async function (showToast) {
     if (!State.authToken || !State.activeExamId) return;
+
+    var SB = global.SupabaseAuth;
+    var sb = SB && SB.raw();
+    if (!sb) return;
+
+    var userId = State.currentUser && State.currentUser.id;
+    if (!userId) return;
+
     State.isSyncing = true;
     State.emit('sync:changed');
 
-    try {
-      var res = await fetch('/api/progress', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': 'Bearer ' + State.authToken
-        },
-        body: JSON.stringify({
-          examId: State.activeExamId,
-          userState: State.userState,
-          stats: State.summaryForCloud(),
-          timer: State.timerSnapshot ? State.timerSnapshot() : {}
-        })
-      });
+    var examId = State.activeExamId;
+    var now = new Date().toISOString();
 
-      if (res.status === 401) {
-        State.clearAuth();
-        State.emit('sync:expired');
-        return;
+    try {
+      var result = await sb
+        .from(progressTable())
+        .upsert({
+          user_id: userId,
+          exam_id: examId,
+          user_state: State.userState,
+          stats: State.summaryForCloud(),
+          timer: State.timerSnapshot ? State.timerSnapshot() : {},
+          last_updated: now
+        }, { onConflict: 'user_id,exam_id' })
+        .select('last_updated')
+        .single();
+
+      if (result.error) {
+        // A revoked or expired session is the one failure worth surfacing:
+        // everything else is transient and the next edit will retry.
+        if (isAuthError(result.error)) {
+          State.clearAuth();
+          State.emit('sync:expired');
+          return;
+        }
+        throw new Error(result.error.message || 'sync failed');
       }
 
-      var data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'sync failed');
-
-      State.lastSyncedAt = data.lastUpdated || new Date().toISOString();
+      State.lastSyncedAt = (result.data && result.data.last_updated) || now;
       if (showToast) State.emit('sync:success');
     } catch (err) {
       console.warn('Background sync warning:', err.message);
@@ -566,6 +645,16 @@
       State.emit('sync:changed');
     }
   };
+
+  /** Postgrest/GoTrue signals an invalid JWT by code or by message. */
+  function isAuthError(error) {
+    if (!error) return false;
+    var code = String(error.code || '');
+    var msg = String(error.message || '').toLowerCase();
+    return code === '401' || code === 'PGRST301' || code === '42501' ||
+      msg.indexOf('jwt') !== -1 || msg.indexOf('token') !== -1 ||
+      msg.indexOf('not authorized') !== -1;
+  }
 
   State.summaryForCloud = function () {
     var s = State.computeStats();
@@ -585,28 +674,45 @@
    */
   State.fetchCloudProgress = async function (examId) {
     if (!State.authToken) return;
+
+    var SB = global.SupabaseAuth;
+    var sb = SB && SB.raw();
+    if (!sb) return;
+
+    var userId = State.currentUser && State.currentUser.id;
+    if (!userId) return;
+
     var id = examId || State.activeExamId;
     State.isSyncing = true;
     State.emit('sync:changed');
 
     try {
-      var res = await fetch('/api/progress?examId=' + encodeURIComponent(id), {
-        headers: { 'Authorization': 'Bearer ' + State.authToken }
-      });
-      if (res.status === 401) { State.clearAuth(); return; }
+      // maybeSingle() returns null rather than erroring on a first-ever login,
+      // when this user has no row for this exam yet.
+      var result = await sb
+        .from(progressTable())
+        .select('user_state, timer, last_updated')
+        .eq('user_id', userId)
+        .eq('exam_id', id)
+        .maybeSingle();
 
-      var data = await res.json();
+      if (result.error) {
+        if (isAuthError(result.error)) { State.clearAuth(); return; }
+        throw new Error(result.error.message || 'fetch failed');
+      }
       if (id !== State.activeExamId) return; // user switched away mid-flight
 
-      var remote = (data && data.userState) || {};
+      var row = result.data;
+      var remote = (row && row.user_state) || {};
       if (Object.keys(remote).length > 0) {
         State.userState = State.mergeProgress(State.userState, remote);
         safeSet(State.progressKey(id), JSON.stringify(State.userState));
-        State.lastSyncedAt = data.lastUpdated || new Date().toISOString();
-        if (data.timer && State.restoreTimer) State.restoreTimer(data.timer);
+        State.lastSyncedAt = (row && row.last_updated) || new Date().toISOString();
+        if (row && row.timer && State.restoreTimer) State.restoreTimer(row.timer);
         State.emit('progress:replaced');
         State.emit('sync:pulled');
       } else if (Object.keys(State.userState).length > 0) {
+        // Nothing in the cloud but work on this device: seed the cloud from it.
         await State.pushCloudProgress(false);
       }
     } catch (err) {
@@ -647,22 +753,35 @@
     return out;
   };
 
+  /**
+   * Confirm the cached identity against Supabase's stored session.
+   * Offline, the cached token is kept as-is — being unable to reach the network
+   * is not evidence that a session has expired.
+   */
   State.verifyAuth = async function () {
-    if (!State.authToken) return false;
+    var SB = global.SupabaseAuth;
+    if (!SB || !SB.isReady()) return false;
+
     try {
-      var res = await fetch('/api/auth/me', {
-        headers: { 'Authorization': 'Bearer ' + State.authToken }
-      });
-      if (!res.ok) { State.clearAuth(); return false; }
-      var data = await res.json();
-      State.currentUser = data.user;
-      safeSet(KEYS.userInfo, JSON.stringify(data.user));
-      State.emit('auth:changed');
+      var session = await SB.getSession();
+      if (!session) {
+        if (State.authToken) State.clearAuth();
+        return false;
+      }
+      State.setAuth(session.access_token, SB.shapeUser(session.user));
       return true;
     } catch (e) {
-      // Offline: keep the token, we simply cannot verify right now.
       return false;
     }
+  };
+
+  /** Sign out of Supabase and clear every trace of the session locally. */
+  State.signOut = async function () {
+    var SB = global.SupabaseAuth;
+    if (SB && SB.isReady()) {
+      try { await SB.signOut(); } catch (e) {}
+    }
+    State.clearAuth();
   };
 
   global.State = State;

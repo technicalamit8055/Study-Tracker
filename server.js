@@ -18,6 +18,7 @@ const loginHandler = require('./api/auth/login');
 const meHandler = require('./api/auth/me');
 const progressHandler = require('./api/progress');
 const examsHandler = require('./api/exams');
+const configHandler = require('./api/config');
 
 app.all('/api/health', (req, res) => healthHandler(req, res));
 app.all('/api/auth/register', (req, res) => registerHandler(req, res));
@@ -25,6 +26,7 @@ app.all('/api/auth/login', (req, res) => loginHandler(req, res));
 app.all('/api/auth/me', (req, res) => meHandler(req, res));
 app.all('/api/progress', (req, res) => progressHandler(req, res));
 app.all('/api/exams', (req, res) => examsHandler(req, res));
+app.all('/api/config', (req, res) => configHandler(req, res));
 
 // Custom headers for service worker and data files
 app.use('/sw.js', (req, res, next) => {
@@ -56,6 +58,7 @@ app.listen(PORT, () => {
   console.log(`  🚀 ExamRoadmap Server Running!`);
   console.log(`  Local URL:   http://localhost:${PORT}`);
   console.log(`  Health API:  http://localhost:${PORT}/api/health`);
+  console.log(`  Supabase:    ${process.env.SUPABASE_URL ? "configured via .env" : "using src/supabase-config.js defaults"}`);
   console.log(`  Environment: ${process.env.NODE_ENV || 'development'}`);
   console.log(`======================================================\n`);
 });
