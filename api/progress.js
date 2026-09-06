@@ -1,6 +1,42 @@
 const { getAuthUser } = require('../lib/auth');
 const { connectToDatabase } = require('../lib/db');
 
+// Exam that pre-multi-exam progress documents belong to. Legacy rows were
+// written before examId existed, and all of them were Bihar STET progress.
+const LEGACY_EXAM_ID = 'bihar-stet-psychology';
+
+function isPlainObject(v) {
+  return v && typeof v === 'object' && !Array.isArray(v);
+}
+
+function emptyPayload(examId) {
+  return {
+    examId,
+    userState: {},
+    stats: null,
+    timer: null,
+    lastUpdated: null
+  };
+}
+
+function serialize(doc, examId) {
+  return {
+    examId: doc.examId || examId,
+    userState: doc.userState || {},
+    stats: doc.stats || null,
+    timer: doc.timer || null,
+    lastUpdated: doc.lastUpdated || null
+  };
+}
+
+/**
+ * Progress is stored one document per (userId, examId) pair so that
+ * progress for one exam can never collide with another.
+ *
+ * GET  /api/progress?examId=<id>  -> that exam's progress
+ * GET  /api/progress?all=1        -> every exam's progress for this user
+ * POST /api/progress              -> { examId, userState, stats, timer }
+ */
 module.exports = async (req, res) => {
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
@@ -15,44 +51,63 @@ module.exports = async (req, res) => {
     const { db } = await connectToDatabase();
     const progressCollection = db.collection('progress');
 
-    // GET /api/progress -> Retrieve user's syllabus state
     if (req.method === 'GET') {
-      const doc = await progressCollection.findOne({ userId: auth.userId });
-      if (!doc) {
+      const wantsAll = req.query && (req.query.all === '1' || req.query.all === 'true');
+      const examId = (req.query && req.query.examId) || LEGACY_EXAM_ID;
+
+      if (wantsAll) {
+        const docs = await progressCollection.find({ userId: auth.userId });
+        const list = Array.isArray(docs) ? docs : [];
         return res.status(200).json({
-          userState: {},
-          lastUpdated: null,
-          stats: null,
-          timer: null
+          progress: list.map(d => serialize(d, d.examId || LEGACY_EXAM_ID))
         });
       }
 
-      return res.status(200).json({
-        userState: doc.userState || {},
-        lastUpdated: doc.lastUpdated || null,
-        stats: doc.stats || null,
-        timer: doc.timer || null
-      });
+      let doc = await progressCollection.findOne({ userId: auth.userId, examId });
+
+      // One-time migration: adopt the pre-multi-exam document (no examId)
+      // as this user's Bihar STET progress.
+      if (!doc && examId === LEGACY_EXAM_ID) {
+        const legacy = await progressCollection.findOne({ userId: auth.userId, examId: null });
+        if (legacy && legacy.userState && Object.keys(legacy.userState).length > 0) {
+          doc = legacy;
+          await progressCollection.updateOne(
+            { userId: auth.userId, examId: null },
+            { $set: { examId: LEGACY_EXAM_ID } }
+          );
+        }
+      }
+
+      if (!doc) {
+        return res.status(200).json(emptyPayload(examId));
+      }
+
+      return res.status(200).json(serialize(doc, examId));
     }
 
-    // POST or PUT /api/progress -> Save/sync user's syllabus state
     if (req.method === 'POST' || req.method === 'PUT') {
-      const { userState, stats, timer } = req.body || {};
+      const body = req.body || {};
+      const { userState, stats, timer } = body;
+      const examId = body.examId || LEGACY_EXAM_ID;
 
-      if (!userState || typeof userState !== 'object') {
+      if (!isPlainObject(userState)) {
         return res.status(400).json({ error: 'Invalid userState payload.' });
+      }
+      if (typeof examId !== 'string' || !examId.trim()) {
+        return res.status(400).json({ error: 'Invalid examId.' });
       }
 
       const now = new Date();
       await progressCollection.updateOne(
-        { userId: auth.userId },
+        { userId: auth.userId, examId },
         {
           $set: {
             userId: auth.userId,
             username: auth.username,
+            examId,
             userState,
-            stats: stats || {},
-            timer: timer || {},
+            stats: isPlainObject(stats) ? stats : {},
+            timer: isPlainObject(timer) ? timer : {},
             lastUpdated: now
           }
         },
@@ -61,6 +116,7 @@ module.exports = async (req, res) => {
 
       return res.status(200).json({
         success: true,
+        examId,
         message: 'Progress synced successfully',
         lastUpdated: now.toISOString()
       });

@@ -1,0 +1,330 @@
+{
+  "id": "cbse-class12-physics",
+  "title": "CBSE कक्षा 12: भौतिक विज्ञान",
+  "titleEn": "CBSE Class 12: Physics",
+  "category": "School & Board Exams",
+  "subject": "Physics (Theory)",
+  "language": "hi",
+  "totalMarks": 70,
+  "passingMarks": 23,
+  "totalQuestions": 35,
+  "durationMinutes": 180,
+  "negativeMarking": "नहीं (No Negative Marking)",
+  "targetAudience": "कक्षा 12 बोर्ड परीक्षा अभ्यर्थी",
+  "resourcePrefix": "Class 12 Physics CBSE",
+  "sections": [
+    {
+      "id": "electro",
+      "name": "विद्युत एवं चुंबकत्व (Electricity & Magnetism)",
+      "marks": 32,
+      "badgeColor": "#4f46e5"
+    },
+    {
+      "id": "optics",
+      "name": "प्रकाशिकी एवं तरंगें (Optics & Waves)",
+      "marks": 18,
+      "badgeColor": "#0d9488"
+    },
+    {
+      "id": "modern",
+      "name": "आधुनिक भौतिकी (Modern Physics)",
+      "marks": 20,
+      "badgeColor": "#ea580c"
+    }
+  ],
+  "phases": [
+    {
+      "id": "phase-1",
+      "name": "चरण 1: स्थिर वैद्युतिकी एवं धारा (Foundations)",
+      "description": "NCERT के पहले चार अध्याय — बाकी सब इन्हीं पर टिका है",
+      "units": [
+        {
+          "id": "phy_u1",
+          "unitNum": "अध्याय 1-2",
+          "title": "वैद्युत आवेश, क्षेत्र एवं विभव",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "8 अंक",
+          "pyqFocus": "गॉस प्रमेय, विभव, संधारित्र के संयोजन",
+          "sectionId": "electro",
+          "sectionName": "विद्युत एवं चुंबकत्व (Electricity & Magnetism)",
+          "sectionMarks": 32,
+          "topics": [
+            {
+              "id": "phy_u1_t0",
+              "text": "कूलॉम का नियम एवं वैद्युत क्षेत्र"
+            },
+            {
+              "id": "phy_u1_t1",
+              "text": "गॉस का प्रमेय एवं अनुप्रयोग"
+            },
+            {
+              "id": "phy_u1_t2",
+              "text": "वैद्युत विभव एवं विभवांतर"
+            },
+            {
+              "id": "phy_u1_t3",
+              "text": "संधारित्र एवं धारिता"
+            },
+            {
+              "id": "phy_u1_t4",
+              "text": "परावैद्युत एवं ध्रुवीकरण"
+            }
+          ]
+        },
+        {
+          "id": "phy_u2",
+          "unitNum": "अध्याय 3",
+          "title": "विद्युत धारा (Current Electricity)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "7 अंक",
+          "pyqFocus": "ओम का नियम, किरचॉफ नियम, व्हीटस्टोन सेतु",
+          "sectionId": "electro",
+          "sectionName": "विद्युत एवं चुंबकत्व (Electricity & Magnetism)",
+          "sectionMarks": 32,
+          "topics": [
+            {
+              "id": "phy_u2_t0",
+              "text": "ओम का नियम एवं प्रतिरोधकता"
+            },
+            {
+              "id": "phy_u2_t1",
+              "text": "सेल, EMF एवं आंतरिक प्रतिरोध"
+            },
+            {
+              "id": "phy_u2_t2",
+              "text": "किरचॉफ के नियम"
+            },
+            {
+              "id": "phy_u2_t3",
+              "text": "व्हीटस्टोन सेतु एवं मीटर सेतु"
+            },
+            {
+              "id": "phy_u2_t4",
+              "text": "पोटेंशियोमीटर"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase-2",
+      "name": "चरण 2: चुंबकत्व, प्रेरण एवं प्रत्यावर्ती धारा (High-Yield)",
+      "description": "सर्वाधिक अंक एवं न्यूमेरिकल — बोर्ड में निर्णायक खंड",
+      "units": [
+        {
+          "id": "phy_u3",
+          "unitNum": "अध्याय 4-5",
+          "title": "गतिमान आवेश एवं चुंबकत्व",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "8 अंक",
+          "pyqFocus": "बायो-सावर्ट, एम्पीयर नियम, चुंबकीय पदार्थ",
+          "sectionId": "electro",
+          "sectionName": "विद्युत एवं चुंबकत्व (Electricity & Magnetism)",
+          "sectionMarks": 32,
+          "topics": [
+            {
+              "id": "phy_u3_t0",
+              "text": "बायो-सावर्ट का नियम"
+            },
+            {
+              "id": "phy_u3_t1",
+              "text": "एम्पीयर का परिपथीय नियम"
+            },
+            {
+              "id": "phy_u3_t2",
+              "text": "गतिमान आवेश पर बल एवं साइक्लोट्रॉन"
+            },
+            {
+              "id": "phy_u3_t3",
+              "text": "चुंबकीय द्विध्रुव एवं पृथ्वी का चुंबकत्व"
+            },
+            {
+              "id": "phy_u3_t4",
+              "text": "चुंबकीय पदार्थ: अनु/प्रति/लौह चुंबकत्व"
+            }
+          ]
+        },
+        {
+          "id": "phy_u4",
+          "unitNum": "अध्याय 6-7",
+          "title": "वैद्युतचुंबकीय प्रेरण एवं प्रत्यावर्ती धारा",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "9 अंक",
+          "pyqFocus": "फैराडे-लेंज नियम, LCR परिपथ, अनुनाद, ट्रांसफार्मर",
+          "sectionId": "electro",
+          "sectionName": "विद्युत एवं चुंबकत्व (Electricity & Magnetism)",
+          "sectionMarks": 32,
+          "topics": [
+            {
+              "id": "phy_u4_t0",
+              "text": "फैराडे के नियम एवं लेंज का नियम"
+            },
+            {
+              "id": "phy_u4_t1",
+              "text": "स्वप्रेरकत्व एवं अन्योन्य प्रेरकत्व"
+            },
+            {
+              "id": "phy_u4_t2",
+              "text": "प्रत्यावर्ती धारा एवं औसत/वर्ग-माध्य-मूल मान"
+            },
+            {
+              "id": "phy_u4_t3",
+              "text": "LCR परिपथ एवं अनुनाद"
+            },
+            {
+              "id": "phy_u4_t4",
+              "text": "ट्रांसफार्मर एवं विद्युत जनित्र"
+            }
+          ]
+        },
+        {
+          "id": "phy_u5",
+          "unitNum": "अध्याय 9-10",
+          "title": "किरण प्रकाशिकी एवं तरंग प्रकाशिकी",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "10 अंक",
+          "pyqFocus": "लेंस सूत्र, प्रिज़्म, यंग द्विझिरी, विवर्तन",
+          "sectionId": "optics",
+          "sectionName": "प्रकाशिकी एवं तरंगें (Optics & Waves)",
+          "sectionMarks": 18,
+          "topics": [
+            {
+              "id": "phy_u5_t0",
+              "text": "गोलीय दर्पण एवं लेंस सूत्र"
+            },
+            {
+              "id": "phy_u5_t1",
+              "text": "प्रिज़्म एवं वर्ण विक्षेपण"
+            },
+            {
+              "id": "phy_u5_t2",
+              "text": "प्रकाशिक यंत्र: सूक्ष्मदर्शी एवं दूरदर्शी"
+            },
+            {
+              "id": "phy_u5_t3",
+              "text": "हाइगेन्स सिद्धांत"
+            },
+            {
+              "id": "phy_u5_t4",
+              "text": "यंग का द्विझिरी प्रयोग"
+            },
+            {
+              "id": "phy_u5_t5",
+              "text": "विवर्तन एवं ध्रुवण"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase-3",
+      "name": "चरण 3: आधुनिक भौतिकी एवं इलेक्ट्रॉनिकी",
+      "description": "सैद्धांतिक एवं सूत्र-आधारित — कम समय में अच्छे अंक",
+      "units": [
+        {
+          "id": "phy_u6",
+          "unitNum": "अध्याय 8",
+          "title": "वैद्युतचुंबकीय तरंगें",
+          "priority": "standard",
+          "priorityLabel": "Standard",
+          "estMarks": "3 अंक",
+          "pyqFocus": "तरंग स्पेक्ट्रम एवं विस्थापन धारा",
+          "sectionId": "optics",
+          "sectionName": "प्रकाशिकी एवं तरंगें (Optics & Waves)",
+          "sectionMarks": 18,
+          "topics": [
+            {
+              "id": "phy_u6_t0",
+              "text": "विस्थापन धारा"
+            },
+            {
+              "id": "phy_u6_t1",
+              "text": "वैद्युतचुंबकीय तरंगों के गुण"
+            },
+            {
+              "id": "phy_u6_t2",
+              "text": "वैद्युतचुंबकीय स्पेक्ट्रम"
+            }
+          ]
+        },
+        {
+          "id": "phy_u7",
+          "unitNum": "अध्याय 11-12",
+          "title": "द्वैत प्रकृति एवं परमाणु",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "7 अंक",
+          "pyqFocus": "प्रकाश-वैद्युत प्रभाव, बोर मॉडल, दे-ब्रॉग्ली",
+          "sectionId": "modern",
+          "sectionName": "आधुनिक भौतिकी (Modern Physics)",
+          "sectionMarks": 20,
+          "topics": [
+            {
+              "id": "phy_u7_t0",
+              "text": "प्रकाश-वैद्युत प्रभाव एवं आइंस्टीन समीकरण"
+            },
+            {
+              "id": "phy_u7_t1",
+              "text": "दे-ब्रॉग्ली तरंगदैर्घ्य"
+            },
+            {
+              "id": "phy_u7_t2",
+              "text": "रदरफोर्ड का प्रकीर्णन प्रयोग"
+            },
+            {
+              "id": "phy_u7_t3",
+              "text": "बोर का परमाणु मॉडल"
+            },
+            {
+              "id": "phy_u7_t4",
+              "text": "हाइड्रोजन स्पेक्ट्रम श्रेणियां"
+            }
+          ]
+        },
+        {
+          "id": "phy_u8",
+          "unitNum": "अध्याय 13-14",
+          "title": "नाभिक एवं अर्धचालक इलेक्ट्रॉनिकी",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "10 अंक",
+          "pyqFocus": "द्रव्यमान क्षति, बंधन ऊर्जा, डायोड, लॉजिक गेट",
+          "sectionId": "modern",
+          "sectionName": "आधुनिक भौतिकी (Modern Physics)",
+          "sectionMarks": 20,
+          "topics": [
+            {
+              "id": "phy_u8_t0",
+              "text": "नाभिकीय आकार एवं द्रव्यमान क्षति"
+            },
+            {
+              "id": "phy_u8_t1",
+              "text": "बंधन ऊर्जा एवं नाभिकीय विखंडन/संलयन"
+            },
+            {
+              "id": "phy_u8_t2",
+              "text": "रेडियोऐक्टिव क्षय नियम"
+            },
+            {
+              "id": "phy_u8_t3",
+              "text": "अर्धचालक: p-type एवं n-type"
+            },
+            {
+              "id": "phy_u8_t4",
+              "text": "p-n संधि डायोड एवं दिष्टकारी"
+            },
+            {
+              "id": "phy_u8_t5",
+              "text": "जेनर डायोड एवं लॉजिक गेट"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

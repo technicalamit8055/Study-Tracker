@@ -1,0 +1,809 @@
+{
+  "id": "bihar-stet-psychology",
+  "title": "बिहार STET 2026: पेपर 2 (मनोविज्ञान)",
+  "titleEn": "Bihar STET 2026: Paper 2 (Psychology)",
+  "category": "Teaching Exams",
+  "subject": "मनोविज्ञान (Psychology)",
+  "language": "hi",
+  "totalMarks": 150,
+  "passingMarks": 75,
+  "totalQuestions": 150,
+  "durationMinutes": 150,
+  "negativeMarking": "नहीं (No Negative Marking)",
+  "targetAudience": "कक्षा 11-12 उच्च माध्यमिक शिक्षक (Class 11-12 Higher Secondary Teachers)",
+  "resourcePrefix": "Bihar STET Psychology Paper 2",
+  "sections": [
+    {
+      "id": "part1",
+      "name": "भाग 1: मनोविज्ञान (Psychology)",
+      "marks": 100,
+      "badgeColor": "#4f46e5"
+    },
+    {
+      "id": "part2_a",
+      "name": "भाग 2 (A): शिक्षण की कला (Art of Teaching)",
+      "marks": 30,
+      "badgeColor": "#0d9488"
+    },
+    {
+      "id": "part2_b",
+      "name": "भाग 2 (B): अन्य कौशल (Other Skills)",
+      "marks": 20,
+      "badgeColor": "#ea580c"
+    }
+  ],
+  "phases": [
+    {
+      "id": "phase-1",
+      "name": "चरण 1: नींव और मूल अवधारणाएं (Foundations & Core Concepts)",
+      "description": "उच्च-वेटेज टॉपिक्स में उतरने से पहले वैचारिक आधार तैयार करें",
+      "units": [
+        {
+          "id": "psy_u1",
+          "unitNum": "यूनिट 1",
+          "title": "मनोविज्ञान का परिचय (Introduction to Psychology)",
+          "priority": "standard",
+          "priorityLabel": "Standard",
+          "estMarks": "4-6 अंक",
+          "pyqFocus": "आधुनिक संप्रदाय, व्यवहारवाद, प्रकार्यवाद",
+          "sectionId": "part1",
+          "sectionName": "भाग 1: मनोविज्ञान (Psychology)",
+          "sectionMarks": 100,
+          "resourceQuery": "Bihar STET Psychology Paper 2 ",
+          "topics": [
+            {
+              "id": "psy_u1_t0",
+              "text": "मनोविज्ञान की परिभाषा और प्रकृति"
+            },
+            {
+              "id": "psy_u1_t1",
+              "text": "मनोविज्ञान के लक्ष्य (Goals of Psychology)"
+            },
+            {
+              "id": "psy_u1_t2",
+              "text": "आधुनिक दृष्टिकोण और संप्रदाय (Modern Perspectives & Schools of Thought)"
+            }
+          ]
+        },
+        {
+          "id": "psy_u2",
+          "unitNum": "यूनिट 2",
+          "title": "जैविक आधार (Biological Basis of Behavior)",
+          "priority": "medium",
+          "priorityLabel": "Medium",
+          "estMarks": "6-7 अंक",
+          "pyqFocus": "मस्तिष्क के लोब्स (Frontal, Parietal), न्यूरॉन, पिट्यूटरी ग्रंथि",
+          "sectionId": "part1",
+          "sectionName": "भाग 1: मनोविज्ञान (Psychology)",
+          "sectionMarks": 100,
+          "resourceQuery": "Bihar STET Psychology Paper 2 ",
+          "topics": [
+            {
+              "id": "psy_u2_t0",
+              "text": "तंत्रिका तंत्र की संरचना और कार्य (Nervous System)"
+            },
+            {
+              "id": "psy_u2_t1",
+              "text": "मस्तिष्क की संरचना और प्रमुख कार्य (Brain Structure & Functions)"
+            },
+            {
+              "id": "psy_u2_t2",
+              "text": "अंतःस्रावी ग्रंथियां और हार्मोनल प्रभाव (Endocrine Glands)"
+            }
+          ]
+        },
+        {
+          "id": "psy_u3",
+          "unitNum": "यूनिट 3",
+          "title": "संवेदी और प्रत्यक्ष प्रक्रियाएं (Sensory and Perceptual Processes)",
+          "priority": "medium",
+          "priorityLabel": "Medium",
+          "estMarks": "6-7 अंक",
+          "pyqFocus": "गेस्टाल्ट सिद्धांत, भ्रम (Muller-Lyer), अवधान के प्रकार",
+          "sectionId": "part1",
+          "sectionName": "भाग 1: मनोविज्ञान (Psychology)",
+          "sectionMarks": 100,
+          "resourceQuery": "Bihar STET Psychology Paper 2 ",
+          "topics": [
+            {
+              "id": "psy_u3_t0",
+              "text": "ध्यान (Attention) के प्रकार और निर्धारक"
+            },
+            {
+              "id": "psy_u3_t1",
+              "text": "धारणा (Perception) और इसके नियम (Gestalt Principles)"
+            },
+            {
+              "id": "psy_u3_t2",
+              "text": "संवेदनशीलता और सीमा (Sensory Thresholds)"
+            },
+            {
+              "id": "psy_u3_t3",
+              "text": "भ्रम और विभ्रम (Illusion and Hallucination)"
+            }
+          ]
+        },
+        {
+          "id": "psy_u6",
+          "unitNum": "यूनिट 6",
+          "title": "विचार और भाषा (Thinking and Language)",
+          "priority": "medium",
+          "priorityLabel": "Medium",
+          "estMarks": "5-7 अंक",
+          "pyqFocus": "एल्गोरिदम बनाम ह्यूरिस्टिक, चॉम्स्की भाषा विकास",
+          "sectionId": "part1",
+          "sectionName": "भाग 1: मनोविज्ञान (Psychology)",
+          "sectionMarks": 100,
+          "resourceQuery": "Bihar STET Psychology Paper 2 ",
+          "topics": [
+            {
+              "id": "psy_u6_t0",
+              "text": "विचार प्रक्रिया की प्रकृति और संप्रत्यय निर्माण (Nature of Thinking & Concepts)"
+            },
+            {
+              "id": "psy_u6_t1",
+              "text": "समस्या समाधान की विधियां और बाधाएं (Problem Solving)"
+            },
+            {
+              "id": "psy_u6_t2",
+              "text": "निर्णय लेना और तर्क (Decision Making & Reasoning)"
+            },
+            {
+              "id": "psy_u6_t3",
+              "text": "भाषा का विकास और विचार से संबंध (Language Development)"
+            }
+          ]
+        },
+        {
+          "id": "psy_u7",
+          "unitNum": "यूनिट 7",
+          "title": "प्रेरणा और संवेग (Motivation and Emotion)",
+          "priority": "medium",
+          "priorityLabel": "Medium",
+          "estMarks": "6-7 अंक",
+          "pyqFocus": "मास्लो आवश्यकता पदानुक्रम, जेम्स-लैंग व कैनन-बार्ड सिद्धांत",
+          "sectionId": "part1",
+          "sectionName": "भाग 1: मनोविज्ञान (Psychology)",
+          "sectionMarks": 100,
+          "resourceQuery": "Bihar STET Psychology Paper 2 ",
+          "topics": [
+            {
+              "id": "psy_u7_t0",
+              "text": "प्रेरणा के प्रकार: जैविक और सामाजिक (Biological & Social Motives)"
+            },
+            {
+              "id": "psy_u7_t1",
+              "text": "प्रेरणा के सिद्धांत (Maslow's Hierarchy, Drive Reduction, Need theories)"
+            },
+            {
+              "id": "psy_u7_t2",
+              "text": "संवेग की प्रकृति और शारीरिक आधार"
+            },
+            {
+              "id": "psy_u7_t3",
+              "text": "संवेग के सिद्धांत (James-Lange, Cannon-Bard, Schachter-Singer)"
+            }
+          ]
+        },
+        {
+          "id": "psy_u10",
+          "unitNum": "यूनिट 10",
+          "title": "सामाजिक मनोविज्ञान (Social Psychology)",
+          "priority": "medium",
+          "priorityLabel": "Medium",
+          "estMarks": "5-7 अंक",
+          "pyqFocus": "एश का अनुरूपता प्रयोग, मिल्ग्राम, पूर्वाग्रह और रूढ़िवादिता",
+          "sectionId": "part1",
+          "sectionName": "भाग 1: मनोविज्ञान (Psychology)",
+          "sectionMarks": 100,
+          "resourceQuery": "Bihar STET Psychology Paper 2 ",
+          "topics": [
+            {
+              "id": "psy_u10_t0",
+              "text": "सामाजिक दृष्टिकोण का निर्माण और परिवर्तन (Attitude Formation & Change)"
+            },
+            {
+              "id": "psy_u10_t1",
+              "text": "पूर्वाग्रह और रूढ़िवादिता (Prejudice and Stereotypes)"
+            },
+            {
+              "id": "psy_u10_t2",
+              "text": "सामाजिक प्रभाव: अनुरूपता, आज्ञाकारिता, अनुपालन (Conformity, Obedience, Compliance)"
+            },
+            {
+              "id": "psy_u10_t3",
+              "text": "समूह गतिशीलता और नेतृत्व (Group Dynamics & Leadership)"
+            }
+          ]
+        },
+        {
+          "id": "psy_u11",
+          "unitNum": "यूनिट 11",
+          "title": "संगठनात्मक मनोविज्ञान (Industrial/Organizational Psychology)",
+          "priority": "standard",
+          "priorityLabel": "Standard",
+          "estMarks": "4-6 अंक",
+          "pyqFocus": "हर्ज़बर्ग द्वि-कारक सिद्धांत, जॉब सेटिस्फैक्शन, बर्नआउट",
+          "sectionId": "part1",
+          "sectionName": "भाग 1: मनोविज्ञान (Psychology)",
+          "sectionMarks": 100,
+          "resourceQuery": "Bihar STET Psychology Paper 2 ",
+          "topics": [
+            {
+              "id": "psy_u11_t0",
+              "text": "कार्य संतुष्टि और कार्य प्रदर्शन (Job Satisfaction & Performance)"
+            },
+            {
+              "id": "psy_u11_t1",
+              "text": "कार्य प्रेरणा के सिद्धांत (Work Motivation)"
+            },
+            {
+              "id": "psy_u11_t2",
+              "text": "कार्यस्थल पर तनाव और प्रबंधन (Workplace Stress & Coping)"
+            },
+            {
+              "id": "psy_u11_t3",
+              "text": "संगठन में नेतृत्व की भूमिका और संगठनात्मक व्यवहार"
+            }
+          ]
+        },
+        {
+          "id": "psy_u13",
+          "unitNum": "यूनिट 13",
+          "title": "शैक्षिक मनोविज्ञान (Educational Psychology)",
+          "priority": "medium",
+          "priorityLabel": "Medium",
+          "estMarks": "6-8 अंक",
+          "pyqFocus": "समावेशी शिक्षा, प्रतिभाशाली व मंदबुद्धि बच्चे, CCE व उपलब्धि परीक्षण",
+          "sectionId": "part1",
+          "sectionName": "भाग 1: मनोविज्ञान (Psychology)",
+          "sectionMarks": 100,
+          "resourceQuery": "Bihar STET Psychology Paper 2 ",
+          "topics": [
+            {
+              "id": "psy_u13_t0",
+              "text": "कक्षा का वातावरण और सीखने की प्रक्रिया"
+            },
+            {
+              "id": "psy_u13_t1",
+              "text": "बुद्धि, योग्यता और उपलब्धि का मापन (Measurement of Intelligence, Aptitude & Achievement)"
+            },
+            {
+              "id": "psy_u13_t2",
+              "text": "विशिष्ट बच्चे: प्रतिभाशाली, मंदबुद्धि, दिव्यांग (Exceptional Children)"
+            },
+            {
+              "id": "psy_u13_t3",
+              "text": "प्रभावी शिक्षण विधियां और मनोवैज्ञानिक नीतियां"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase-2",
+      "name": "चरण 2: उच्च-स्कोरिंग यूनिट्स (High-Yield 80/20)",
+      "description": "ये यूनिट्स परीक्षा के 60%+ वेटेज को कवर करती हैं — यहाँ सबसे ज़्यादा समय दें",
+      "units": [
+        {
+          "id": "psy_u4",
+          "unitNum": "यूनिट 4",
+          "title": "अधिगम या सीखना (Learning)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "8-10 अंक",
+          "pyqFocus": "पावलोव (CS, CR), स्किनर (Reinforcement Schedules), बंडूरा",
+          "sectionId": "part1",
+          "sectionName": "भाग 1: मनोविज्ञान (Psychology)",
+          "sectionMarks": 100,
+          "resourceQuery": "Bihar STET Psychology Paper 2 ",
+          "topics": [
+            {
+              "id": "psy_u4_t0",
+              "text": "क्लासिकल कंडीशनिंग (Pavlov's Classical Conditioning)"
+            },
+            {
+              "id": "psy_u4_t1",
+              "text": "ऑपरेंट कंडीशनिंग (Skinner's Operant Conditioning)"
+            },
+            {
+              "id": "psy_u4_t2",
+              "text": "संज्ञानात्मक शिक्षा (Cognitive Learning & Bandura's Social Learning)"
+            },
+            {
+              "id": "psy_u4_t3",
+              "text": "अधिगम के अन्य महत्वपूर्ण सिद्धांत और स्थानांतरण"
+            }
+          ]
+        },
+        {
+          "id": "psy_u5",
+          "unitNum": "यूनिट 5",
+          "title": "स्मृति और विस्मृति (Memory and Forgetting)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "7-9 अंक",
+          "pyqFocus": "एटकिंसन-शिफ्रिन मॉडल, एबिंगहॉस कर्व, व्यतिकरण (Interference)",
+          "sectionId": "part1",
+          "sectionName": "भाग 1: मनोविज्ञान (Psychology)",
+          "sectionMarks": 100,
+          "resourceQuery": "Bihar STET Psychology Paper 2 ",
+          "topics": [
+            {
+              "id": "psy_u5_t0",
+              "text": "स्मृति के प्रकार (Sensory, STM, LTM)"
+            },
+            {
+              "id": "psy_u5_t1",
+              "text": "सूचना प्रसंस्करण मॉडल (Atkinson-Shiffrin Information Processing Model)"
+            },
+            {
+              "id": "psy_u5_t2",
+              "text": "विस्मृति के कारण और सिद्धांत (Ebbinghaus, Interference, Decay theories)"
+            }
+          ]
+        },
+        {
+          "id": "psy_u8",
+          "unitNum": "यूनिट 8",
+          "title": "बुद्धिमत्ता (Intelligence)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "8-10 अंक",
+          "pyqFocus": "गार्डनर 8 बुद्धि, थर्स्टन PMA, स्टैनफोर्ड-बिने, वेक्सलर IQ",
+          "sectionId": "part1",
+          "sectionName": "भाग 1: मनोविज्ञान (Psychology)",
+          "sectionMarks": 100,
+          "resourceQuery": "Bihar STET Psychology Paper 2 ",
+          "topics": [
+            {
+              "id": "psy_u8_t0",
+              "text": "बुद्धि की प्रकृति और परिभाषा"
+            },
+            {
+              "id": "psy_u8_t1",
+              "text": "स्पियरमैन, थर्स्टन और गिलफोर्ड के सिद्धांत (Spearman, Thurstone, Guilford)"
+            },
+            {
+              "id": "psy_u8_t2",
+              "text": "गार्डनर का बहु-बुद्धि सिद्धांत (Howard Gardner's Multiple Intelligences)"
+            },
+            {
+              "id": "psy_u8_t3",
+              "text": "बुद्धि का मापन (IQ Tests, Verbal & Non-verbal tests)"
+            }
+          ]
+        },
+        {
+          "id": "psy_u9",
+          "unitNum": "यूनिट 9",
+          "title": "व्यक्तित्व (Personality)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "8-10 अंक",
+          "pyqFocus": "फ्रायड (Id, Ego, Superego), बिग फाइव, रोर्शा व TAT टेस्ट",
+          "sectionId": "part1",
+          "sectionName": "भाग 1: मनोविज्ञान (Psychology)",
+          "sectionMarks": 100,
+          "resourceQuery": "Bihar STET Psychology Paper 2 ",
+          "topics": [
+            {
+              "id": "psy_u9_t0",
+              "text": "व्यक्तित्व के प्रकार और गुण सिद्धांत (Trait & Type Theories - Allport, Cattell, Big Five)"
+            },
+            {
+              "id": "psy_u9_t1",
+              "text": "फ्रायड का मनोविश्लेषणवाद (Freud's Psychoanalytic Theory - Id, Ego, Superego)"
+            },
+            {
+              "id": "psy_u9_t2",
+              "text": "व्यक्तित्व का मूल्यांकन: प्रोजेक्टिव टेस्ट (TAT, Rorschach)"
+            },
+            {
+              "id": "psy_u9_t3",
+              "text": "व्यक्तित्व का मूल्यांकन: नॉन-प्रोजेक्टिव टेस्ट (MMPI, 16PF, Questionnaires)"
+            }
+          ]
+        },
+        {
+          "id": "psy_u12",
+          "unitNum": "यूनिट 12",
+          "title": "नैदानिक मनोविज्ञान (Clinical Psychology)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "7-9 अंक",
+          "pyqFocus": "DSM-5 विकार, डिप्रेशन, सिज़ोफ्रेनिया, रोजर्स क्लाइंट-सेंटर्ड थेरेपी",
+          "sectionId": "part1",
+          "sectionName": "भाग 1: मनोविज्ञान (Psychology)",
+          "sectionMarks": 100,
+          "resourceQuery": "Bihar STET Psychology Paper 2 ",
+          "topics": [
+            {
+              "id": "psy_u12_t0",
+              "text": "मानसिक विकार: चिंता विकार (Anxiety Disorders, Phobias)"
+            },
+            {
+              "id": "psy_u12_t1",
+              "text": "मूड विकार: डिप्रेशन और बाइपोलर (Depression & Mood Disorders)"
+            },
+            {
+              "id": "psy_u12_t2",
+              "text": "सिज़ोफ्रेनिया और अन्य गंभीर विकार (Schizophrenia)"
+            },
+            {
+              "id": "psy_u12_t3",
+              "text": "मनोवैज्ञानिक परीक्षण (Clinical Diagnostic & Projective Tests)"
+            },
+            {
+              "id": "psy_u12_t4",
+              "text": "चिकित्सा पद्धतियां: क्लाइंट-सेंटर्ड थेरेपी, बिहेवियर थेरेपी (CBT, Rogers)"
+            }
+          ]
+        },
+        {
+          "id": "psy_u14",
+          "unitNum": "यूनिट 14",
+          "title": "अनुसंधान पद्धति (Research Methodology)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "7-9 अंक",
+          "pyqFocus": "टाइप I और II त्रुटि, रैंडम सैंपलिंग, प्रयोगात्मक चर (IV/DV)",
+          "sectionId": "part1",
+          "sectionName": "भाग 1: मनोविज्ञान (Psychology)",
+          "sectionMarks": 100,
+          "resourceQuery": "Bihar STET Psychology Paper 2 ",
+          "topics": [
+            {
+              "id": "psy_u14_t0",
+              "text": "अनुसंधान की समस्याएं और उद्देश्य (Research Problem Formulation)"
+            },
+            {
+              "id": "psy_u14_t1",
+              "text": "परिकल्पना निर्माण और प्रकार (Hypothesis Formulation)"
+            },
+            {
+              "id": "psy_u14_t2",
+              "text": "सैंपलिंग तकनीक: प्रोबेबिलिटी व नॉन-प्रोबेबिलिटी (Sampling Techniques)"
+            },
+            {
+              "id": "psy_u14_t3",
+              "text": "डेटा संग्रह की विधियां: अवलोकन, साक्षात्कार, प्रश्नावली"
+            },
+            {
+              "id": "psy_u14_t4",
+              "text": "प्रयोगात्मक बनाम गैर-प्रयोगात्मक अनुसंधान डिजाइन (Experimental vs Non-experimental)"
+            }
+          ]
+        },
+        {
+          "id": "psy_u15",
+          "unitNum": "यूनिट 15",
+          "title": "सांख्यिकी (Statistics in Psychology)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "8-10 अंक",
+          "pyqFocus": "मीन/मीडियन/मोड गुण, सामान्य वितरण वक्र (NPC विशेषताएं), SD, कोरिलेशन",
+          "sectionId": "part1",
+          "sectionName": "भाग 1: मनोविज्ञान (Psychology)",
+          "sectionMarks": 100,
+          "resourceQuery": "Bihar STET Psychology Paper 2 ",
+          "topics": [
+            {
+              "id": "psy_u15_t0",
+              "text": "केंद्रीय प्रवृत्ति के माप (Mean, Median, Mode)"
+            },
+            {
+              "id": "psy_u15_t1",
+              "text": "मानक विचलन और प्रसरण (Standard Deviation & Variance)"
+            },
+            {
+              "id": "psy_u15_t2",
+              "text": "सहसंबंध गुणांक (Correlation: Pearson & Spearman)"
+            },
+            {
+              "id": "psy_u15_t3",
+              "text": "टी-टेस्ट और परिकल्पना परीक्षण (T-Test & Hypothesis Testing)"
+            },
+            {
+              "id": "psy_u15_t4",
+              "text": "सामान्य संभाव्यता वक्र और विशेषताएं (Normal Probability Curve - NPC)"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase-3",
+      "name": "चरण 3: शिक्षण कला एवं सामान्य कौशल (Pedagogy & General Skills)",
+      "description": "अनिवार्य 50-अंक खंड — अपेक्षाकृत आसान, इसलिए पूरा स्कोर करें",
+      "units": [
+        {
+          "id": "aot_u1",
+          "unitNum": "टॉपिक 1",
+          "title": "शिक्षण और सीखना (Teaching & Learning)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "5 अंक",
+          "pyqFocus": "शिक्षण-अधिगम अंतर संबंध, ब्लूम टैक्सोनॉमी",
+          "sectionId": "part2_a",
+          "sectionName": "भाग 2 (A): शिक्षण की कला (Art of Teaching)",
+          "sectionMarks": 30,
+          "resourceQuery": "Bihar STET Art of Teaching ",
+          "topics": [
+            {
+              "id": "aot_u1_t0",
+              "text": "शिक्षण का अर्थ, परिभाषा और स्वरूप"
+            },
+            {
+              "id": "aot_u1_t1",
+              "text": "शिक्षण-अधिगम प्रक्रिया (Teaching-Learning Process)"
+            },
+            {
+              "id": "aot_u1_t2",
+              "text": "शिक्षण की विशेषताएं और मुख्य उद्देश्य"
+            }
+          ]
+        },
+        {
+          "id": "aot_u2",
+          "unitNum": "टॉपिक 2",
+          "title": "शिक्षण के सिद्धांत और सूत्र (Principles & Maxims of Teaching)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "5 अंक",
+          "pyqFocus": "बाल-केंद्रित शिक्षा, ज्ञात से अज्ञात सूत्र, सुगमकर्ता शिक्षक",
+          "sectionId": "part2_a",
+          "sectionName": "भाग 2 (A): शिक्षण की कला (Art of Teaching)",
+          "sectionMarks": 30,
+          "resourceQuery": "Bihar STET Art of Teaching ",
+          "topics": [
+            {
+              "id": "aot_u2_t0",
+              "text": "बाल-केंद्रित शिक्षण (Child-Centered Teaching)"
+            },
+            {
+              "id": "aot_u2_t1",
+              "text": "शिक्षक-केंद्रित शिक्षण (Teacher-Centered Teaching)"
+            },
+            {
+              "id": "aot_u2_t2",
+              "text": "शिक्षण के सामान्य सिद्धांत और मनोवैज्ञानिक सूत्र (Maxims)"
+            }
+          ]
+        },
+        {
+          "id": "aot_u3",
+          "unitNum": "टॉपिक 3",
+          "title": "शिक्षण विधियां (Teaching Methods)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "5 अंक",
+          "pyqFocus": "प्रोजेक्ट विधि (Kilpatrick), समस्या समाधान, ह्यूरिस्टिक विधि",
+          "sectionId": "part2_a",
+          "sectionName": "भाग 2 (A): शिक्षण की कला (Art of Teaching)",
+          "sectionMarks": 30,
+          "resourceQuery": "Bihar STET Art of Teaching ",
+          "topics": [
+            {
+              "id": "aot_u3_t0",
+              "text": "व्याख्यान विधि (Lecture Method)"
+            },
+            {
+              "id": "aot_u3_t1",
+              "text": "प्रोजेक्ट विधि (Project Method)"
+            },
+            {
+              "id": "aot_u3_t2",
+              "text": "समस्या समाधान विधि (Problem Solving Method)"
+            },
+            {
+              "id": "aot_u3_t3",
+              "text": "खेल विधि, खोज विधि और चर्चा विधि (Play-way, Heuristic, Discussion Methods)"
+            }
+          ]
+        },
+        {
+          "id": "aot_u4",
+          "unitNum": "टॉपिक 4",
+          "title": "पाठ योजना (Lesson Plan)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "5 अंक",
+          "pyqFocus": "हरबार्ट के 5 सोपान, इकाई योजना बनाम दैनिक पाठ योजना",
+          "sectionId": "part2_a",
+          "sectionName": "भाग 2 (A): शिक्षण की कला (Art of Teaching)",
+          "sectionMarks": 30,
+          "resourceQuery": "Bihar STET Art of Teaching ",
+          "topics": [
+            {
+              "id": "aot_u4_t0",
+              "text": "पाठ योजना के प्रकार (Daily, Unit, Annual Plans)"
+            },
+            {
+              "id": "aot_u4_t1",
+              "text": "पाठ योजना का महत्व और आवश्यकता"
+            },
+            {
+              "id": "aot_u4_t2",
+              "text": "हरबार्टियन पाठ योजना प्रारूप (Herbartian 5-Step Format)"
+            }
+          ]
+        },
+        {
+          "id": "aot_u5",
+          "unitNum": "टॉपिक 5",
+          "title": "कक्षा प्रबंधन (Classroom Management)",
+          "priority": "medium",
+          "priorityLabel": "Medium",
+          "estMarks": "5 अंक",
+          "pyqFocus": "सकारात्मक सुदृढ़ीकरण, कक्षा अनुशासन, प्रेरणा तकनीक",
+          "sectionId": "part2_a",
+          "sectionName": "भाग 2 (A): शिक्षण की कला (Art of Teaching)",
+          "sectionMarks": 30,
+          "resourceQuery": "Bihar STET Art of Teaching ",
+          "topics": [
+            {
+              "id": "aot_u5_t0",
+              "text": "छात्रों को प्रेरित करने की रणनीतियां (Student Motivation)"
+            },
+            {
+              "id": "aot_u5_t1",
+              "text": "कक्षा अनुशासन और सकारात्मक व्यवहार समर्थन"
+            },
+            {
+              "id": "aot_u5_t2",
+              "text": "कक्षा का भौतिक व मनोवैज्ञानिक वातावरण"
+            }
+          ]
+        },
+        {
+          "id": "aot_u6",
+          "unitNum": "टॉपिक 6",
+          "title": "मूल्यांकन और परीक्षा (Evaluation & Assessment)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "5 अंक",
+          "pyqFocus": "CCE, रचनात्मक (Formative) बनाम योगात्मक (Summative), उपचारात्मक शिक्षण",
+          "sectionId": "part2_a",
+          "sectionName": "भाग 2 (A): शिक्षण की कला (Art of Teaching)",
+          "sectionMarks": 30,
+          "resourceQuery": "Bihar STET Art of Teaching ",
+          "topics": [
+            {
+              "id": "aot_u6_t0",
+              "text": "सतत और व्यापक मूल्यांकन (Continuous and Comprehensive Evaluation - CCE)"
+            },
+            {
+              "id": "aot_u6_t1",
+              "text": "रचनात्मक बनाम योगात्मक मूल्यांकन (Formative vs Summative Assessment)"
+            },
+            {
+              "id": "aot_u6_t2",
+              "text": "नैदानिक और उपचारात्मक शिक्षण (Diagnostic & Remedial Teaching)"
+            }
+          ]
+        },
+        {
+          "id": "oth_u1",
+          "unitNum": "क्षेत्र 1",
+          "title": "सामान्य ज्ञान (General Knowledge)",
+          "priority": "standard",
+          "priorityLabel": "Standard",
+          "estMarks": "5 अंक",
+          "pyqFocus": "बिहार विशेष (इतिहास, भूगोल, बजट) और राष्ट्रीय करंट अफेयर्स",
+          "sectionId": "part2_b",
+          "sectionName": "भाग 2 (B): अन्य कौशल (Other Skills)",
+          "sectionMarks": 20,
+          "resourceQuery": "Bihar STET Paper 2 ",
+          "topics": [
+            {
+              "id": "oth_u1_t0",
+              "text": "राष्ट्रीय समसामयिक घटनाएं (National Current Affairs)"
+            },
+            {
+              "id": "oth_u1_t1",
+              "text": "अंतर्राष्ट्रीय समसामयिक घटनाएं (International Current Affairs)"
+            },
+            {
+              "id": "oth_u1_t2",
+              "text": "बिहार का सामान्य ज्ञान (Bihar History, Geography, Polity, Culture)"
+            }
+          ]
+        },
+        {
+          "id": "oth_u2",
+          "unitNum": "क्षेत्र 2",
+          "title": "पर्यावरण विज्ञान (Environmental Science)",
+          "priority": "standard",
+          "priorityLabel": "Standard",
+          "estMarks": "5 अंक",
+          "pyqFocus": "पारिस्थितिकी तंत्र, ग्रीनहाउस प्रभाव, जैव विविधता संरक्षण",
+          "sectionId": "part2_b",
+          "sectionName": "भाग 2 (B): अन्य कौशल (Other Skills)",
+          "sectionMarks": 20,
+          "resourceQuery": "Bihar STET Paper 2 ",
+          "topics": [
+            {
+              "id": "oth_u2_t0",
+              "text": "पर्यावरण संरक्षण के उपाय और नीतियां"
+            },
+            {
+              "id": "oth_u2_t1",
+              "text": "पारिस्थितिकी तंत्र की संरचना और कार्य (Ecosystem)"
+            },
+            {
+              "id": "oth_u2_t2",
+              "text": "प्रदूषण के प्रकार, प्रभाव और नियंत्रण (Pollution Control)"
+            },
+            {
+              "id": "oth_u2_t3",
+              "text": "जलवायु परिवर्तन और जैव विविधता (Climate Change & Biodiversity)"
+            }
+          ]
+        },
+        {
+          "id": "oth_u3",
+          "unitNum": "क्षेत्र 3",
+          "title": "गणितीय तर्क (Mathematical Reasoning)",
+          "priority": "medium",
+          "priorityLabel": "Medium",
+          "estMarks": "5 अंक",
+          "pyqFocus": "संख्या श्रृंखला, प्रतिशत, लाभ-हानि, कोडिंग-डिकोडिंग",
+          "sectionId": "part2_b",
+          "sectionName": "भाग 2 (B): अन्य कौशल (Other Skills)",
+          "sectionMarks": 20,
+          "resourceQuery": "Bihar STET Paper 2 ",
+          "topics": [
+            {
+              "id": "oth_u3_t0",
+              "text": "बुनियादी अंकगणित: प्रतिशत, लाभ-हानि, औसत, अनुपात"
+            },
+            {
+              "id": "oth_u3_t1",
+              "text": "संख्या श्रृंखला और पैटर्न (Number Series)"
+            },
+            {
+              "id": "oth_u3_t2",
+              "text": "कोडिंग और डिकोडिंग (Coding-Decoding)"
+            }
+          ]
+        },
+        {
+          "id": "oth_u4",
+          "unitNum": "क्षेत्र 4",
+          "title": "तार्किक क्षमता (Logical Reasoning)",
+          "priority": "medium",
+          "priorityLabel": "Medium",
+          "estMarks": "5 अंक",
+          "pyqFocus": "रक्त संबंध, दिशा ज्ञान, वेन आरेख, सादृश्यता",
+          "sectionId": "part2_b",
+          "sectionName": "भाग 2 (B): अन्य कौशल (Other Skills)",
+          "sectionMarks": 20,
+          "resourceQuery": "Bihar STET Paper 2 ",
+          "topics": [
+            {
+              "id": "oth_u4_t0",
+              "text": "वेन आरेख (Venn Diagrams)"
+            },
+            {
+              "id": "oth_u4_t1",
+              "text": "रक्त संबंध (Blood Relations)"
+            },
+            {
+              "id": "oth_u4_t2",
+              "text": "दिशा एवं दूरी ज्ञान (Direction & Distance Sense)"
+            },
+            {
+              "id": "oth_u4_t3",
+              "text": "सादृश्यता और वर्गीकरण (Analogy & Classification)"
+            },
+            {
+              "id": "oth_u4_t4",
+              "text": "कथन और निष्कर्ष (Statements & Conclusions)"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

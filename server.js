@@ -17,12 +17,14 @@ const registerHandler = require('./api/auth/register');
 const loginHandler = require('./api/auth/login');
 const meHandler = require('./api/auth/me');
 const progressHandler = require('./api/progress');
+const examsHandler = require('./api/exams');
 
 app.all('/api/health', (req, res) => healthHandler(req, res));
 app.all('/api/auth/register', (req, res) => registerHandler(req, res));
 app.all('/api/auth/login', (req, res) => loginHandler(req, res));
 app.all('/api/auth/me', (req, res) => meHandler(req, res));
 app.all('/api/progress', (req, res) => progressHandler(req, res));
+app.all('/api/exams', (req, res) => examsHandler(req, res));
 
 // Serve static frontend files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -39,7 +41,7 @@ app.get('*', (req, res) => {
 // Start dev server
 app.listen(PORT, () => {
   console.log(`\n======================================================`);
-  console.log(`  🚀 Bihar STET 2026 Tracker Server Running!`);
+  console.log(`  🚀 ExamRoadmap Server Running!`);
   console.log(`  Local URL:   http://localhost:${PORT}`);
   console.log(`  Health API:  http://localhost:${PORT}/api/health`);
   console.log(`  Environment: ${process.env.NODE_ENV || 'development'}`);

@@ -1322,6 +1322,83 @@
       color: #475569;
     }
 
+    /* App Footer Styles */
+    .app-footer {
+      margin-top: 48px;
+      padding: 24px 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(15, 23, 42, 0.7);
+      backdrop-filter: blur(10px);
+    }
+
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .footer-info p {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      margin-bottom: 3px;
+    }
+
+    .footer-info span {
+      font-size: 0.76rem;
+      color: #94a3b8;
+    }
+
+    .footer-reset-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: transparent;
+      border: 1px solid rgba(239, 68, 68, 0.25);
+      color: #94a3b8;
+      font-size: 0.78rem;
+      padding: 7px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .footer-reset-btn:hover {
+      background: rgba(239, 68, 68, 0.12);
+      color: #f87171;
+      border-color: rgba(239, 68, 68, 0.5);
+      transform: translateY(-1px);
+    }
+
+    [data-theme="light"] .app-footer {
+      border-top: 1px solid #e2e8f0;
+      background: #f8fafc;
+    }
+
+    [data-theme="light"] .footer-info p {
+      color: #0f172a;
+    }
+
+    [data-theme="light"] .footer-info span {
+      color: #64748b;
+    }
+
+    [data-theme="light"] .footer-reset-btn {
+      border-color: #fecaca;
+      color: #64748b;
+      background: #ffffff;
+    }
+
+    [data-theme="light"] .footer-reset-btn:hover {
+      background: #fee2e2;
+      color: #dc2626;
+      border-color: #f87171;
+    }
+
     /* Print styles */
     @media print {
       header, .toolbar, .study-widget, .unit-actions, .topic-controls, .btn, .unit-yt-btn, .yt-resource-btn, .strategy-card {
@@ -1356,20 +1433,6 @@
         <button class="btn theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="थीम बदलें (Light/Dark Mode)">
           <span id="themeToggleIcon">☀️</span>
           <span id="themeToggleText">लाइट मोड</span>
-        </button>
-
-        <button class="btn btn-secondary" onclick="exportProgressJSON()">
-          <span>💾</span> बैकअप / Export
-        </button>
-        <button class="btn btn-secondary" onclick="triggerImportJSON()">
-          <span>📂</span> Import
-        </button>
-        <input type="file" id="importFileInput" accept=".json" style="display:none" onchange="handleImportFile(event)">
-        <button class="btn btn-secondary" onclick="window.print()">
-          <span>🖨️</span> प्रिंट / PDF
-        </button>
-        <button class="btn btn-danger" onclick="confirmResetAll()">
-          <span>🔄</span> रीसेट
         </button>
       </div>
     </div>
@@ -1520,11 +1583,26 @@
 
   </div>
 
+  <!-- App Footer with safe Reset Option -->
+  <footer class="app-footer">
+    <div class="footer-inner">
+      <div class="footer-info">
+        <p>🎯 <strong>बिहार STET 2026 : पेपर 2 मनोविज्ञान (Psychology)</strong> | 150 अंक तैयारी ट्रैकर</p>
+        <span>आपकी अध्ययन प्रगति आपके डिवाइस में ऑटो-सेव होती है।</span>
+      </div>
+      <div class="footer-actions">
+        <button class="footer-reset-btn" onclick="confirmResetAll()" title="सभी प्रगति रीसेट करें">
+          <span>🔄</span> डेटा रीसेट करें
+        </button>
+      </div>
+    </div>
+  </footer>
+
   <!-- Reset Confirmation Modal -->
   <div class="modal-overlay" id="resetModal">
     <div class="modal-card">
       <h3>⚠️ क्या आप प्रगति रीसेट करना चाहते हैं?</h3>
-      <p>यह क्रिया आपके सभी मार्क किए गए टॉपिक्स, नोट्स और रिवीजन काउंटर को मिटा देगी। यदि आवश्यक हो तो पहले 'बैकअप / Export' कर लें।</p>
+      <p>यह क्रिया आपके सभी मार्क किए गए टॉपिक्स, नोट्स और रिवीजन काउंटर को मिटा देगी। क्या आप सचमुच रीसेट करना चाहते हैं?</p>
       <div class="modal-actions">
         <button class="btn btn-secondary" onclick="closeResetModal()">रद्द करें</button>
         <button class="btn btn-danger" onclick="executeResetAll()">हाँ, सब रीसेट करें</button>
