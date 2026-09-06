@@ -1,0 +1,392 @@
+{
+  "id": "ssc-cgl-tier1",
+  "title": "SSC CGL टियर 1",
+  "titleEn": "SSC CGL Tier 1",
+  "category": "SSC & Railways",
+  "subject": "General Intelligence, GK, Quantitative Aptitude & English",
+  "language": "hi",
+  "totalMarks": 200,
+  "passingMarks": 140,
+  "totalQuestions": 100,
+  "durationMinutes": 60,
+  "negativeMarking": "0.50 अंक प्रति गलत उत्तर",
+  "targetAudience": "स्नातक अभ्यर्थी (Graduate Aspirants)",
+  "resourcePrefix": "SSC CGL Tier 1",
+  "sections": [
+    {
+      "id": "reasoning",
+      "name": "सामान्य बुद्धि एवं तर्कशक्ति (General Intelligence & Reasoning)",
+      "marks": 50,
+      "badgeColor": "#4f46e5"
+    },
+    {
+      "id": "gk",
+      "name": "सामान्य जागरूकता (General Awareness)",
+      "marks": 50,
+      "badgeColor": "#b45309"
+    },
+    {
+      "id": "quant",
+      "name": "मात्रात्मक अभियोग्यता (Quantitative Aptitude)",
+      "marks": 50,
+      "badgeColor": "#0d9488"
+    },
+    {
+      "id": "english",
+      "name": "अंग्रेज़ी बोधगम्यता (English Comprehension)",
+      "marks": 50,
+      "badgeColor": "#ea580c"
+    }
+  ],
+  "phases": [
+    {
+      "id": "phase-1",
+      "name": "चरण 1: नींव — अंकगणित एवं मूल रीज़निंग",
+      "description": "गणित एवं रीज़निंग की बुनियादी अवधारणाएं मज़बूत करें",
+      "units": [
+        {
+          "id": "ssc_u1",
+          "unitNum": "यूनिट 1",
+          "title": "अंकगणित की नींव (Arithmetic Foundations)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "8-10 अंक",
+          "pyqFocus": "प्रतिशत, अनुपात, औसत — हर शिफ्ट में पूछे जाते हैं",
+          "sectionId": "quant",
+          "sectionName": "मात्रात्मक अभियोग्यता (Quantitative Aptitude)",
+          "sectionMarks": 50,
+          "topics": [
+            {
+              "id": "ssc_u1_t0",
+              "text": "संख्या पद्धति एवं सरलीकरण"
+            },
+            {
+              "id": "ssc_u1_t1",
+              "text": "प्रतिशत (Percentage)"
+            },
+            {
+              "id": "ssc_u1_t2",
+              "text": "अनुपात एवं समानुपात"
+            },
+            {
+              "id": "ssc_u1_t3",
+              "text": "औसत (Average)"
+            },
+            {
+              "id": "ssc_u1_t4",
+              "text": "लाभ, हानि एवं छूट"
+            }
+          ]
+        },
+        {
+          "id": "ssc_u2",
+          "unitNum": "यूनिट 2",
+          "title": "मौखिक तर्कशक्ति (Verbal Reasoning)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "10-12 अंक",
+          "pyqFocus": "सादृश्यता, वर्गीकरण, श्रृंखला — स्कोरिंग एवं तेज़",
+          "sectionId": "reasoning",
+          "sectionName": "सामान्य बुद्धि एवं तर्कशक्ति (General Intelligence & Reasoning)",
+          "sectionMarks": 50,
+          "topics": [
+            {
+              "id": "ssc_u2_t0",
+              "text": "सादृश्यता (Analogy)"
+            },
+            {
+              "id": "ssc_u2_t1",
+              "text": "वर्गीकरण (Classification)"
+            },
+            {
+              "id": "ssc_u2_t2",
+              "text": "श्रृंखला: संख्या एवं अक्षर"
+            },
+            {
+              "id": "ssc_u2_t3",
+              "text": "कोडिंग-डिकोडिंग"
+            },
+            {
+              "id": "ssc_u2_t4",
+              "text": "रक्त संबंध एवं दिशा ज्ञान"
+            }
+          ]
+        },
+        {
+          "id": "ssc_u3",
+          "unitNum": "यूनिट 3",
+          "title": "अंग्रेज़ी व्याकरण की नींव",
+          "priority": "medium",
+          "priorityLabel": "Medium",
+          "estMarks": "8-10 अंक",
+          "pyqFocus": "Error spotting, sentence improvement",
+          "sectionId": "english",
+          "sectionName": "अंग्रेज़ी बोधगम्यता (English Comprehension)",
+          "sectionMarks": 50,
+          "topics": [
+            {
+              "id": "ssc_u3_t0",
+              "text": "Parts of Speech एवं Tenses"
+            },
+            {
+              "id": "ssc_u3_t1",
+              "text": "Subject-Verb Agreement"
+            },
+            {
+              "id": "ssc_u3_t2",
+              "text": "Error Spotting"
+            },
+            {
+              "id": "ssc_u3_t3",
+              "text": "Sentence Improvement"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase-2",
+      "name": "चरण 2: उच्च-स्कोरिंग खंड (High-Yield 80/20)",
+      "description": "उन्नत गणित, शब्दावली एवं गैर-मौखिक रीज़निंग — सर्वाधिक अंक यहीं",
+      "units": [
+        {
+          "id": "ssc_u4",
+          "unitNum": "यूनिट 4",
+          "title": "उन्नत गणित (Advanced Maths)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "12-15 अंक",
+          "pyqFocus": "ज्यामिति, त्रिकोणमिति, क्षेत्रमिति — कठिन पर निर्णायक",
+          "sectionId": "quant",
+          "sectionName": "मात्रात्मक अभियोग्यता (Quantitative Aptitude)",
+          "sectionMarks": 50,
+          "topics": [
+            {
+              "id": "ssc_u4_t0",
+              "text": "ज्यामिति (Geometry): त्रिभुज एवं वृत्त"
+            },
+            {
+              "id": "ssc_u4_t1",
+              "text": "त्रिकोणमिति (Trigonometry)"
+            },
+            {
+              "id": "ssc_u4_t2",
+              "text": "क्षेत्रमिति (Mensuration 2D & 3D)"
+            },
+            {
+              "id": "ssc_u4_t3",
+              "text": "बीजगणित एवं सर्वसमिकाएं"
+            },
+            {
+              "id": "ssc_u4_t4",
+              "text": "आंकड़ा निर्वचन (Data Interpretation)"
+            }
+          ]
+        },
+        {
+          "id": "ssc_u5",
+          "unitNum": "यूनिट 5",
+          "title": "समय, कार्य, चाल एवं दूरी",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "8-10 अंक",
+          "pyqFocus": "TSD एवं Time-Work हर पेपर में",
+          "sectionId": "quant",
+          "sectionName": "मात्रात्मक अभियोग्यता (Quantitative Aptitude)",
+          "sectionMarks": 50,
+          "topics": [
+            {
+              "id": "ssc_u5_t0",
+              "text": "समय एवं कार्य (Time & Work)"
+            },
+            {
+              "id": "ssc_u5_t1",
+              "text": "पाइप एवं टंकी"
+            },
+            {
+              "id": "ssc_u5_t2",
+              "text": "चाल, समय एवं दूरी"
+            },
+            {
+              "id": "ssc_u5_t3",
+              "text": "नाव एवं धारा"
+            },
+            {
+              "id": "ssc_u5_t4",
+              "text": "साधारण एवं चक्रवृद्धि ब्याज"
+            }
+          ]
+        },
+        {
+          "id": "ssc_u6",
+          "unitNum": "यूनिट 6",
+          "title": "अंग्रेज़ी शब्दावली एवं बोधगम्यता",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "12-15 अंक",
+          "pyqFocus": "Idioms, synonyms, cloze test — रटने से सीधा लाभ",
+          "sectionId": "english",
+          "sectionName": "अंग्रेज़ी बोधगम्यता (English Comprehension)",
+          "sectionMarks": 50,
+          "topics": [
+            {
+              "id": "ssc_u6_t0",
+              "text": "Synonyms एवं Antonyms"
+            },
+            {
+              "id": "ssc_u6_t1",
+              "text": "Idioms एवं Phrases"
+            },
+            {
+              "id": "ssc_u6_t2",
+              "text": "One Word Substitution"
+            },
+            {
+              "id": "ssc_u6_t3",
+              "text": "Cloze Test"
+            },
+            {
+              "id": "ssc_u6_t4",
+              "text": "Reading Comprehension"
+            },
+            {
+              "id": "ssc_u6_t5",
+              "text": "Spelling Correction"
+            }
+          ]
+        },
+        {
+          "id": "ssc_u7",
+          "unitNum": "यूनिट 7",
+          "title": "गैर-मौखिक एवं विश्लेषणात्मक तर्क",
+          "priority": "medium",
+          "priorityLabel": "Medium",
+          "estMarks": "8-10 अंक",
+          "pyqFocus": "आकृति श्रृंखला, पेपर फोल्डिंग, वेन आरेख",
+          "sectionId": "reasoning",
+          "sectionName": "सामान्य बुद्धि एवं तर्कशक्ति (General Intelligence & Reasoning)",
+          "sectionMarks": 50,
+          "topics": [
+            {
+              "id": "ssc_u7_t0",
+              "text": "आकृति श्रृंखला एवं दर्पण प्रतिबिंब"
+            },
+            {
+              "id": "ssc_u7_t1",
+              "text": "पेपर कटिंग एवं फोल्डिंग"
+            },
+            {
+              "id": "ssc_u7_t2",
+              "text": "घन एवं पासा (Cube & Dice)"
+            },
+            {
+              "id": "ssc_u7_t3",
+              "text": "वेन आरेख एवं कथन-निष्कर्ष"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase-3",
+      "name": "चरण 3: सामान्य जागरूकता एवं करंट अफेयर्स",
+      "description": "स्थैतिक GK एवं समसामयिकी — रोज़ 30 मिनट का नियमित अभ्यास",
+      "units": [
+        {
+          "id": "ssc_u8",
+          "unitNum": "यूनिट 8",
+          "title": "स्थैतिक सामान्य ज्ञान (Static GK)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "20-25 अंक",
+          "pyqFocus": "इतिहास, भूगोल, राजव्यवस्था — बिना गणना के तेज़ अंक",
+          "sectionId": "gk",
+          "sectionName": "सामान्य जागरूकता (General Awareness)",
+          "sectionMarks": 50,
+          "topics": [
+            {
+              "id": "ssc_u8_t0",
+              "text": "भारतीय इतिहास: प्राचीन, मध्यकालीन एवं आधुनिक"
+            },
+            {
+              "id": "ssc_u8_t1",
+              "text": "भारतीय एवं विश्व भूगोल"
+            },
+            {
+              "id": "ssc_u8_t2",
+              "text": "भारतीय राजव्यवस्था एवं संविधान"
+            },
+            {
+              "id": "ssc_u8_t3",
+              "text": "अर्थव्यवस्था एवं बजट"
+            },
+            {
+              "id": "ssc_u8_t4",
+              "text": "कला, संस्कृति एवं पुरस्कार"
+            }
+          ]
+        },
+        {
+          "id": "ssc_u9",
+          "unitNum": "यूनिट 9",
+          "title": "सामान्य विज्ञान (General Science)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "8-10 अंक",
+          "pyqFocus": "भौतिकी, रसायन एवं जीव विज्ञान की NCERT अवधारणाएं",
+          "sectionId": "gk",
+          "sectionName": "सामान्य जागरूकता (General Awareness)",
+          "sectionMarks": 50,
+          "topics": [
+            {
+              "id": "ssc_u9_t0",
+              "text": "भौतिक विज्ञान की मूल अवधारणाएं"
+            },
+            {
+              "id": "ssc_u9_t1",
+              "text": "रसायन विज्ञान: तत्व एवं यौगिक"
+            },
+            {
+              "id": "ssc_u9_t2",
+              "text": "जीव विज्ञान: मानव शरीर एवं रोग"
+            },
+            {
+              "id": "ssc_u9_t3",
+              "text": "कंप्यूटर एवं प्रौद्योगिकी"
+            }
+          ]
+        },
+        {
+          "id": "ssc_u10",
+          "unitNum": "यूनिट 10",
+          "title": "समसामयिक घटनाएं (Current Affairs)",
+          "priority": "medium",
+          "priorityLabel": "Medium",
+          "estMarks": "8-10 अंक",
+          "pyqFocus": "पिछले 6-8 महीने की राष्ट्रीय व अंतर्राष्ट्रीय घटनाएं",
+          "sectionId": "gk",
+          "sectionName": "सामान्य जागरूकता (General Awareness)",
+          "sectionMarks": 50,
+          "topics": [
+            {
+              "id": "ssc_u10_t0",
+              "text": "राष्ट्रीय समसामयिक घटनाएं"
+            },
+            {
+              "id": "ssc_u10_t1",
+              "text": "अंतर्राष्ट्रीय समाचार एवं संगठन"
+            },
+            {
+              "id": "ssc_u10_t2",
+              "text": "खेल एवं पुरस्कार"
+            },
+            {
+              "id": "ssc_u10_t3",
+              "text": "सरकारी योजनाएं"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "users": [
+    {
+      "username": "test_1788676890955",
+      "name": "Test User",
+      "password": "$2a$10$P.Gpc3Rxb0zZIlk7EXlt9eNhLt0yZy5OiQcMIn72LEoR4bctJUtTO",
+      "createdAt": "2026-09-06T06:41:31.055Z",
+      "updatedAt": "2026-09-06T06:41:31.055Z",
+      "_id": "local_1788676891056_uctrhf"
+    }
+  ],
+  "progress": [
+    {
+      "userId": "local_1788676891056_uctrhf",
+      "examId": "bihar-stet-psychology",
+      "username": "test_1788676890955",
+      "userState": {
+        "psy_u4_t0": {
+          "completed": true,
+          "status": "mastered",
+          "revisions": 3,
+          "stars": 5,
+          "notes": "Pavlov v2"
+        }
+      },
+      "stats": {},
+      "timer": {},
+      "lastUpdated": "2026-09-06T06:41:31.154Z",
+      "_id": "local_1788676891109_e2f2r0"
+    },
+    {
+      "userId": "local_1788676891056_uctrhf",
+      "examId": "ssc-cgl-tier1",
+      "username": "test_1788676890955",
+      "userState": {
+        "ssc_u1_t0": {
+          "completed": true,
+          "status": "mastered",
+          "revisions": 1,
+          "stars": 3,
+          "notes": "Percentages"
+        }
+      },
+      "stats": {},
+      "timer": {},
+      "lastUpdated": "2026-09-06T06:41:31.113Z",
+      "_id": "local_1788676891115_ftikfh"
+    }
+  ]
+}

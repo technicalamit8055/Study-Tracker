@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "updated": "2026-09-06",
+  "categories": [
+    {
+      "id": "teaching",
+      "name": "Teaching Exams",
+      "nameHi": "शिक्षक भर्ती परीक्षाएं",
+      "icon": "👩‍🏫",
+      "color": "#4f46e5"
+    },
+    {
+      "id": "civil-services",
+      "name": "Civil Services & State PSCs",
+      "nameHi": "सिविल सेवा एवं राज्य पीएससी",
+      "icon": "🏛️",
+      "color": "#b45309"
+    },
+    {
+      "id": "ssc-railways",
+      "name": "SSC & Railways",
+      "nameHi": "एसएससी एवं रेलवे",
+      "icon": "📋",
+      "color": "#0d9488"
+    },
+    {
+      "id": "school-boards",
+      "name": "School & Board Exams",
+      "nameHi": "स्कूल एवं बोर्ड परीक्षाएं",
+      "icon": "🎒",
+      "color": "#db2777"
+    },
+    {
+      "id": "engineering-medical",
+      "name": "Engineering & Medical",
+      "nameHi": "इंजीनियरिंग एवं मेडिकल",
+      "icon": "🔬",
+      "color": "#7c3aed"
+    }
+  ],
+  "exams": [
+    {
+      "id": "bihar-stet-psychology",
+      "title": "बिहार STET 2026: पेपर 2 (मनोविज्ञान)",
+      "titleEn": "Bihar STET 2026: Paper 2 (Psychology)",
+      "categoryId": "teaching",
+      "subject": "मनोविज्ञान (Psychology)",
+      "totalMarks": 150,
+      "totalQuestions": 150,
+      "durationMinutes": 150,
+      "file": "bihar-stet-psychology.json",
+      "available": true,
+      "featured": true,
+      "tagline": "कक्षा 11-12 उच्च माध्यमिक शिक्षक भर्ती हेतु पूर्ण रोडमैप"
+    },
+    {
+      "id": "ctet-paper2-cdp",
+      "title": "CTET पेपर 2: बाल विकास एवं शिक्षाशास्त्र",
+      "titleEn": "CTET Paper 2: Child Development & Pedagogy",
+      "categoryId": "teaching",
+      "subject": "बाल विकास एवं शिक्षाशास्त्र (CDP)",
+      "totalMarks": 150,
+      "totalQuestions": 150,
+      "durationMinutes": 150,
+      "file": "ctet-paper2-cdp.json",
+      "available": true,
+      "featured": true,
+      "tagline": "कक्षा 6-8 शिक्षक पात्रता परीक्षा — CDP, गणित/विज्ञान एवं भाषा"
+    },
+    {
+      "id": "ssc-cgl-tier1",
+      "title": "SSC CGL टियर 1",
+      "titleEn": "SSC CGL Tier 1",
+      "categoryId": "ssc-railways",
+      "subject": "General Intelligence, GK, Quant & English",
+      "totalMarks": 200,
+      "totalQuestions": 100,
+      "durationMinutes": 60,
+      "file": "ssc-cgl-tier1.json",
+      "available": true,
+      "featured": false,
+      "tagline": "चारों खंडों का संतुलित रोडमैप — रीज़निंग, GK, गणित, अंग्रेज़ी"
+    },
+    {
+      "id": "cbse-class12-physics",
+      "title": "CBSE कक्षा 12: भौतिक विज्ञान",
+      "titleEn": "CBSE Class 12: Physics",
+      "categoryId": "school-boards",
+      "subject": "Physics (Theory)",
+      "totalMarks": 70,
+      "totalQuestions": 35,
+      "durationMinutes": 180,
+      "file": "cbse-class12-physics.json",
+      "available": true,
+      "featured": false,
+      "tagline": "बोर्ड परीक्षा हेतु अध्याय-वार वेटेज एवं न्यूमेरिकल अभ्यास"
+    },
+    {
+      "id": "upsc-prelims-gs1",
+      "title": "UPSC प्रारंभिक: सामान्य अध्ययन पेपर 1",
+      "titleEn": "UPSC Prelims: General Studies Paper 1",
+      "categoryId": "civil-services",
+      "subject": "General Studies",
+      "totalMarks": 200,
+      "totalQuestions": 100,
+      "durationMinutes": 120,
+      "file": "upsc-prelims-gs1.json",
+      "available": false,
+      "featured": false,
+      "tagline": "जल्द आ रहा है (Coming soon)"
+    },
+    {
+      "id": "neet-biology",
+      "title": "NEET: जीव विज्ञान",
+      "titleEn": "NEET: Biology",
+      "categoryId": "engineering-medical",
+      "subject": "Botany & Zoology",
+      "totalMarks": 360,
+      "totalQuestions": 90,
+      "durationMinutes": 200,
+      "file": "neet-biology.json",
+      "available": false,
+      "featured": false,
+      "tagline": "जल्द आ रहा है (Coming soon)"
+    }
+  ]
+}

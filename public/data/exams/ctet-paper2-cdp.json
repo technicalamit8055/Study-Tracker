@@ -1,0 +1,318 @@
+{
+  "id": "ctet-paper2-cdp",
+  "title": "CTET पेपर 2: बाल विकास एवं शिक्षाशास्त्र",
+  "titleEn": "CTET Paper 2: Child Development & Pedagogy",
+  "category": "Teaching Exams",
+  "subject": "बाल विकास एवं शिक्षाशास्त्र (CDP)",
+  "language": "hi",
+  "totalMarks": 150,
+  "passingMarks": 90,
+  "totalQuestions": 150,
+  "durationMinutes": 150,
+  "negativeMarking": "नहीं (No Negative Marking)",
+  "targetAudience": "कक्षा 6-8 (उच्च प्राथमिक) शिक्षक",
+  "resourcePrefix": "CTET Paper 2 CDP",
+  "sections": [
+    {
+      "id": "cdp",
+      "name": "बाल विकास एवं शिक्षाशास्त्र (CDP)",
+      "marks": 30,
+      "badgeColor": "#4f46e5"
+    },
+    {
+      "id": "lang",
+      "name": "भाषा I एवं II (Language I & II)",
+      "marks": 60,
+      "badgeColor": "#0d9488"
+    },
+    {
+      "id": "ms",
+      "name": "गणित एवं विज्ञान (Mathematics & Science)",
+      "marks": 60,
+      "badgeColor": "#ea580c"
+    }
+  ],
+  "phases": [
+    {
+      "id": "phase-1",
+      "name": "चरण 1: बाल विकास की नींव (Foundations of Child Development)",
+      "description": "विकास के सिद्धांत एवं अधिगम की मूल अवधारणाएं — पूरे पेपर का आधार",
+      "units": [
+        {
+          "id": "ctet_u1",
+          "unitNum": "यूनिट 1",
+          "title": "बाल विकास की अवधारणा (Concept of Development)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "4-5 अंक",
+          "pyqFocus": "विकास के सिद्धांत, वृद्धि बनाम विकास, वंशानुक्रम व वातावरण",
+          "sectionId": "cdp",
+          "sectionName": "बाल विकास एवं शिक्षाशास्त्र (CDP)",
+          "sectionMarks": 30,
+          "topics": [
+            {
+              "id": "ctet_u1_t0",
+              "text": "विकास एवं वृद्धि में अंतर"
+            },
+            {
+              "id": "ctet_u1_t1",
+              "text": "विकास के सिद्धांत एवं अवस्थाएं"
+            },
+            {
+              "id": "ctet_u1_t2",
+              "text": "वंशानुक्रम एवं वातावरण का प्रभाव"
+            },
+            {
+              "id": "ctet_u1_t3",
+              "text": "समाजीकरण की प्रक्रिया"
+            }
+          ]
+        },
+        {
+          "id": "ctet_u2",
+          "unitNum": "यूनिट 2",
+          "title": "पियाजे, कोहलबर्ग एवं वाइगोत्स्की",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "5-6 अंक",
+          "pyqFocus": "पियाजे की अवस्थाएं, ZPD, कोहलबर्ग के नैतिक स्तर",
+          "sectionId": "cdp",
+          "sectionName": "बाल विकास एवं शिक्षाशास्त्र (CDP)",
+          "sectionMarks": 30,
+          "topics": [
+            {
+              "id": "ctet_u2_t0",
+              "text": "पियाजे का संज्ञानात्मक विकास सिद्धांत"
+            },
+            {
+              "id": "ctet_u2_t1",
+              "text": "वाइगोत्स्की का सामाजिक-सांस्कृतिक सिद्धांत (ZPD, Scaffolding)"
+            },
+            {
+              "id": "ctet_u2_t2",
+              "text": "कोहलबर्ग का नैतिक विकास सिद्धांत"
+            },
+            {
+              "id": "ctet_u2_t3",
+              "text": "एरिक्सन का मनो-सामाजिक विकास"
+            }
+          ]
+        },
+        {
+          "id": "ctet_u3",
+          "unitNum": "यूनिट 3",
+          "title": "अधिगम एवं शिक्षाशास्त्र (Learning & Pedagogy)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "5-6 अंक",
+          "pyqFocus": "अधिगम के सिद्धांत, बच्चों की त्रुटियाँ, समस्या समाधान",
+          "sectionId": "cdp",
+          "sectionName": "बाल विकास एवं शिक्षाशास्त्र (CDP)",
+          "sectionMarks": 30,
+          "topics": [
+            {
+              "id": "ctet_u3_t0",
+              "text": "बच्चे कैसे सोचते और सीखते हैं"
+            },
+            {
+              "id": "ctet_u3_t1",
+              "text": "अधिगम को प्रभावित करने वाले कारक"
+            },
+            {
+              "id": "ctet_u3_t2",
+              "text": "बच्चों की त्रुटियों का महत्व"
+            },
+            {
+              "id": "ctet_u3_t3",
+              "text": "प्रेरणा एवं अधिगम का संबंध"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase-2",
+      "name": "चरण 2: समावेशी शिक्षा एवं आकलन (High-Yield)",
+      "description": "CTET में सर्वाधिक पूछे जाने वाले खंड — समावेशन, CCE एवं विशिष्ट बालक",
+      "units": [
+        {
+          "id": "ctet_u4",
+          "unitNum": "यूनिट 4",
+          "title": "समावेशी शिक्षा (Inclusive Education)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "5-6 अंक",
+          "pyqFocus": "दिव्यांग बालक, वंचित वर्ग, RTE अधिनियम 2009",
+          "sectionId": "cdp",
+          "sectionName": "बाल विकास एवं शिक्षाशास्त्र (CDP)",
+          "sectionMarks": 30,
+          "topics": [
+            {
+              "id": "ctet_u4_t0",
+              "text": "विशेष आवश्यकता वाले बालक (CWSN)"
+            },
+            {
+              "id": "ctet_u4_t1",
+              "text": "प्रतिभाशाली एवं सृजनशील बालक"
+            },
+            {
+              "id": "ctet_u4_t2",
+              "text": "अधिगम अक्षमता (Dyslexia, Dyscalculia)"
+            },
+            {
+              "id": "ctet_u4_t3",
+              "text": "वंचित एवं पिछड़े वर्ग के बालक"
+            },
+            {
+              "id": "ctet_u4_t4",
+              "text": "शिक्षा का अधिकार अधिनियम (RTE) 2009"
+            }
+          ]
+        },
+        {
+          "id": "ctet_u5",
+          "unitNum": "यूनिट 5",
+          "title": "आकलन एवं मूल्यांकन (Assessment & Evaluation)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "4-5 अंक",
+          "pyqFocus": "CCE, रचनात्मक बनाम योगात्मक आकलन, NCF 2005",
+          "sectionId": "cdp",
+          "sectionName": "बाल विकास एवं शिक्षाशास्त्र (CDP)",
+          "sectionMarks": 30,
+          "topics": [
+            {
+              "id": "ctet_u5_t0",
+              "text": "सतत एवं व्यापक मूल्यांकन (CCE)"
+            },
+            {
+              "id": "ctet_u5_t1",
+              "text": "रचनात्मक बनाम योगात्मक आकलन"
+            },
+            {
+              "id": "ctet_u5_t2",
+              "text": "उपचारात्मक शिक्षण"
+            },
+            {
+              "id": "ctet_u5_t3",
+              "text": "NCF 2005 एवं NEP 2020 की सिफारिशें"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase-3",
+      "name": "चरण 3: विषय-वस्तु एवं भाषा शिक्षाशास्त्र (Subject & Language Pedagogy)",
+      "description": "भाषा I/II एवं गणित-विज्ञान के 120 अंक — नियमित अभ्यास आवश्यक",
+      "units": [
+        {
+          "id": "ctet_u6",
+          "unitNum": "यूनिट 6",
+          "title": "भाषा शिक्षाशास्त्र (Language Pedagogy)",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "15 अंक",
+          "pyqFocus": "अपठित गद्यांश, भाषा अर्जन बनाम अधिगम, बहुभाषिकता",
+          "sectionId": "lang",
+          "sectionName": "भाषा I एवं II (Language I & II)",
+          "sectionMarks": 60,
+          "topics": [
+            {
+              "id": "ctet_u6_t0",
+              "text": "अपठित गद्यांश एवं काव्यांश अभ्यास"
+            },
+            {
+              "id": "ctet_u6_t1",
+              "text": "भाषा अर्जन एवं अधिगम के सिद्धांत"
+            },
+            {
+              "id": "ctet_u6_t2",
+              "text": "भाषा शिक्षण की विधियां"
+            },
+            {
+              "id": "ctet_u6_t3",
+              "text": "सुनना, बोलना, पढ़ना, लिखना (LSRW कौशल)"
+            },
+            {
+              "id": "ctet_u6_t4",
+              "text": "व्याकरण एवं भाषा की भूमिका"
+            }
+          ]
+        },
+        {
+          "id": "ctet_u7",
+          "unitNum": "यूनिट 7",
+          "title": "गणित शिक्षाशास्त्र एवं विषय-वस्तु",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "30 अंक",
+          "pyqFocus": "संख्या पद्धति, बीजगणित, क्षेत्रमिति, गणित की प्रकृति",
+          "sectionId": "ms",
+          "sectionName": "गणित एवं विज्ञान (Mathematics & Science)",
+          "sectionMarks": 60,
+          "topics": [
+            {
+              "id": "ctet_u7_t0",
+              "text": "संख्या पद्धति एवं परिमेय संख्याएं"
+            },
+            {
+              "id": "ctet_u7_t1",
+              "text": "बीजगणित एवं सर्वसमिकाएं"
+            },
+            {
+              "id": "ctet_u7_t2",
+              "text": "ज्यामिति एवं क्षेत्रमिति"
+            },
+            {
+              "id": "ctet_u7_t3",
+              "text": "आंकड़ों का प्रबंधन (Data Handling)"
+            },
+            {
+              "id": "ctet_u7_t4",
+              "text": "गणित शिक्षण की प्रकृति एवं त्रुटि विश्लेषण"
+            }
+          ]
+        },
+        {
+          "id": "ctet_u8",
+          "unitNum": "यूनिट 8",
+          "title": "विज्ञान शिक्षाशास्त्र एवं विषय-वस्तु",
+          "priority": "high",
+          "priorityLabel": "High Yield",
+          "estMarks": "30 अंक",
+          "pyqFocus": "भोजन, सजीव जगत, गति-बल, प्राकृतिक संसाधन",
+          "sectionId": "ms",
+          "sectionName": "गणित एवं विज्ञान (Mathematics & Science)",
+          "sectionMarks": 60,
+          "topics": [
+            {
+              "id": "ctet_u8_t0",
+              "text": "भोजन एवं पोषण"
+            },
+            {
+              "id": "ctet_u8_t1",
+              "text": "सामग्री: पदार्थ की संरचना"
+            },
+            {
+              "id": "ctet_u8_t2",
+              "text": "सजीव जगत एवं मानव शरीर"
+            },
+            {
+              "id": "ctet_u8_t3",
+              "text": "गति, बल एवं ऊर्जा"
+            },
+            {
+              "id": "ctet_u8_t4",
+              "text": "प्राकृतिक संसाधन एवं पर्यावरण"
+            },
+            {
+              "id": "ctet_u8_t5",
+              "text": "विज्ञान शिक्षण की विधियां एवं प्रयोग"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
