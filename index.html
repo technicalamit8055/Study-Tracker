@@ -1,0 +1,2290 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>बिहार STET 2026 पेपर 2 (मनोविज्ञान) सिलेबस & वेटेज ट्रैकर | Bihar STET Paper 2 Psychology Tracker</title>
+  <style>
+    :root {
+      --primary: #4f46e5;
+      --primary-hover: #4338ca;
+      --primary-light: #eef2ff;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --info: #0ea5e9;
+      --yt-red: #ff0000;
+      --bg: #0b0f19;
+      --card-bg: #151e32;
+      --card-border: #263554;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --input-bg: #0b0f19;
+      --high-p: #ef4444;
+      --med-p: #f59e0b;
+      --std-p: #3b82f6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Noto Sans Devanagari";
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      min-height: 100vh;
+      padding-bottom: 60px;
+      line-height: 1.5;
+    }
+
+    /* Top Navigation Header */
+    header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 22px 20px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    }
+
+    .header-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    @media (min-width: 768px) {
+      .header-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
+    }
+
+    .header-title h1 {
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .header-title p {
+      font-size: 0.85rem;
+      color: #c7d2fe;
+      margin-top: 4px;
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 13px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border-radius: 8px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background-color: #6366f1;
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background-color: #4f46e5;
+    }
+
+    .btn-secondary {
+      background-color: rgba(255, 255, 255, 0.08);
+      color: #f1f5f9;
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+    .btn-secondary:hover {
+      background-color: rgba(255, 255, 255, 0.18);
+    }
+
+    .btn-danger {
+      background-color: rgba(239, 68, 68, 0.15);
+      color: #fca5a5;
+      border-color: rgba(239, 68, 68, 0.35);
+    }
+    .btn-danger:hover {
+      background-color: rgba(239, 68, 68, 0.25);
+    }
+
+    .container {
+      max-width: 1280px;
+      margin: 22px auto;
+      padding: 0 16px;
+    }
+
+    /* Exam Stats Overview Cards */
+    .exam-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .stat-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    }
+
+    .stat-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      flex-shrink: 0;
+    }
+
+    .stat-info h4 {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .stat-info p {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-top: 2px;
+    }
+
+    /* Past Year Analysis / High Yield Strategy Card */
+    .strategy-card {
+      background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(15, 23, 42, 0.95) 100%);
+      border: 1px solid #3b4252;
+      border-left: 4px solid #6366f1;
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 22px;
+    }
+
+    .strategy-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .strategy-header h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #e0e7ff;
+    }
+
+    .strategy-body {
+      margin-top: 14px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+      font-size: 0.84rem;
+      color: #cbd5e1;
+      line-height: 1.6;
+    }
+
+    .strat-box {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid #2d3748;
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .strat-box-title {
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* Overall Progress Bar Card */
+    .progress-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 22px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 12px;
+    }
+
+    .progress-header h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .progress-percentage {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #818cf8;
+    }
+
+    .progress-bar-bg {
+      background-color: #1e293b;
+      height: 14px;
+      border-radius: 7px;
+      overflow: hidden;
+      margin-bottom: 16px;
+      position: relative;
+    }
+
+    .progress-bar-fill {
+      background: linear-gradient(90deg, #6366f1 0%, #10b981 100%);
+      height: 100%;
+      width: 0%;
+      border-radius: 7px;
+      transition: width 0.4s ease;
+    }
+
+    .progress-substats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      padding-top: 14px;
+      border-top: 1px solid var(--card-border);
+    }
+
+    .substat-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .substat-label {
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+
+    .substat-val {
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    /* Pomodoro / Timer */
+    .study-widget {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 22px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+    }
+
+    .timer-display {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .timer-clock {
+      font-size: 1.9rem;
+      font-weight: 800;
+      font-family: monospace;
+      color: #38bdf8;
+      letter-spacing: 0.05em;
+    }
+
+    .timer-mode {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .timer-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* Control Toolbar (Search, Filter, Sort) */
+    .toolbar {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 16px;
+      margin-bottom: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    @media (min-width: 992px) {
+      .toolbar {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .search-box {
+      position: relative;
+      flex: 1;
+      min-width: 260px;
+    }
+
+    .search-box input {
+      width: 100%;
+      background-color: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 10px 14px 10px 38px;
+      font-size: 0.9rem;
+      color: #fff;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .search-box input:focus {
+      border-color: #6366f1;
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .filters-group {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .filter-select {
+      background-color: var(--input-bg);
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .filter-select:focus {
+      border-color: #6366f1;
+    }
+
+    /* Sections & Units */
+    .section-container {
+      margin-bottom: 28px;
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      background: #172138;
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      cursor: pointer;
+      user-select: none;
+      transition: background-color 0.2s;
+    }
+
+    .section-header:hover {
+      background: #1e2c4a;
+    }
+
+    .section-title-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .section-badge {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .section-name {
+      font-size: 1.12rem;
+      font-weight: 700;
+      color: #f1f5f9;
+    }
+
+    .section-meta {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .unit-card {
+      background-color: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      margin-bottom: 14px;
+      overflow: hidden;
+      transition: border-color 0.15s ease;
+    }
+
+    .unit-card:hover {
+      border-color: #3b507a;
+    }
+
+    .unit-header {
+      padding: 14px 18px;
+      background-color: rgba(21, 30, 50, 0.9);
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .unit-title-group {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      flex: 1;
+    }
+
+    .unit-tag {
+      background-color: #1e293b;
+      color: #94a3b8;
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .unit-title {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: #e2e8f0;
+    }
+
+    /* Priority & Weightage Badges */
+    .badge-priority {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.02em;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .badge-priority.high {
+      background: rgba(239, 68, 68, 0.18);
+      color: #fca5a5;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+
+    .badge-priority.medium {
+      background: rgba(245, 158, 11, 0.18);
+      color: #fcd34d;
+      border: 1px solid rgba(245, 158, 11, 0.4);
+    }
+
+    .badge-priority.standard {
+      background: rgba(59, 130, 246, 0.18);
+      color: #93c5fd;
+      border: 1px solid rgba(59, 130, 246, 0.4);
+    }
+
+    .badge-weight {
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 6px;
+      background: rgba(16, 185, 129, 0.15);
+      color: #6ee7b7;
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      white-space: nowrap;
+    }
+
+    .unit-header-right {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .unit-progress-badge {
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #818cf8;
+      background: rgba(99, 102, 241, 0.15);
+      padding: 3px 9px;
+      border-radius: 6px;
+    }
+
+    .unit-yt-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 4px 9px;
+      background: rgba(255, 0, 0, 0.15);
+      border: 1px solid rgba(255, 0, 0, 0.35);
+      color: #ff6b6b;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .unit-yt-btn:hover {
+      background: #ff0000;
+      color: #fff;
+    }
+
+    .unit-actions {
+      display: flex;
+      gap: 6px;
+    }
+
+    .btn-xs {
+      padding: 4px 8px;
+      font-size: 0.74rem;
+      border-radius: 6px;
+      border: 1px solid var(--card-border);
+      background-color: #0b0f19;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .btn-xs:hover {
+      color: #fff;
+      background-color: #1e293b;
+    }
+
+    /* PYQ Focus Box */
+    .unit-pyq-hint {
+      padding: 6px 18px;
+      background-color: rgba(15, 23, 42, 0.5);
+      border-bottom: 1px solid rgba(38, 53, 84, 0.6);
+      font-size: 0.78rem;
+      color: #94a3b8;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .unit-pyq-hint strong {
+      color: #cbd5e1;
+    }
+
+    /* Topics List inside Unit */
+    .topics-list {
+      padding: 6px 0;
+    }
+
+    .topic-row {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 12px 18px;
+      border-bottom: 1px solid rgba(38, 53, 84, 0.4);
+      transition: background-color 0.15s ease;
+    }
+
+    .topic-row:last-child {
+      border-bottom: none;
+    }
+
+    .topic-row:hover {
+      background-color: rgba(255, 255, 255, 0.02);
+    }
+
+    @media (min-width: 890px) {
+      .topic-row {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+    }
+
+    .topic-main {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      flex: 1;
+    }
+
+    .topic-checkbox {
+      width: 19px;
+      height: 19px;
+      accent-color: #10b981;
+      cursor: pointer;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    .topic-name {
+      font-size: 0.9rem;
+      color: #f1f5f9;
+      line-height: 1.4;
+      cursor: pointer;
+    }
+
+    .topic-name.completed {
+      text-decoration: line-through;
+      color: #64748b;
+    }
+
+    .topic-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    /* YouTube Resource Link Button */
+    .yt-resource-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(239, 68, 68, 0.12);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .yt-resource-btn:hover {
+      background: #dc2626;
+      border-color: #dc2626;
+      color: #ffffff;
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(220, 38, 38, 0.35);
+    }
+
+    .yt-icon {
+      width: 14px;
+      height: 14px;
+      display: inline-block;
+      fill: currentColor;
+    }
+
+    /* Status Selector Badge */
+    .status-select {
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 0.74rem;
+      font-weight: 600;
+      border: 1px solid var(--card-border);
+      background-color: #0b0f19;
+      color: #fff;
+      cursor: pointer;
+    }
+
+    .status-select.not_started { color: #94a3b8; border-color: #475569; }
+    .status-select.in_progress { color: #f59e0b; border-color: #d97706; background: rgba(245, 158, 11, 0.1); }
+    .status-select.notes_done { color: #38bdf8; border-color: #0284c7; background: rgba(56, 189, 248, 0.1); }
+    .status-select.mcqs_done { color: #a855f7; border-color: #7e22ce; background: rgba(168, 85, 247, 0.1); }
+    .status-select.mastered { color: #10b981; border-color: #059669; background: rgba(16, 185, 129, 0.1); }
+
+    /* Revision Counter */
+    .rev-counter {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      background: #0b0f19;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 2px 5px;
+    }
+
+    .rev-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      margin-right: 2px;
+    }
+
+    .rev-val {
+      font-size: 0.78rem;
+      font-weight: 700;
+      min-width: 14px;
+      text-align: center;
+      color: #818cf8;
+    }
+
+    .rev-btn {
+      background: none;
+      border: none;
+      color: #94a3b8;
+      cursor: pointer;
+      font-size: 0.82rem;
+      width: 16px;
+      height: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 3px;
+    }
+
+    .rev-btn:hover {
+      color: #fff;
+      background: #1e293b;
+    }
+
+    /* Star / Confidence Rating */
+    .confidence-stars {
+      display: flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .star-btn {
+      background: none;
+      border: none;
+      font-size: 0.9rem;
+      color: #3b4c68;
+      cursor: pointer;
+      padding: 0 1px;
+      transition: color 0.15s ease;
+    }
+
+    .star-btn.active {
+      color: #fbbf24;
+    }
+
+    /* Topic Notes Button & Drawer */
+    .notes-toggle-btn {
+      background: none;
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      padding: 4px 8px;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .notes-toggle-btn.has-notes {
+      border-color: #38bdf8;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.1);
+    }
+
+    .topic-notes-drawer {
+      margin-top: 8px;
+      padding: 8px 12px;
+      background: #0b0f19;
+      border-radius: 8px;
+      border: 1px solid #263554;
+      display: none;
+    }
+
+    .topic-notes-drawer.open {
+      display: block;
+    }
+
+    .topic-notes-drawer textarea {
+      width: 100%;
+      background: transparent;
+      border: none;
+      color: #e2e8f0;
+      font-size: 0.85rem;
+      resize: vertical;
+      min-height: 55px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    /* Modal dialog */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: #151e32;
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      width: 100%;
+      max-width: 520px;
+      padding: 24px;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+    }
+
+    .modal-card h3 {
+      font-size: 1.15rem;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    .modal-card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    .modal-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    /* Cloud Sync & Auth Elements */
+    .sync-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      cursor: pointer;
+      user-select: none;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+    }
+    .sync-badge.synced {
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      border-color: rgba(16, 185, 129, 0.35);
+    }
+    .sync-badge.syncing {
+      background: rgba(99, 102, 241, 0.18);
+      color: #a5b4fc;
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+    .sync-badge.local {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border-color: rgba(245, 158, 11, 0.35);
+    }
+    .sync-badge .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .sync-badge.synced .dot { background: #10b981; box-shadow: 0 0 8px #10b981; }
+    .sync-badge.syncing .dot {
+      background: #818cf8;
+      box-shadow: 0 0 8px #818cf8;
+      animation: pulseSync 1s infinite alternate;
+    }
+    .sync-badge.local .dot { background: #f59e0b; box-shadow: 0 0 8px #f59e0b; }
+
+    @keyframes pulseSync {
+      0% { transform: scale(0.8); opacity: 0.6; }
+      100% { transform: scale(1.3); opacity: 1; }
+    }
+
+    .user-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      font-size: 0.8rem;
+      color: #e2e8f0;
+    }
+    .user-avatar {
+      width: 22px;
+      height: 22px;
+      background: #4f46e5;
+      color: #fff;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+
+    /* Auth Modal Tabs & Form */
+    .auth-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 18px;
+      gap: 10px;
+    }
+    .auth-tab-btn {
+      background: none;
+      border: none;
+      padding: 10px 14px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      cursor: pointer;
+      position: relative;
+      transition: color 0.2s;
+    }
+    .auth-tab-btn.active {
+      color: #fff;
+    }
+    .auth-tab-btn.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: #6366f1;
+      border-radius: 2px;
+    }
+    .form-group {
+      margin-bottom: 14px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #cbd5e1;
+      margin-bottom: 5px;
+    }
+    .form-control {
+      width: 100%;
+      background-color: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: #fff;
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-control:focus {
+      border-color: #6366f1;
+    }
+    .auth-alert {
+      padding: 10px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      margin-bottom: 14px;
+      display: none;
+    }
+    .auth-alert.error {
+      background: rgba(239, 68, 68, 0.15);
+      border: 1px solid rgba(239, 68, 68, 0.4);
+      color: #fca5a5;
+      display: block;
+    }
+    .auth-alert.success {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #6ee7b7;
+      display: block;
+    }
+    .auth-info-banner {
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 0.78rem;
+      color: #c7d2fe;
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+
+    /* Toast Notification */
+    .toast-container {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 2000;
+      pointer-events: none;
+    }
+    .toast {
+      background: #1e293b;
+      border: 1px solid #3b4252;
+      color: #fff;
+      padding: 12px 18px;
+      border-radius: 10px;
+      font-size: 0.85rem;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      pointer-events: auto;
+    }
+    .toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .toast.success { border-color: #10b981; }
+    .toast.error { border-color: #ef4444; }
+
+    /* Print styles */
+    @media print {
+      header, .toolbar, .study-widget, .unit-actions, .topic-controls, .btn, .unit-yt-btn, .yt-resource-btn, .strategy-card {
+        display: none !important;
+      }
+      body {
+        background: #fff !important;
+        color: #000 !important;
+      }
+      .card-bg, .unit-card, .progress-card, .stat-card {
+        background: #fff !important;
+        border: 1px solid #ccc !important;
+        color: #000 !important;
+      }
+      .topic-name {
+        color: #000 !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1><span>🎯</span> बिहार STET 2026 : पेपर 2 मनोविज्ञान (Psychology) ट्रैकर</h1>
+        <p>उच्च माध्यमिक शिक्षक (कक्षा 11वीं - 12वीं) | 150 प्रश्न • 150 अंक • वेटेज व प्राथमिकता ट्रैकर</p>
+      </div>
+      <div class="header-actions">
+        <!-- Cloud Sync Status Badge -->
+        <div id="syncStatusBadge" class="sync-badge local" onclick="openAuthModal()" title="क्लाउड सिंक स्थिति (क्लिक करके लॉगिन या सिंक करें)">
+          <span class="dot"></span>
+          <span id="syncStatusText">लोकल मोड</span>
+        </div>
+
+        <!-- Logged in Student Chip -->
+        <div id="userChipContainer" style="display:none;"></div>
+
+        <!-- Auth / Cloud Action Button -->
+        <button class="btn btn-primary" id="authActionBtn" onclick="openAuthModal()">
+          <span>👤</span> लॉगिन / क्लाउड सिंक
+        </button>
+
+        <!-- Manual Sync Button -->
+        <button class="btn btn-secondary" id="manualSyncBtn" onclick="triggerManualSync()" style="display:none;" title="तुरंत क्लाउड पर सेव करें">
+          <span>☁️</span> सिंक करें
+        </button>
+
+        <button class="btn btn-secondary" onclick="exportProgressJSON()">
+          <span>💾</span> बैकअप / Export
+        </button>
+        <button class="btn btn-secondary" onclick="triggerImportJSON()">
+          <span>📂</span> Import
+        </button>
+        <input type="file" id="importFileInput" accept=".json" style="display:none" onchange="handleImportFile(event)">
+        <button class="btn btn-secondary" onclick="window.print()">
+          <span>🖨️</span> प्रिंट / PDF
+        </button>
+        <button class="btn btn-danger" onclick="confirmResetAll()">
+          <span>🔄</span> रीसेट
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    
+    <!-- Exam Pattern Overview -->
+    <div class="exam-stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(99, 102, 241, 0.2); color: #818cf8;">🧠</div>
+        <div class="stat-info">
+          <h4>भाग 1: मनोविज्ञान</h4>
+          <p>100 अंक <span style="font-size:0.75rem; font-weight:normal; color:#94a3b8;">(15 यूनिट्स)</span></p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(13, 148, 136, 0.2); color: #2dd4bf;">🏫</div>
+        <div class="stat-info">
+          <h4>भाग 2 (A): शिक्षण कला</h4>
+          <p>30 अंक <span style="font-size:0.75rem; font-weight:normal; color:#94a3b8;">(6 विषय)</span></p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(234, 88, 12, 0.2); color: #fb923c;">⚡</div>
+        <div class="stat-info">
+          <h4>भाग 2 (B): अन्य कौशल</h4>
+          <p>20 अंक <span style="font-size:0.75rem; font-weight:normal; color:#94a3b8;">(4 विषय • 5-5 M)</span></p>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon" style="background: rgba(16, 185, 129, 0.2); color: #34d399;">⏱️</div>
+        <div class="stat-info">
+          <h4>परीक्षा नियम</h4>
+          <p>150 प्रश्न • निगेटिव मार्किंग नहीं</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Past Years Analysis & Strategy Guide (Collapsible) -->
+    <div class="strategy-card">
+      <div class="strategy-header" onclick="toggleStrategyBody()">
+        <h3><span>📈</span> पिछले वर्षों के प्रश्नपत्रों (PYQ Trend) का वेटेज व प्राथमिकता विश्लेषण</h3>
+        <span id="stratToggleIcon" style="color:#818cf8; font-weight:700;">▲ बंद करें</span>
+      </div>
+      <div class="strategy-body" id="strategyBody">
+        <div class="strat-box">
+          <div class="strat-box-title" style="color: #f87171;">🔥 टियर 1: कोर हाई-यील्ड यूनिट्स (50-60+ अंक)</div>
+          <p>मनोविज्ञान में सबसे ज्यादा प्रश्न <strong>अधिगम (Learning - 8-10M)</strong>, <strong>व्यक्तित्व (Personality - 8-10M)</strong>, <strong>बुद्धिमत्ता (Intelligence - 8-10M)</strong>, <strong>सांख्यिकी (Statistics - 8-10M)</strong>, और <strong>नैदानिक मनोविज्ञान (Clinical - 7-9M)</strong> से पूछे जाते हैं। इन्हें पहले पूरा करें।</p>
+        </div>
+
+        <div class="strat-box">
+          <div class="strat-box-title" style="color: #2dd4bf;">🏫 शिक्षण कला (Art of Teaching - 30 अंक)</div>
+          <p>शिक्षण कला के 6 विषय हैं और प्रत्येक से औसतन <strong>5-5 अंक</strong> के प्रश्न आते हैं। बाल-केंद्रित शिक्षण, CCE मूल्यांकन, पाठ योजना और शिक्षण विधियां सबसे सरल और अधिकतम स्कोरिंग क्षेत्र हैं।</p>
+        </div>
+
+        <div class="strat-box">
+          <div class="strat-box-title" style="color: #fcd34d;">⚡ टियर 2: स्कोरिंग सपोर्ट यूनिट्स (30-40 अंक)</div>
+          <p>अनुसंधान पद्धति (Hypothesis/Sampling), शैक्षिक मनोविज्ञान, स्मृति-विस्मृति, प्रेरणा व संवेग, और पेपर 2B के <strong>रीजनिंग व बेसिक मैथ्स (10 अंक)</strong> बहुत निर्णायक होते हैं।</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Overall Live Progress Card -->
+    <div class="progress-card">
+      <div class="progress-header">
+        <h2><span>📊</span> कुल सिलेबस तैयारी प्रगति (Live Progress & Weightage)</h2>
+        <div class="progress-percentage" id="overallPercentage">0%</div>
+      </div>
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="overallProgressBar"></div>
+      </div>
+      <div class="progress-substats">
+        <div class="substat-item">
+          <span class="substat-label">पूर्ण विषय (Completed Topics)</span>
+          <span class="substat-val" id="completedCount" style="color: #10b981;">0 / 94</span>
+        </div>
+        <div class="substat-item">
+          <span class="substat-label">प्रगति पर (In Progress)</span>
+          <span class="substat-val" id="inProgressCount" style="color: #f59e0b;">0</span>
+        </div>
+        <div class="substat-item">
+          <span class="substat-label">हाई-प्रायोरिटी पूर्ण (High Yield Done)</span>
+          <span class="substat-val" id="highPriorityProgress" style="color: #ef4444;">0 / 48</span>
+        </div>
+        <div class="substat-item">
+          <span class="substat-label">अनुमानित अंक कवरेज (Weightage Covered)</span>
+          <span class="substat-val" id="weightedMarksCovered" style="color: #818cf8;">0 / 150 अंक</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Study Pomodoro & Timer Widget -->
+    <div class="study-widget">
+      <div class="timer-display">
+        <div class="timer-clock" id="timerClock">25:00</div>
+        <div>
+          <div class="timer-mode" id="timerMode">Study Focus Session</div>
+          <span style="font-size:0.75rem; color:#94a3b8;">पोमोडोरो अध्ययन टाइमर</span>
+        </div>
+      </div>
+      <div class="timer-buttons">
+        <button class="btn btn-primary" id="timerStartBtn" onclick="toggleTimer()">▶ शुरू करें</button>
+        <button class="btn btn-secondary" onclick="resetTimer(25)">25m Focus</button>
+        <button class="btn btn-secondary" onclick="resetTimer(50)">50m Deep Work</button>
+        <button class="btn btn-secondary" onclick="resetTimer(5)">5m Break</button>
+        <button class="btn btn-secondary" onclick="resetTimer(0)">Stopwatch</button>
+      </div>
+    </div>
+
+    <!-- Toolbar: Search, Filters & Priority Sorting -->
+    <div class="toolbar">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="searchInput" placeholder="टॉपिक या कीवर्ड खोजें (उदा. Memory, कंडीशनिंग, CCE, Piaget, Statistics)..." oninput="filterTopics()">
+      </div>
+      <div class="filters-group">
+        <select class="filter-select" id="sectionFilter" onchange="filterTopics()">
+          <option value="all">सभी भाग (All Sections)</option>
+          <option value="part1">भाग 1: मनोविज्ञान (100 अंक)</option>
+          <option value="part2_a">भाग 2 (A): शिक्षण कला (30 अंक)</option>
+          <option value="part2_b">भाग 2 (B): अन्य कौशल (20 अंक)</option>
+        </select>
+
+        <select class="filter-select" id="priorityFilter" onchange="filterTopics()">
+          <option value="all">सभी प्राथमिकताएं (All Priorities)</option>
+          <option value="high">🔥 केवल High Priority (Core / High Yield)</option>
+          <option value="medium">⚡ केवल Medium Priority</option>
+          <option value="standard">📌 केवल Standard Priority</option>
+        </select>
+
+        <select class="filter-select" id="statusFilter" onchange="filterTopics()">
+          <option value="all">सभी स्टेटस (All Status)</option>
+          <option value="completed">केवल पूर्ण (Completed)</option>
+          <option value="in_progress">प्रगति पर (In Progress / Reading)</option>
+          <option value="not_started">शुरू नहीं किया (Not Started)</option>
+          <option value="has_notes">जिनमें नोट्स हैं (Has Notes)</option>
+          <option value="need_revision">रिवीजन आवश्यक (Revision = 0)</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Syllabus Sections Dynamic Rendering Target -->
+    <div id="syllabusContent"></div>
+
+  </div>
+
+  <!-- Auth & Cloud Sync Modal -->
+  <div class="modal-overlay" id="authModal">
+    <div class="modal-card">
+      <div class="auth-tabs">
+        <button class="auth-tab-btn active" id="tabLoginBtn" onclick="switchAuthTab('login')">लॉगिन (Login)</button>
+        <button class="auth-tab-btn" id="tabRegisterBtn" onclick="switchAuthTab('register')">नया खाता (Sign Up)</button>
+      </div>
+
+      <div class="auth-info-banner">
+        ☁️ <strong>क्लाउड सिंक का लाभ:</strong> आपकी अध्ययन प्रगति, नोट्स, PYQ स्टार्स और रिवीजन मोबाइल, लैपटॉप और टैबलेट पर अपने आप सुरक्षित और सिंक रहेंगे।
+      </div>
+
+      <div id="authAlert" class="auth-alert"></div>
+
+      <!-- Login Form -->
+      <form id="loginForm" onsubmit="submitLoginForm(event)">
+        <div class="form-group">
+          <label for="loginUsername">यूज़रनेम या ईमेल (Username / Email)</label>
+          <input type="text" id="loginUsername" class="form-control" placeholder="उदा. stet_student या email@example.com" required autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label for="loginPassword">पासवर्ड (Password)</label>
+          <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required autocomplete="current-password">
+        </div>
+        <div class="modal-actions" style="margin-top: 20px;">
+          <button type="button" class="btn btn-secondary" onclick="closeAuthModal()">रद्द करें (Cancel)</button>
+          <button type="submit" class="btn btn-primary" id="loginSubmitBtn">✓ लॉगिन करें</button>
+        </div>
+      </form>
+
+      <!-- Register Form -->
+      <form id="registerForm" style="display:none;" onsubmit="submitRegisterForm(event)">
+        <div class="form-group">
+          <label for="regName">आपका नाम (Full Name)</label>
+          <input type="text" id="regName" class="form-control" placeholder="उदा. रवि कुमार">
+        </div>
+        <div class="form-group">
+          <label for="regUsername">यूज़रनेम / ईमेल (Username or Email)</label>
+          <input type="text" id="regUsername" class="form-control" placeholder="उदा. stet_aspirant" required minlength="3" autocomplete="username">
+        </div>
+        <div class="form-group">
+          <label for="regPassword">पासवर्ड बनाएं (Create Password)</label>
+          <input type="password" id="regPassword" class="form-control" placeholder="न्यूनतम 4 अक्षर" required minlength="4" autocomplete="new-password">
+        </div>
+        <div class="modal-actions" style="margin-top: 20px;">
+          <button type="button" class="btn btn-secondary" onclick="closeAuthModal()">रद्द करें</button>
+          <button type="submit" class="btn btn-primary" id="regSubmitBtn">✓ खाता बनाएं व सिंक शुरू करें</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toastContainer"></div>
+
+  <!-- Reset Confirmation Modal -->
+  <div class="modal-overlay" id="resetModal">
+    <div class="modal-card">
+      <h3>⚠️ क्या आप प्रगति रीसेट करना चाहते हैं?</h3>
+      <p>यह क्रिया आपके सभी मार्क किए गए टॉपिक्स, नोट्स और रिवीजन काउंटर को मिटा देगी। यदि आवश्यक हो तो पहले 'बैकअप / Export' कर लें।</p>
+      <div class="modal-actions">
+        <button class="btn btn-secondary" onclick="closeResetModal()">रद्द करें</button>
+        <button class="btn btn-danger" onclick="executeResetAll()">हाँ, सब रीसेट करें</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Embedded Complete Syllabus Data with Priorities and PYQ Weightages
+    const SYLLABUS = {"exam_info": {"title": "बिहार एसटीईटी (Bihar STET) 2026 - पेपर 2 (Senior Secondary / कक्षा 11वीं-12वीं)", "subject": "मनोविज्ञान (Psychology)", "total_marks": 150, "total_questions": 150, "duration_minutes": 150, "negative_marking": "नहीं (No Negative Marking)"}, "sections": [{"id": "part1", "name": "भाग 1: मनोविज्ञान (Psychology)", "marks": 100, "badge_color": "#4f46e5", "units": [{"id": "psy_u1", "unit_num": "यूनिट 1", "title": "मनोविज्ञान का परिचय (Introduction to Psychology)", "topics": ["मनोविज्ञान की परिभाषा और प्रकृति", "मनोविज्ञान के लक्ष्य (Goals of Psychology)", "आधुनिक दृष्टिकोण और संप्रदाय (Modern Perspectives & Schools of Thought)"], "priority": "standard", "priority_label": "Standard", "est_marks": "4-6 अंक", "pyq_focus": "आधुनिक संप्रदाय, व्यवहारवाद, प्रकार्यवाद"}, {"id": "psy_u2", "unit_num": "यूनिट 2", "title": "जैविक आधार (Biological Basis of Behavior)", "topics": ["तंत्रिका तंत्र की संरचना और कार्य (Nervous System)", "मस्तिष्क की संरचना और प्रमुख कार्य (Brain Structure & Functions)", "अंतःस्रावी ग्रंथियां और हार्मोनल प्रभाव (Endocrine Glands)"], "priority": "medium", "priority_label": "Medium", "est_marks": "6-7 अंक", "pyq_focus": "मस्तिष्क के लोब्स (Frontal, Parietal), न्यूरॉन, पिट्यूटरी ग्रंथि"}, {"id": "psy_u3", "unit_num": "यूनिट 3", "title": "संवेदी और प्रत्यक्ष प्रक्रियाएं (Sensory and Perceptual Processes)", "topics": ["ध्यान (Attention) के प्रकार और निर्धारक", "धारणा (Perception) और इसके नियम (Gestalt Principles)", "संवेदनशीलता और सीमा (Sensory Thresholds)", "भ्रम और विभ्रम (Illusion and Hallucination)"], "priority": "medium", "priority_label": "Medium", "est_marks": "6-7 अंक", "pyq_focus": "गेस्टाल्ट सिद्धांत, भ्रम (Muller-Lyer), अवधान के प्रकार"}, {"id": "psy_u4", "unit_num": "यूनिट 4", "title": "अधिगम या सीखना (Learning)", "topics": ["क्लासिकल कंडीशनिंग (Pavlov's Classical Conditioning)", "ऑपरेंट कंडीशनिंग (Skinner's Operant Conditioning)", "संज्ञानात्मक शिक्षा (Cognitive Learning & Bandura's Social Learning)", "अधिगम के अन्य महत्वपूर्ण सिद्धांत और स्थानांतरण"], "priority": "high", "priority_label": "High Yield", "est_marks": "8-10 अंक", "pyq_focus": "पावलोव (CS, CR), स्किनर (Reinforcement Schedules), बंडूरा"}, {"id": "psy_u5", "unit_num": "यूनिट 5", "title": "स्मृति और विस्मृति (Memory and Forgetting)", "topics": ["स्मृति के प्रकार (Sensory, STM, LTM)", "सूचना प्रसंस्करण मॉडल (Atkinson-Shiffrin Information Processing Model)", "विस्मृति के कारण और सिद्धांत (Ebbinghaus, Interference, Decay theories)"], "priority": "high", "priority_label": "High Yield", "est_marks": "7-9 अंक", "pyq_focus": "एटकिंसन-शिफ्रिन मॉडल, एबिंगहॉस कर्व, व्यतिकरण (Interference)"}, {"id": "psy_u6", "unit_num": "यूनिट 6", "title": "विचार और भाषा (Thinking and Language)", "topics": ["विचार प्रक्रिया की प्रकृति और संप्रत्यय निर्माण (Nature of Thinking & Concepts)", "समस्या समाधान की विधियां और बाधाएं (Problem Solving)", "निर्णय लेना और तर्क (Decision Making & Reasoning)", "भाषा का विकास और विचार से संबंध (Language Development)"], "priority": "medium", "priority_label": "Medium", "est_marks": "5-7 अंक", "pyq_focus": "एल्गोरिदम बनाम ह्यूरिस्टिक, चॉम्स्की भाषा विकास"}, {"id": "psy_u7", "unit_num": "यूनिट 7", "title": "प्रेरणा और संवेग (Motivation and Emotion)", "topics": ["प्रेरणा के प्रकार: जैविक और सामाजिक (Biological & Social Motives)", "प्रेरणा के सिद्धांत (Maslow's Hierarchy, Drive Reduction, Need theories)", "संवेग की प्रकृति और शारीरिक आधार", "संवेग के सिद्धांत (James-Lange, Cannon-Bard, Schachter-Singer)"], "priority": "medium", "priority_label": "Medium", "est_marks": "6-7 अंक", "pyq_focus": "मास्लो आवश्यकता पदानुक्रम, जेम्स-लैंग व कैनन-बार्ड सिद्धांत"}, {"id": "psy_u8", "unit_num": "यूनिट 8", "title": "बुद्धिमत्ता (Intelligence)", "topics": ["बुद्धि की प्रकृति और परिभाषा", "स्पियरमैन, थर्स्टन और गिलफोर्ड के सिद्धांत (Spearman, Thurstone, Guilford)", "गार्डनर का बहु-बुद्धि सिद्धांत (Howard Gardner's Multiple Intelligences)", "बुद्धि का मापन (IQ Tests, Verbal & Non-verbal tests)"], "priority": "high", "priority_label": "High Yield", "est_marks": "8-10 अंक", "pyq_focus": "गार्डनर 8 बुद्धि, थर्स्टन PMA, स्टैनफोर्ड-बिने, वेक्सलर IQ"}, {"id": "psy_u9", "unit_num": "यूनिट 9", "title": "व्यक्तित्व (Personality)", "topics": ["व्यक्तित्व के प्रकार और गुण सिद्धांत (Trait & Type Theories - Allport, Cattell, Big Five)", "फ्रायड का मनोविश्लेषणवाद (Freud's Psychoanalytic Theory - Id, Ego, Superego)", "व्यक्तित्व का मूल्यांकन: प्रोजेक्टिव टेस्ट (TAT, Rorschach)", "व्यक्तित्व का मूल्यांकन: नॉन-प्रोजेक्टिव टेस्ट (MMPI, 16PF, Questionnaires)"], "priority": "high", "priority_label": "High Yield", "est_marks": "8-10 अंक", "pyq_focus": "फ्रायड (Id, Ego, Superego), बिग फाइव, रोर्शा व TAT टेस्ट"}, {"id": "psy_u10", "unit_num": "यूनिट 10", "title": "सामाजिक मनोविज्ञान (Social Psychology)", "topics": ["सामाजिक दृष्टिकोण का निर्माण और परिवर्तन (Attitude Formation & Change)", "पूर्वाग्रह और रूढ़िवादिता (Prejudice and Stereotypes)", "सामाजिक प्रभाव: अनुरूपता, आज्ञाकारिता, अनुपालन (Conformity, Obedience, Compliance)", "समूह गतिशीलता और नेतृत्व (Group Dynamics & Leadership)"], "priority": "medium", "priority_label": "Medium", "est_marks": "5-7 अंक", "pyq_focus": "एश का अनुरूपता प्रयोग, मिल्ग्राम, पूर्वाग्रह और रूढ़िवादिता"}, {"id": "psy_u11", "unit_num": "यूनिट 11", "title": "संगठनात्मक मनोविज्ञान (Industrial/Organizational Psychology)", "topics": ["कार्य संतुष्टि और कार्य प्रदर्शन (Job Satisfaction & Performance)", "कार्य प्रेरणा के सिद्धांत (Work Motivation)", "कार्यस्थल पर तनाव और प्रबंधन (Workplace Stress & Coping)", "संगठन में नेतृत्व की भूमिका और संगठनात्मक व्यवहार"], "priority": "standard", "priority_label": "Standard", "est_marks": "4-6 अंक", "pyq_focus": "हर्ज़बर्ग द्वि-कारक सिद्धांत, जॉब सेटिस्फैक्शन, बर्नआउट"}, {"id": "psy_u12", "unit_num": "यूनिट 12", "title": "नैदानिक मनोविज्ञान (Clinical Psychology)", "topics": ["मानसिक विकार: चिंता विकार (Anxiety Disorders, Phobias)", "मूड विकार: डिप्रेशन और बाइपोलर (Depression & Mood Disorders)", "सिज़ोफ्रेनिया और अन्य गंभीर विकार (Schizophrenia)", "मनोवैज्ञानिक परीक्षण (Clinical Diagnostic & Projective Tests)", "चिकित्सा पद्धतियां: क्लाइंट-सेंटर्ड थेरेपी, बिहेवियर थेरेपी (CBT, Rogers)"], "priority": "high", "priority_label": "High Yield", "est_marks": "7-9 अंक", "pyq_focus": "DSM-5 विकार, डिप्रेशन, सिज़ोफ्रेनिया, रोजर्स क्लाइंट-सेंटर्ड थेरेपी"}, {"id": "psy_u13", "unit_num": "यूनिट 13", "title": "शैक्षिक मनोविज्ञान (Educational Psychology)", "topics": ["कक्षा का वातावरण और सीखने की प्रक्रिया", "बुद्धि, योग्यता और उपलब्धि का मापन (Measurement of Intelligence, Aptitude & Achievement)", "विशिष्ट बच्चे: प्रतिभाशाली, मंदबुद्धि, दिव्यांग (Exceptional Children)", "प्रभावी शिक्षण विधियां और मनोवैज्ञानिक नीतियां"], "priority": "medium", "priority_label": "Medium", "est_marks": "6-8 अंक", "pyq_focus": "समावेशी शिक्षा, प्रतिभाशाली व मंदबुद्धि बच्चे, CCE व उपलब्धि परीक्षण"}, {"id": "psy_u14", "unit_num": "यूनिट 14", "title": "अनुसंधान पद्धति (Research Methodology)", "topics": ["अनुसंधान की समस्याएं और उद्देश्य (Research Problem Formulation)", "परिकल्पना निर्माण और प्रकार (Hypothesis Formulation)", "सैंपलिंग तकनीक: प्रोबेबिलिटी व नॉन-प्रोबेबिलिटी (Sampling Techniques)", "डेटा संग्रह की विधियां: अवलोकन, साक्षात्कार, प्रश्नावली", "प्रयोगात्मक बनाम गैर-प्रयोगात्मक अनुसंधान डिजाइन (Experimental vs Non-experimental)"], "priority": "high", "priority_label": "High Yield", "est_marks": "7-9 अंक", "pyq_focus": "टाइप I और II त्रुटि, रैंडम सैंपलिंग, प्रयोगात्मक चर (IV/DV)"}, {"id": "psy_u15", "unit_num": "यूनिट 15", "title": "सांख्यिकी (Statistics in Psychology)", "topics": ["केंद्रीय प्रवृत्ति के माप (Mean, Median, Mode)", "मानक विचलन और प्रसरण (Standard Deviation & Variance)", "सहसंबंध गुणांक (Correlation: Pearson & Spearman)", "टी-टेस्ट और परिकल्पना परीक्षण (T-Test & Hypothesis Testing)", "सामान्य संभाव्यता वक्र और विशेषताएं (Normal Probability Curve - NPC)"], "priority": "high", "priority_label": "High Yield", "est_marks": "8-10 अंक", "pyq_focus": "मीन/मीडियन/मोड गुण, सामान्य वितरण वक्र (NPC विशेषताएं), SD, कोरिलेशन"}]}, {"id": "part2_a", "name": "भाग 2 (A): शिक्षण की कला (Art of Teaching)", "marks": 30, "badge_color": "#0d9488", "units": [{"id": "aot_u1", "unit_num": "टॉपिक 1", "title": "शिक्षण और सीखना (Teaching & Learning)", "topics": ["शिक्षण का अर्थ, परिभाषा और स्वरूप", "शिक्षण-अधिगम प्रक्रिया (Teaching-Learning Process)", "शिक्षण की विशेषताएं और मुख्य उद्देश्य"], "priority": "high", "priority_label": "High Yield", "est_marks": "5 अंक", "pyq_focus": "शिक्षण-अधिगम अंतर संबंध, ब्लूम टैक्सोनॉमी"}, {"id": "aot_u2", "unit_num": "टॉपिक 2", "title": "शिक्षण के सिद्धांत और सूत्र (Principles & Maxims of Teaching)", "topics": ["बाल-केंद्रित शिक्षण (Child-Centered Teaching)", "शिक्षक-केंद्रित शिक्षण (Teacher-Centered Teaching)", "शिक्षण के सामान्य सिद्धांत और मनोवैज्ञानिक सूत्र (Maxims)"], "priority": "high", "priority_label": "High Yield", "est_marks": "5 अंक", "pyq_focus": "बाल-केंद्रित शिक्षा, ज्ञात से अज्ञात सूत्र, सुगमकर्ता शिक्षक"}, {"id": "aot_u3", "unit_num": "टॉपिक 3", "title": "शिक्षण विधियां (Teaching Methods)", "topics": ["व्याख्यान विधि (Lecture Method)", "प्रोजेक्ट विधि (Project Method)", "समस्या समाधान विधि (Problem Solving Method)", "खेल विधि, खोज विधि और चर्चा विधि (Play-way, Heuristic, Discussion Methods)"], "priority": "high", "priority_label": "High Yield", "est_marks": "5 अंक", "pyq_focus": "प्रोजेक्ट विधि (Kilpatrick), समस्या समाधान, ह्यूरिस्टिक विधि"}, {"id": "aot_u4", "unit_num": "टॉपिक 4", "title": "पाठ योजना (Lesson Plan)", "topics": ["पाठ योजना के प्रकार (Daily, Unit, Annual Plans)", "पाठ योजना का महत्व और आवश्यकता", "हरबार्टियन पाठ योजना प्रारूप (Herbartian 5-Step Format)"], "priority": "high", "priority_label": "High Yield", "est_marks": "5 अंक", "pyq_focus": "हरबार्ट के 5 सोपान, इकाई योजना बनाम दैनिक पाठ योजना"}, {"id": "aot_u5", "unit_num": "टॉपिक 5", "title": "कक्षा प्रबंधन (Classroom Management)", "topics": ["छात्रों को प्रेरित करने की रणनीतियां (Student Motivation)", "कक्षा अनुशासन और सकारात्मक व्यवहार समर्थन", "कक्षा का भौतिक व मनोवैज्ञानिक वातावरण"], "priority": "medium", "priority_label": "Medium", "est_marks": "5 अंक", "pyq_focus": "सकारात्मक सुदृढ़ीकरण, कक्षा अनुशासन, प्रेरणा तकनीक"}, {"id": "aot_u6", "unit_num": "टॉपिक 6", "title": "मूल्यांकन और परीक्षा (Evaluation & Assessment)", "topics": ["सतत और व्यापक मूल्यांकन (Continuous and Comprehensive Evaluation - CCE)", "रचनात्मक बनाम योगात्मक मूल्यांकन (Formative vs Summative Assessment)", "नैदानिक और उपचारात्मक शिक्षण (Diagnostic & Remedial Teaching)"], "priority": "high", "priority_label": "High Yield", "est_marks": "5 अंक", "pyq_focus": "CCE, रचनात्मक (Formative) बनाम योगात्मक (Summative), उपचारात्मक शिक्षण"}]}, {"id": "part2_b", "name": "भाग 2 (B): अन्य कौशल (Other Skills)", "marks": 20, "badge_color": "#ea580c", "units": [{"id": "oth_u1", "unit_num": "क्षेत्र 1", "title": "सामान्य ज्ञान (General Knowledge)", "topics": ["राष्ट्रीय समसामयिक घटनाएं (National Current Affairs)", "अंतर्राष्ट्रीय समसामयिक घटनाएं (International Current Affairs)", "बिहार का सामान्य ज्ञान (Bihar History, Geography, Polity, Culture)"], "priority": "standard", "priority_label": "Standard", "est_marks": "5 अंक", "pyq_focus": "बिहार विशेष (इतिहास, भूगोल, बजट) और राष्ट्रीय करंट अफेयर्स"}, {"id": "oth_u2", "unit_num": "क्षेत्र 2", "title": "पर्यावरण विज्ञान (Environmental Science)", "topics": ["पर्यावरण संरक्षण के उपाय और नीतियां", "पारिस्थितिकी तंत्र की संरचना और कार्य (Ecosystem)", "प्रदूषण के प्रकार, प्रभाव और नियंत्रण (Pollution Control)", "जलवायु परिवर्तन और जैव विविधता (Climate Change & Biodiversity)"], "priority": "standard", "priority_label": "Standard", "est_marks": "5 अंक", "pyq_focus": "पारिस्थितिकी तंत्र, ग्रीनहाउस प्रभाव, जैव विविधता संरक्षण"}, {"id": "oth_u3", "unit_num": "क्षेत्र 3", "title": "गणितीय तर्क (Mathematical Reasoning)", "topics": ["बुनियादी अंकगणित: प्रतिशत, लाभ-हानि, औसत, अनुपात", "संख्या श्रृंखला और पैटर्न (Number Series)", "कोडिंग और डिकोडिंग (Coding-Decoding)"], "priority": "medium", "priority_label": "Medium", "est_marks": "5 अंक", "pyq_focus": "संख्या श्रृंखला, प्रतिशत, लाभ-हानि, कोडिंग-डिकोडिंग"}, {"id": "oth_u4", "unit_num": "क्षेत्र 4", "title": "तार्किक क्षमता (Logical Reasoning)", "topics": ["वेन आरेख (Venn Diagrams)", "रक्त संबंध (Blood Relations)", "दिशा एवं दूरी ज्ञान (Direction & Distance Sense)", "सादृश्यता और वर्गीकरण (Analogy & Classification)", "कथन और निष्कर्ष (Statements & Conclusions)"], "priority": "medium", "priority_label": "Medium", "est_marks": "5 अंक", "pyq_focus": "रक्त संबंध, दिशा ज्ञान, वेन आरेख, सादृश्यता"}]}]};
+
+    // User State stored in LocalStorage
+    const STORAGE_KEY = 'bihar_stet_2026_psychology_tracker_v2';
+    const AUTH_TOKEN_KEY = 'stet_auth_token';
+    const USER_INFO_KEY = 'stet_user_info';
+    let userState = {};
+    let authToken = localStorage.getItem(AUTH_TOKEN_KEY) || null;
+    let currentUser = null;
+    try {
+      currentUser = JSON.parse(localStorage.getItem(USER_INFO_KEY) || 'null');
+    } catch (e) {
+      currentUser = null;
+    }
+    let syncDebounceTimer = null;
+    let isSyncing = false;
+    let lastSyncedAt = null;
+
+    // Helper to generate optimized YouTube search URL
+    function getYoutubeSearchUrl(secId, unitTitle, topicText) {
+      let queryPrefix = "";
+      if (secId === "part1") {
+        queryPrefix = "Bihar STET Psychology Paper 2 ";
+      } else if (secId === "part2_a") {
+        queryPrefix = "Bihar STET Art of Teaching ";
+      } else {
+        queryPrefix = "Bihar STET Paper 2 ";
+      }
+      const fullPrompt = `${queryPrefix} ${topicText || unitTitle}`;
+      return `https://www.youtube.com/results?search_query=${encodeURIComponent(fullPrompt)}`;
+    }
+
+    // Toggle Strategy Card
+    function toggleStrategyBody() {
+      const b = document.getElementById('strategyBody');
+      const icon = document.getElementById('stratToggleIcon');
+      if (b.style.display === 'none') {
+        b.style.display = 'grid';
+        icon.innerText = '▲ बंद करें';
+      } else {
+        b.style.display = 'none';
+        icon.innerText = '▼ विस्तार देखें';
+      }
+    }
+
+    // Initialize State
+    function loadState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('bihar_stet_2026_psychology_tracker_v1');
+        if (raw) {
+          userState = JSON.parse(raw);
+        }
+      } catch (e) {
+        console.error("Failed to load local storage state:", e);
+        userState = {};
+      }
+    }
+
+    function saveState(skipCloud = false) {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(userState));
+        updateProgressSummary();
+        if (!skipCloud) {
+          queueCloudSync();
+        }
+      } catch (e) {
+        console.error("Failed to save state to local storage:", e);
+      }
+    }
+
+    function getTopicState(id) {
+      if (!userState[id]) {
+        userState[id] = {
+          status: 'not_started', // not_started | in_progress | notes_done | mcqs_done | mastered
+          completed: false,
+          revisions: 0,
+          stars: 0,
+          notes: ''
+        };
+      }
+      return userState[id];
+    }
+
+    // Render Syllabus UI
+    function renderSyllabus() {
+      const container = document.getElementById('syllabusContent');
+      let html = '';
+
+      SYLLABUS.sections.forEach(sec => {
+        html += `
+          <div class="section-container" id="sec_${sec.id}" data-sec-id="${sec.id}">
+            <div class="section-header" onclick="toggleSectionCollapse('${sec.id}')">
+              <div class="section-title-wrap">
+                <span class="section-badge" style="background-color: ${sec.badge_color};">${sec.marks} अंक</span>
+                <span class="section-name">${sec.name}</span>
+              </div>
+              <div class="section-meta">
+                <span id="sec_prog_${sec.id}">0 / ${sec.units.length} यूनिट्स</span>
+                <span>▼</span>
+              </div>
+            </div>
+            <div class="section-units" id="units_container_${sec.id}">
+        `;
+
+        sec.units.forEach(unit => {
+          const unitYtUrl = getYoutubeSearchUrl(sec.id, unit.title, "");
+          const priorityClass = unit.priority || 'standard';
+          let priorityLabel = '📌 Standard';
+          if (priorityClass === 'high') priorityLabel = '🔥 High Priority';
+          else if (priorityClass === 'medium') priorityLabel = '⚡ Medium Priority';
+
+          html += `
+            <div class="unit-card" id="unit_${unit.id}" data-unit-id="${unit.id}" data-priority="${priorityClass}">
+              <div class="unit-header">
+                <div class="unit-title-group">
+                  <span class="unit-tag">${unit.unit_num}</span>
+                  <span class="unit-title">${unit.title}</span>
+                  <span class="badge-priority ${priorityClass}">${priorityLabel}</span>
+                  <span class="badge-weight" title="पिछले वर्षों के आधार पर अनुमानित अंक">🎯 वेटेज: ${unit.est_marks}</span>
+                </div>
+                <div class="unit-header-right">
+                  <a href="${unitYtUrl}" target="_blank" rel="noopener noreferrer" class="unit-yt-btn" title="यूनिट के यूट्यूब लेक्चर्स देखें">
+                    <svg class="yt-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    यूनिट क्लास
+                  </a>
+                  <span class="unit-progress-badge" id="unit_badge_${unit.id}">0%</span>
+                  <div class="unit-actions">
+                    <button class="btn-xs" title="सभी पूरे मार्क करें" onclick="markAllInUnit('${unit.id}', true)">✓ सब पूर्ण</button>
+                    <button class="btn-xs" title="रीसेट यूनिट" onclick="markAllInUnit('${unit.id}', false)">↺ रीसेट</button>
+                  </div>
+                </div>
+              </div>
+
+              ${unit.pyq_focus ? `
+                <div class="unit-pyq-hint">
+                  <span>💡 <strong>PYQ मुख्य बिंदु (Key Focus):</strong> ${unit.pyq_focus}</span>
+                </div>
+              ` : ''}
+
+              <div class="topics-list">
+          `;
+
+          unit.topics.forEach((topicText, idx) => {
+            const topicId = `${unit.id}_t${idx}`;
+            const state = getTopicState(topicId);
+            const isDone = state.completed;
+            const hasNotes = state.notes && state.notes.trim().length > 0;
+            const topicYtUrl = getYoutubeSearchUrl(sec.id, unit.title, topicText);
+
+            html += `
+              <div class="topic-row" id="row_${topicId}" data-topic-id="${topicId}" data-priority="${priorityClass}">
+                <div class="topic-main">
+                  <input type="checkbox" class="topic-checkbox" id="chk_${topicId}" 
+                    ${isDone ? 'checked' : ''} onchange="toggleTopicComplete('${topicId}')">
+                  <label class="topic-name ${isDone ? 'completed' : ''}" id="lbl_${topicId}" 
+                    for="chk_${topicId}">
+                    ${topicText}
+                  </label>
+                </div>
+
+                <div class="topic-controls">
+                  <!-- YouTube Resource Link with Topic Prompt -->
+                  <a href="${topicYtUrl}" target="_blank" rel="noopener noreferrer" 
+                     class="yt-resource-btn" title="यूट्यूब पर इस टॉपिक की क्लास / वीडियो देखें">
+                    <svg class="yt-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                    YouTube
+                  </a>
+
+                  <!-- Status dropdown -->
+                  <select class="status-select ${state.status}" id="status_${topicId}" 
+                    onchange="changeTopicStatus('${topicId}', this.value)">
+                    <option value="not_started" ${state.status==='not_started'?'selected':''}>शुरू नहीं (Not Started)</option>
+                    <option value="in_progress" ${state.status==='in_progress'?'selected':''}>अध्ययन जारी (Reading)</option>
+                    <option value="notes_done" ${state.status==='notes_done'?'selected':''}>नोट्स तैयार (Notes Done)</option>
+                    <option value="mcqs_done" ${state.status==='mcqs_done'?'selected':''}>MCQs अभ्यास (MCQs Solved)</option>
+                    <option value="mastered" ${state.status==='mastered'?'selected':''}>कंठस्थ / पूर्ण (Mastered)</option>
+                  </select>
+
+                  <!-- Revision Counter -->
+                  <div class="rev-counter" title="रिवीजन संख्या">
+                    <span class="rev-label">Rev</span>
+                    <button class="rev-btn" onclick="stepRevision('${topicId}', -1)">-</button>
+                    <span class="rev-val" id="rev_${topicId}">${state.revisions}</span>
+                    <button class="rev-btn" onclick="stepRevision('${topicId}', 1)">+</button>
+                  </div>
+
+                  <!-- Confidence Stars -->
+                  <div class="confidence-stars" title="कॉन्फिडेंस रेटिंग">
+                    ${[1,2,3,4,5].map(star => `
+                      <button class="star-btn ${star <= state.stars ? 'active' : ''}" 
+                        onclick="setTopicStars('${topicId}', ${star})">★</button>
+                    `).join('')}
+                  </div>
+
+                  <!-- Notes Toggle -->
+                  <button class="notes-toggle-btn ${hasNotes ? 'has-notes' : ''}" id="notes_btn_${topicId}" 
+                    onclick="toggleNotesDrawer('${topicId}')" title="व्यक्तिगत नोट्स / संदर्भ">
+                    <span>📝</span> <span>नोट्स</span>
+                  </button>
+                </div>
+
+                <!-- Notes Drawer -->
+                <div class="topic-notes-drawer" id="drawer_${topicId}">
+                  <textarea placeholder="इस टॉपिक के महत्वपूर्ण सूत्र, PYQ नोट्स, या याद रखने योग्य बिंदु यहाँ लिखें..." 
+                    oninput="updateTopicNotes('${topicId}', this.value)">${state.notes || ''}</textarea>
+                </div>
+              </div>
+            `;
+          });
+
+          html += `
+              </div>
+            </div>
+          `;
+        });
+
+        html += `
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+      updateProgressSummary();
+    }
+
+    // State Mutation Functions
+    function toggleTopicComplete(id) {
+      const state = getTopicState(id);
+      const chk = document.getElementById(`chk_${id}`);
+      state.completed = chk.checked;
+      if (state.completed) {
+        if (state.status === 'not_started') state.status = 'mastered';
+      } else {
+        if (state.status === 'mastered') state.status = 'in_progress';
+      }
+      syncTopicUI(id);
+      saveState();
+    }
+
+    function changeTopicStatus(id, newStatus) {
+      const state = getTopicState(id);
+      state.status = newStatus;
+      if (newStatus === 'mastered') {
+        state.completed = true;
+      } else if (newStatus === 'not_started') {
+        state.completed = false;
+      }
+      syncTopicUI(id);
+      saveState();
+    }
+
+    function stepRevision(id, delta) {
+      const state = getTopicState(id);
+      state.revisions = Math.max(0, (state.revisions || 0) + delta);
+      document.getElementById(`rev_${id}`).innerText = state.revisions;
+      saveState();
+    }
+
+    function setTopicStars(id, stars) {
+      const state = getTopicState(id);
+      state.stars = (state.stars === stars) ? 0 : stars;
+      syncTopicUI(id);
+      saveState();
+    }
+
+    function toggleNotesDrawer(id) {
+      const drawer = document.getElementById(`drawer_${id}`);
+      drawer.classList.toggle('open');
+    }
+
+    function updateTopicNotes(id, text) {
+      const state = getTopicState(id);
+      state.notes = text;
+      const btn = document.getElementById(`notes_btn_${id}`);
+      if (text.trim().length > 0) {
+        btn.classList.add('has-notes');
+      } else {
+        btn.classList.remove('has-notes');
+      }
+      saveState();
+    }
+
+    function syncTopicUI(id) {
+      const state = getTopicState(id);
+      const chk = document.getElementById(`chk_${id}`);
+      const lbl = document.getElementById(`lbl_${id}`);
+      const sel = document.getElementById(`status_${id}`);
+      const row = document.getElementById(`row_${id}`);
+
+      if (chk) chk.checked = !!state.completed;
+      if (lbl) {
+        if (state.completed) lbl.classList.add('completed');
+        else lbl.classList.remove('completed');
+      }
+      if (sel) {
+        sel.value = state.status;
+        sel.className = `status-select ${state.status}`;
+      }
+
+      // Stars
+      const starBtns = row.querySelectorAll('.star-btn');
+      starBtns.forEach((b, idx) => {
+        if (idx + 1 <= state.stars) b.classList.add('active');
+        else b.classList.remove('active');
+      });
+    }
+
+    function markAllInUnit(unitId, isComplete) {
+      const unit = findUnitById(unitId);
+      if (!unit) return;
+
+      unit.topics.forEach((_, idx) => {
+        const tid = `${unitId}_t${idx}`;
+        const st = getTopicState(tid);
+        st.completed = isComplete;
+        st.status = isComplete ? 'mastered' : 'not_started';
+        syncTopicUI(tid);
+      });
+
+      saveState();
+    }
+
+    function findUnitById(unitId) {
+      for (const sec of SYLLABUS.sections) {
+        for (const u of sec.units) {
+          if (u.id === unitId) return u;
+        }
+      }
+      return null;
+    }
+
+    // Calculation & Progress Summary
+    function updateProgressSummary() {
+      let totalTopics = 0;
+      let completedTopics = 0;
+      let inProgressTopics = 0;
+      let weightedMarks = 0;
+      let totalHighTopics = 0;
+      let completedHighTopics = 0;
+
+      SYLLABUS.sections.forEach(sec => {
+        let secTotal = 0;
+        let secCompleted = 0;
+
+        sec.units.forEach(unit => {
+          let unitTotal = unit.topics.length;
+          let unitCompleted = 0;
+          const isHigh = (unit.priority === 'high');
+
+          unit.topics.forEach((_, idx) => {
+            totalTopics++;
+            secTotal++;
+            if (isHigh) totalHighTopics++;
+
+            const tid = `${unit.id}_t${idx}`;
+            const st = getTopicState(tid);
+            if (st.completed || st.status === 'mastered') {
+              completedTopics++;
+              secCompleted++;
+              unitCompleted++;
+              if (isHigh) completedHighTopics++;
+            } else if (st.status !== 'not_started') {
+              inProgressTopics++;
+            }
+          });
+
+          const unitPct = Math.round((unitCompleted / unitTotal) * 100);
+          const badge = document.getElementById(`unit_badge_${unit.id}`);
+          if (badge) badge.innerText = `${unitPct}%`;
+        });
+
+        // Marks contribution from this section
+        const secRatio = secTotal > 0 ? (secCompleted / secTotal) : 0;
+        weightedMarks += secRatio * sec.marks;
+
+        const secProgEl = document.getElementById(`sec_prog_${sec.id}`);
+        if (secProgEl) {
+          const secPct = Math.round(secRatio * 100);
+          secProgEl.innerText = `${secCompleted} / ${secTotal} टॉपिक्स (${secPct}%)`;
+        }
+      });
+
+      const overallPct = totalTopics > 0 ? Math.round((completedTopics / totalTopics) * 100) : 0;
+      const notStarted = totalTopics - completedTopics - inProgressTopics;
+
+      document.getElementById('overallPercentage').innerText = `${overallPct}%`;
+      document.getElementById('overallProgressBar').style.width = `${overallPct}%`;
+      document.getElementById('completedCount').innerText = `${completedTopics} / ${totalTopics}`;
+      document.getElementById('inProgressCount').innerText = `${inProgressTopics}`;
+      document.getElementById('highPriorityProgress').innerText = `${completedHighTopics} / ${totalHighTopics}`;
+      document.getElementById('weightedMarksCovered').innerText = `${Math.round(weightedMarks)} / 150 अंक`;
+    }
+
+    // Search and Filters
+    function filterTopics() {
+      const q = document.getElementById('searchInput').value.trim().toLowerCase();
+      const secVal = document.getElementById('sectionFilter').value;
+      const prioVal = document.getElementById('priorityFilter').value;
+      const statusVal = document.getElementById('statusFilter').value;
+
+      SYLLABUS.sections.forEach(sec => {
+        const secElem = document.getElementById(`sec_${sec.id}`);
+        const secMatch = (secVal === 'all' || secVal === sec.id);
+
+        if (!secMatch) {
+          secElem.style.display = 'none';
+          return;
+        }
+
+        let anyUnitVisible = false;
+
+        sec.units.forEach(unit => {
+          const unitElem = document.getElementById(`unit_${unit.id}`);
+          const unitPrioMatch = (prioVal === 'all' || unit.priority === prioVal);
+
+          if (!unitPrioMatch) {
+            unitElem.style.display = 'none';
+            return;
+          }
+
+          let anyTopicVisible = false;
+
+          unit.topics.forEach((topicText, idx) => {
+            const tid = `${unit.id}_t${idx}`;
+            const row = document.getElementById(`row_${tid}`);
+            const st = getTopicState(tid);
+
+            // Match Query
+            const textMatch = !q || topicText.toLowerCase().includes(q) || unit.title.toLowerCase().includes(q);
+
+            // Match Status
+            let statusMatch = true;
+            if (statusVal === 'completed') {
+              statusMatch = st.completed || st.status === 'mastered';
+            } else if (statusVal === 'in_progress') {
+              statusMatch = !st.completed && st.status !== 'not_started';
+            } else if (statusVal === 'not_started') {
+              statusMatch = !st.completed && st.status === 'not_started';
+            } else if (statusVal === 'has_notes') {
+              statusMatch = st.notes && st.notes.trim().length > 0;
+            } else if (statusVal === 'need_revision') {
+              statusMatch = (!st.revisions || st.revisions === 0);
+            }
+
+            if (textMatch && statusMatch) {
+              row.style.display = '';
+              anyTopicVisible = true;
+            } else {
+              row.style.display = 'none';
+            }
+          });
+
+          if (anyTopicVisible) {
+            unitElem.style.display = '';
+            anyUnitVisible = true;
+          } else {
+            unitElem.style.display = 'none';
+          }
+        });
+
+        secElem.style.display = anyUnitVisible ? '' : 'none';
+      });
+    }
+
+    function toggleSectionCollapse(secId) {
+      const container = document.getElementById(`units_container_${secId}`);
+      if (container.style.display === 'none') {
+        container.style.display = '';
+      } else {
+        container.style.display = 'none';
+      }
+    }
+
+    // Export & Import
+    function exportProgressJSON() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(userState, null, 2));
+      const downloadAnchor = document.createElement('a');
+      downloadAnchor.setAttribute("href", dataStr);
+      downloadAnchor.setAttribute("download", `bihar_stet_psychology_progress_${new Date().toISOString().slice(0,10)}.json`);
+      document.body.appendChild(downloadAnchor);
+      downloadAnchor.click();
+      downloadAnchor.remove();
+    }
+
+    function triggerImportJSON() {
+      document.getElementById('importFileInput').click();
+    }
+
+    function handleImportFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const imported = JSON.parse(e.target.result);
+          if (imported && typeof imported === 'object') {
+            userState = imported;
+            saveState();
+            renderSyllabus();
+            alert("✓ प्रगति सफलतापूर्वक लोड की गई (Progress Imported Successfully)!");
+          }
+        } catch (err) {
+          alert("अमान्य JSON फ़ाइल (Invalid File Format)");
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    // Reset Confirmation
+    function confirmResetAll() {
+      document.getElementById('resetModal').classList.add('open');
+    }
+
+    function closeResetModal() {
+      document.getElementById('resetModal').classList.remove('open');
+    }
+
+    function executeResetAll() {
+      userState = {};
+      localStorage.removeItem(STORAGE_KEY);
+      closeResetModal();
+      renderSyllabus();
+      if (authToken) {
+        syncWithBackend(false);
+      }
+      showToast('प्रगति रीसेट कर दी गई है।', 'info');
+    }
+
+    // Study Timer Logic
+    let timerInterval = null;
+    let timerSeconds = 25 * 60;
+    let timerRunning = false;
+    let isStopwatch = false;
+
+    function updateTimerDisplay() {
+      const mins = Math.floor(timerSeconds / 60);
+      const secs = timerSeconds % 60;
+      document.getElementById('timerClock').innerText = 
+        `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function toggleTimer() {
+      const btn = document.getElementById('timerStartBtn');
+      if (timerRunning) {
+        clearInterval(timerInterval);
+        timerRunning = false;
+        btn.innerText = '▶ जारी रखें';
+        btn.classList.remove('btn-danger');
+        btn.classList.add('btn-primary');
+      } else {
+        timerRunning = true;
+        btn.innerText = '⏸ रोकें (Pause)';
+        btn.classList.remove('btn-primary');
+        btn.classList.add('btn-danger');
+        timerInterval = setInterval(() => {
+          if (isStopwatch) {
+            timerSeconds++;
+            updateTimerDisplay();
+          } else {
+            if (timerSeconds > 0) {
+              timerSeconds--;
+              updateTimerDisplay();
+            } else {
+              clearInterval(timerInterval);
+              timerRunning = false;
+              btn.innerText = '▶ शुरू करें';
+              btn.classList.remove('btn-danger');
+              btn.classList.add('btn-primary');
+              alert("🔔 समय समाप्त! शानदार अध्ययन सत्र पूरा हुआ!");
+            }
+          }
+        }, 1000);
+      }
+    }
+
+    function resetTimer(mins) {
+      clearInterval(timerInterval);
+      timerRunning = false;
+      const btn = document.getElementById('timerStartBtn');
+      btn.innerText = '▶ शुरू करें';
+      btn.classList.remove('btn-danger');
+      btn.classList.add('btn-primary');
+
+      if (mins === 0) {
+        isStopwatch = true;
+        timerSeconds = 0;
+        document.getElementById('timerMode').innerText = 'Stopwatch Mode';
+      } else {
+        isStopwatch = false;
+        timerSeconds = mins * 60;
+        document.getElementById('timerMode').innerText = mins >= 25 ? 'Focus Study Session' : 'Break Time';
+      }
+      updateTimerDisplay();
+    }
+
+    // Toast Notification System
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toastContainer');
+      if (!container) return;
+      const toast = document.createElement('div');
+      toast.className = `toast ${type}`;
+      const icon = type === 'success' ? '✓' : '⚠️';
+      toast.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => toast.classList.add('show'), 10);
+      setTimeout(() => {
+        toast.classList.remove('show');
+        setTimeout(() => toast.remove(), 300);
+      }, 3500);
+    }
+
+    // Auth & Cloud Sync UI Management
+    function updateSyncUI() {
+      const badge = document.getElementById('syncStatusBadge');
+      const text = document.getElementById('syncStatusText');
+      const userChip = document.getElementById('userChipContainer');
+      const authBtn = document.getElementById('authActionBtn');
+      const manualSyncBtn = document.getElementById('manualSyncBtn');
+
+      if (!badge || !text) return;
+
+      if (isSyncing) {
+        badge.className = 'sync-badge syncing';
+        text.innerText = 'सिंक हो रहा है...';
+      } else if (authToken && currentUser) {
+        badge.className = 'sync-badge synced';
+        const syncTimeStr = lastSyncedAt ? new Date(lastSyncedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : 'अभी';
+        text.innerText = `क्लाउड सिंक (${syncTimeStr})`;
+      } else {
+        badge.className = 'sync-badge local';
+        text.innerText = 'लोकल मोड (सिंक करें)';
+      }
+
+      if (authToken && currentUser) {
+        authBtn.style.display = 'none';
+        manualSyncBtn.style.display = 'inline-flex';
+        userChip.style.display = 'inline-flex';
+        const initial = (currentUser.name || currentUser.username || 'S').charAt(0).toUpperCase();
+        userChip.innerHTML = `
+          <div class="user-chip" title="लॉगिन यूज़र">
+            <div class="user-avatar">${initial}</div>
+            <span>${currentUser.name || currentUser.username}</span>
+            <button class="btn-xs" style="margin-left: 4px; border-color: rgba(255,255,255,0.2);" onclick="handleLogout()" title="लॉगआउट करें">लॉगआउट</button>
+          </div>
+        `;
+      } else {
+        authBtn.style.display = 'inline-flex';
+        manualSyncBtn.style.display = 'none';
+        userChip.style.display = 'none';
+        userChip.innerHTML = '';
+      }
+    }
+
+    // Modal Controls & Tabs
+    function openAuthModal() {
+      document.getElementById('authAlert').style.display = 'none';
+      document.getElementById('authModal').classList.add('open');
+    }
+
+    function closeAuthModal() {
+      document.getElementById('authModal').classList.remove('open');
+    }
+
+    function switchAuthTab(tab) {
+      const loginTabBtn = document.getElementById('tabLoginBtn');
+      const regTabBtn = document.getElementById('tabRegisterBtn');
+      const loginForm = document.getElementById('loginForm');
+      const regForm = document.getElementById('registerForm');
+      const alertBox = document.getElementById('authAlert');
+      alertBox.style.display = 'none';
+
+      if (tab === 'login') {
+        loginTabBtn.classList.add('active');
+        regTabBtn.classList.remove('active');
+        loginForm.style.display = 'block';
+        regForm.style.display = 'none';
+      } else {
+        loginTabBtn.classList.remove('active');
+        regTabBtn.classList.add('active');
+        loginForm.style.display = 'none';
+        regForm.style.display = 'block';
+      }
+    }
+
+    function showAuthAlert(msg, isError = true) {
+      const alertBox = document.getElementById('authAlert');
+      alertBox.className = `auth-alert ${isError ? 'error' : 'success'}`;
+      alertBox.innerText = msg;
+      alertBox.style.display = 'block';
+    }
+
+    // Authentication Handlers
+    async function submitLoginForm(event) {
+      event.preventDefault();
+      const username = document.getElementById('loginUsername').value.trim();
+      const password = document.getElementById('loginPassword').value;
+      const btn = document.getElementById('loginSubmitBtn');
+
+      if (!username || !password) return;
+
+      btn.disabled = true;
+      btn.innerText = 'लॉगिन हो रहा है...';
+
+      try {
+        const res = await fetch('/api/auth/login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username, password })
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.error || 'लॉगिन विफल रहा (Login failed)');
+        }
+
+        authToken = data.token;
+        currentUser = data.user;
+        localStorage.setItem(AUTH_TOKEN_KEY, authToken);
+        localStorage.setItem(USER_INFO_KEY, JSON.stringify(currentUser));
+
+        closeAuthModal();
+        showToast(`स्वागत है, ${currentUser.name || currentUser.username}! क्लाउड सिंक सक्रिय है।`);
+        await fetchAndMergeCloudProgress();
+        updateSyncUI();
+      } catch (err) {
+        showAuthAlert(err.message, true);
+      } finally {
+        btn.disabled = false;
+        btn.innerText = '✓ लॉगिन करें';
+      }
+    }
+
+    async function submitRegisterForm(event) {
+      event.preventDefault();
+      const name = document.getElementById('regName').value.trim();
+      const username = document.getElementById('regUsername').value.trim();
+      const password = document.getElementById('regPassword').value;
+      const btn = document.getElementById('regSubmitBtn');
+
+      if (!username || !password) return;
+
+      btn.disabled = true;
+      btn.innerText = 'खाता बनाया जा रहा है...';
+
+      try {
+        const res = await fetch('/api/auth/register', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, username, password })
+        });
+
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.error || 'रजिस्ट्रेशन विफल (Registration failed)');
+        }
+
+        authToken = data.token;
+        currentUser = data.user;
+        localStorage.setItem(AUTH_TOKEN_KEY, authToken);
+        localStorage.setItem(USER_INFO_KEY, JSON.stringify(currentUser));
+
+        closeAuthModal();
+        showToast(`खाता बन गया! आपकी प्रगति क्लाउड पर सुरक्षित हो रही है...`);
+
+        // Immediately sync current local progress to new account
+        await syncWithBackend(true);
+        updateSyncUI();
+      } catch (err) {
+        showAuthAlert(err.message, true);
+      } finally {
+        btn.disabled = false;
+        btn.innerText = '✓ खाता बनाएं व सिंक शुरू करें';
+      }
+    }
+
+    function handleLogout() {
+      if (confirm('क्या आप लॉगआउट करना चाहते हैं? आपकी स्थानीय प्रगति डिवाइस पर सुरक्षित रहेगी।')) {
+        authToken = null;
+        currentUser = null;
+        localStorage.removeItem(AUTH_TOKEN_KEY);
+        localStorage.removeItem(USER_INFO_KEY);
+        updateSyncUI();
+        showToast('सफलतापूर्वक लॉगआउट हो गया। अब आप लोकल मोड में हैं।', 'info');
+      }
+    }
+
+    // Cloud Sync Synchronization Logic
+    function queueCloudSync() {
+      if (!authToken) {
+        updateSyncUI();
+        return;
+      }
+      isSyncing = true;
+      updateSyncUI();
+      if (syncDebounceTimer) clearTimeout(syncDebounceTimer);
+      syncDebounceTimer = setTimeout(() => {
+        syncWithBackend(false);
+      }, 1500);
+    }
+
+    async function triggerManualSync() {
+      if (!authToken) {
+        openAuthModal();
+        return;
+      }
+      await syncWithBackend(true);
+    }
+
+    async function syncWithBackend(showSuccessToast = false) {
+      if (!authToken) return;
+
+      isSyncing = true;
+      updateSyncUI();
+
+      try {
+        const res = await fetch('/api/progress', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${authToken}`
+          },
+          body: JSON.stringify({
+            userState,
+            timer: { timerSeconds, isStopwatch }
+          })
+        });
+
+        if (res.status === 401) {
+          handleLogout();
+          showToast('सत्र समाप्त हो गया है। कृपया पुनः लॉगिन करें।', 'error');
+          return;
+        }
+
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'सिंक त्रुटि');
+
+        lastSyncedAt = data.lastUpdated || new Date().toISOString();
+        if (showSuccessToast) {
+          showToast('✓ प्रगति क्लाउड पर सफलतापूर्वक सिंक हो गई!');
+        }
+      } catch (err) {
+        console.warn('Background sync warning:', err.message);
+      } finally {
+        isSyncing = false;
+        updateSyncUI();
+      }
+    }
+
+    async function fetchAndMergeCloudProgress() {
+      if (!authToken) return;
+
+      isSyncing = true;
+      updateSyncUI();
+
+      try {
+        const res = await fetch('/api/progress', {
+          headers: {
+            'Authorization': `Bearer ${authToken}`
+          }
+        });
+
+        if (res.status === 401) {
+          handleLogout();
+          return;
+        }
+
+        const data = await res.json();
+        if (data && data.userState && Object.keys(data.userState).length > 0) {
+          // Merge remote state with local state
+          userState = Object.assign({}, userState, data.userState);
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(userState));
+          renderSyllabus();
+          lastSyncedAt = data.lastUpdated || new Date().toISOString();
+          showToast('✓ क्लाउड से नवीनतम प्रगति लोड की गई!');
+        } else if (Object.keys(userState).length > 0) {
+          await syncWithBackend(false);
+        }
+      } catch (err) {
+        console.warn('Failed to fetch cloud progress:', err);
+      } finally {
+        isSyncing = false;
+        updateSyncUI();
+      }
+    }
+
+    async function initAuthAndSync() {
+      updateSyncUI();
+      if (!authToken) return;
+
+      try {
+        const res = await fetch('/api/auth/me', {
+          headers: { 'Authorization': `Bearer ${authToken}` }
+        });
+        if (res.ok) {
+          const data = await res.json();
+          currentUser = data.user;
+          localStorage.setItem(USER_INFO_KEY, JSON.stringify(currentUser));
+          await fetchAndMergeCloudProgress();
+        } else {
+          authToken = null;
+          currentUser = null;
+          localStorage.removeItem(AUTH_TOKEN_KEY);
+          localStorage.removeItem(USER_INFO_KEY);
+        }
+      } catch (err) {
+        console.warn('Offline or server unreachable:', err);
+      }
+      updateSyncUI();
+    }
+
+    // Initialize App
+    window.addEventListener('DOMContentLoaded', () => {
+      loadState();
+      renderSyllabus();
+      updateTimerDisplay();
+      initAuthAndSync();
+    });
+  </script>
+</body>
+</html>
