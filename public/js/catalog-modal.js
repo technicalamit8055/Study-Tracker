@@ -40,11 +40,11 @@
     if (modal) modal.classList.add('open');
     if (!State.catalog) {
       var body = document.getElementById('catalogBody');
-      if (body) body.innerHTML = '<div class="catalog-loading">लोड हो रहा है…</div>';
+      if (body) body.innerHTML = '<div class="catalog-loading">' + esc(I18n.t('catalog.loading')) + '</div>';
       try {
         await State.fetchCatalog();
       } catch (e) {
-        if (body) body.innerHTML = '<div class="catalog-loading">कैटलॉग लोड नहीं हो सका।</div>';
+        if (body) body.innerHTML = '<div class="catalog-loading">' + esc(I18n.t('catalog.loadFailed')) + '</div>';
         return;
       }
     }
@@ -78,12 +78,12 @@
       });
       tabs.innerHTML =
         '<button class="cat-tab ' + (Catalog.activeCategory === 'all' ? 'active' : '') + '" ' +
-          'onclick="Catalog.setCategory(\'all\')">सभी (' + cat.exams.length + ')</button>' +
+          'onclick="Catalog.setCategory(\'all\')">' + esc(I18n.t('catalog.all')) + ' (' + cat.exams.length + ')</button>' +
         cat.categories.map(function (c) {
           var n = counts[c.id] || 0;
           if (!n) return '';
           return '<button class="cat-tab ' + (Catalog.activeCategory === c.id ? 'active' : '') + '" ' +
-            'onclick="Catalog.setCategory(\'' + esc(c.id) + '\')">' + c.icon + ' ' + esc(c.nameHi || c.name) + ' (' + n + ')</button>';
+            'onclick="Catalog.setCategory(\'' + esc(c.id) + '\')">' + c.icon + ' ' + esc(I18n.categoryName(c)) + ' (' + n + ')</button>';
         }).join('');
     }
     Catalog.renderCards();
@@ -101,12 +101,13 @@
       if (Catalog.activeCategory !== 'all' && e.categoryId !== Catalog.activeCategory) return false;
       if (!Catalog.query) return true;
       var hay = (e.title + ' ' + (e.titleEn || '') + ' ' + (e.subject || '') + ' ' +
-        (e.tagline || '') + ' ' + ((catById[e.categoryId] || {}).name || '')).toLowerCase();
+        (e.tagline || '') + ' ' + ((catById[e.categoryId] || {}).name || '') + ' ' +
+        ((catById[e.categoryId] || {}).nameHi || '')).toLowerCase();
       return hay.indexOf(Catalog.query) !== -1;
     });
 
     if (!list.length) {
-      body.innerHTML = '<div class="catalog-loading">कोई परीक्षा नहीं मिली। खोज बदलकर देखें।</div>';
+      body.innerHTML = '<div class="catalog-loading">' + esc(I18n.t('catalog.noneFound')) + '</div>';
       return;
     }
 
@@ -117,33 +118,33 @@
       var pctLine = '';
 
       if (!e.available) {
-        pctLine = '<div class="ec-progress soon">जल्द आ रहा है</div>';
+        pctLine = '<div class="ec-progress soon">' + esc(I18n.t('catalog.comingSoon')) + '</div>';
       } else if (prog && prog.done > 0) {
         pctLine = '<div class="ec-progress"><span class="ec-dot started"></span>' +
-          prog.done + ' टॉपिक पूर्ण</div>';
+          esc(I18n.t('catalog.topicsDone', { n: prog.done })) + '</div>';
       } else {
-        pctLine = '<div class="ec-progress"><span class="ec-dot"></span>अभी शुरू नहीं किया</div>';
+        pctLine = '<div class="ec-progress"><span class="ec-dot"></span>' + esc(I18n.t('catalog.notStarted')) + '</div>';
       }
 
       var btn;
       if (!e.available) {
-        btn = '<button class="ec-btn disabled" disabled>उपलब्ध नहीं</button>';
+        btn = '<button class="ec-btn disabled" disabled>' + esc(I18n.t('catalog.unavailable')) + '</button>';
       } else if (isActive) {
-        btn = '<button class="ec-btn current" onclick="Catalog.close()">✓ वर्तमान रोडमैप</button>';
+        btn = '<button class="ec-btn current" onclick="Catalog.close()">' + esc(I18n.t('catalog.current')) + '</button>';
       } else if (prog && prog.done > 0) {
-        btn = '<button class="ec-btn" onclick="Catalog.choose(\'' + esc(e.id) + '\')">जारी रखें →</button>';
+        btn = '<button class="ec-btn" onclick="Catalog.choose(\'' + esc(e.id) + '\')">' + esc(I18n.t('catalog.continue')) + '</button>';
       } else {
-        btn = '<button class="ec-btn" onclick="Catalog.choose(\'' + esc(e.id) + '\')">रोडमैप शुरू करें →</button>';
+        btn = '<button class="ec-btn" onclick="Catalog.choose(\'' + esc(e.id) + '\')">' + esc(I18n.t('catalog.start')) + '</button>';
       }
 
       return '' +
         '<div class="exam-card ' + (isActive ? 'active' : '') + ' ' + (e.available ? '' : 'unavailable') + '">' +
-          '<div class="ec-cat" style="color:' + esc(c.color) + '">' + c.icon + ' ' + esc(c.nameHi || c.name) + '</div>' +
-          '<h4 class="ec-title">' + esc(e.title) + '</h4>' +
-          '<div class="ec-sub">' + esc(e.titleEn || '') + '</div>' +
+          '<div class="ec-cat" style="color:' + esc(c.color) + '">' + c.icon + ' ' + esc(I18n.categoryName(c)) + '</div>' +
+          '<h4 class="ec-title">' + esc(I18n.examTitle(e)) + '</h4>' +
+          '<div class="ec-sub">' + esc(I18n.lang === 'en' ? (e.title || '') : (e.titleEn || '')) + '</div>' +
           '<div class="ec-tagline">' + esc(e.tagline || '') + '</div>' +
           '<div class="ec-meta">' +
-            '<span>🎯 ' + e.totalMarks + ' अंक</span>' +
+            '<span>🎯 ' + e.totalMarks + ' ' + esc(I18n.t('progress.marks')) + '</span>' +
             (e.totalQuestions ? '<span>❓ ' + e.totalQuestions + '</span>' : '') +
             (e.durationMinutes ? '<span>⏱ ' + e.durationMinutes + 'm</span>' : '') +
           '</div>' +
@@ -154,7 +155,7 @@
 
   Catalog.choose = async function (examId) {
     var body = document.getElementById('catalogBody');
-    if (body) body.innerHTML = '<div class="catalog-loading">रोडमैप लोड हो रहा है…</div>';
+    if (body) body.innerHTML = '<div class="catalog-loading">' + esc(I18n.t('catalog.loadingRoadmap')) + '</div>';
     try {
       // Flush any pending edits for the current exam before switching away.
       if (State.authToken && State.activeExamId) {
@@ -162,10 +163,10 @@
       }
       await State.activateExam(examId);
       Catalog.close();
-      if (global.showToast) showToast('🎯 रोडमैप बदला: ' + State.exam.title, 'success');
+      if (global.showToast) showToast(I18n.t('catalog.switched', { title: I18n.pick(State.exam, 'title', 'titleEn') }), 'success');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } catch (e) {
-      if (body) body.innerHTML = '<div class="catalog-loading">रोडमैप लोड नहीं हो सका: ' + esc(e.message) + '</div>';
+      if (body) body.innerHTML = '<div class="catalog-loading">' + esc(I18n.t('catalog.switchFailed', { msg: e.message })) + '</div>';
     }
   };
 

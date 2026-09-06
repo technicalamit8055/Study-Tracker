@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>ExamRoadmap — प्रतियोगी एवं बोर्ड परीक्षा तैयारी रोडमैप</title>
-  <meta name="description" content="बहु-परीक्षा रोडमैप: चरणबद्ध सिलेबस ट्रैकर, वेटेज इंटेलिजेंस, स्पेस्ड रिपिटीशन रिवीजन और फोकस टाइमर — STET, CTET, SSC, बोर्ड परीक्षाओं हेतु।">
+  <title>ExamRoadmap — Competitive &amp; Board Exam Preparation Roadmap</title>
+  <meta name="description" content="Multi-exam roadmap: phased syllabus tracker, weightage intelligence, spaced-repetition revision and a focus timer — for STET, CTET, SSC and Board exams. Available in English and Hindi.">
   <meta name="theme-color" content="#4f46e5">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -32,46 +32,61 @@
 </head>
 <body>
 
-  <div class="offline-banner" id="offlineBanner">
-    📴 आप ऑफलाइन हैं — प्रगति इस डिवाइस पर सेव होती रहेगी और ऑनलाइन आते ही सिंक हो जाएगी।
+  <div class="offline-banner" id="offlineBanner" data-i18n="app.offline">
+    You are offline — progress keeps saving on this device.
   </div>
 
   <header>
     <div class="header-inner">
       <div class="header-title">
         <div class="exam-switch-bar">
-          <button class="active-exam-badge" onclick="Catalog.open()" title="दूसरी परीक्षा का रोडमैप चुनें">
+          <button class="active-exam-badge" onclick="Catalog.open()" data-i18n-title="app.switchExamTitle" title="Pick a different exam roadmap">
             <span>🎯</span>
-            <span class="aeb-label" id="activeExamBadgeText">रोडमैप लोड हो रहा है…</span>
-            <span class="aeb-switch">बदलें</span>
+            <span class="aeb-label" id="activeExamBadgeText" data-i18n="app.loadingRoadmap">Loading roadmap…</span>
+            <span class="aeb-switch" data-i18n="app.switchExam">Switch</span>
           </button>
         </div>
         <div id="examHeaderInfo" style="margin-top:12px;"></div>
       </div>
 
       <div class="header-actions">
-        <div id="syncStatusBadge" class="sync-badge local" onclick="openAuthModal()" title="क्लाउड सिंक स्थिति">
+        <button class="btn goal-guide-btn" id="goalGuideBtn" onclick="openGoalGuide()"
+                data-i18n-title="goal.buttonTitle" title="View or edit your goal and study plan">
+          <span data-i18n="goal.button">🎯 My Goal &amp; Guide</span>
+        </button>
+
+        <button class="btn lang-toggle-btn" id="langToggleBtn" onclick="toggleAppLanguage()"
+                data-i18n-title="ob.langPrompt" title="App language">
+          <span aria-hidden="true">🌐</span>
+          <span id="langToggleText">हिंदी</span>
+        </button>
+
+        <div id="syncStatusBadge" class="sync-badge local" onclick="openAuthModal()"
+             data-i18n-title="sync.status" title="Cloud sync status">
           <span class="sync-dot"></span>
-          <span id="syncStatusText">लोकल मोड</span>
+          <span id="syncStatusText" data-i18n="sync.local">Local mode</span>
         </div>
 
         <div id="userChipContainer" style="display:none;"></div>
 
-        <button class="btn theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()" title="थीम बदलें">
+        <button class="btn theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()"
+                data-i18n-title="app.themeToggle" title="Switch theme">
           <span id="themeToggleIcon">☀️</span>
-          <span id="themeToggleText">लाइट</span>
+          <span id="themeToggleText" data-i18n="app.themeLight">Light</span>
         </button>
 
-        <button class="btn btn-secondary" id="installAppBtn" onclick="installApp()" style="display:none;" title="ऐप इंस्टॉल करें">
-          📲 ऐप इंस्टॉल
+        <button class="btn btn-secondary" id="installAppBtn" onclick="installApp()" style="display:none;"
+                data-i18n-title="app.installTitle" title="Install this app" data-i18n="app.install">
+          📲 Install App
         </button>
 
-        <button class="btn btn-primary" id="authActionBtn" onclick="openAuthModal()">
-          ☁ लॉगिन / सिंक
+        <button class="btn btn-primary" id="authActionBtn" onclick="openAuthModal()" data-i18n="sync.login">
+          ☁ Login / Sync
         </button>
 
-        <button class="btn btn-secondary" id="manualSyncBtn" onclick="triggerManualSync()" style="display:none;" title="तुरंत क्लाउड पर सेव करें">
-          ⟳ सिंक करें
+        <button class="btn btn-secondary" id="manualSyncBtn" onclick="triggerManualSync()" style="display:none;"
+                data-i18n-title="sync.nowTitle" title="Save to the cloud right now" data-i18n="sync.now">
+          ⟳ Sync now
         </button>
       </div>
     </div>
@@ -79,10 +94,13 @@
 
   <div class="container">
 
+    <!-- Personalised goal banner (rendered once onboarding has run) -->
+    <section class="goal-banner" id="goalBanner" style="display:none;"></section>
+
     <!-- Live progress across the active exam -->
     <div class="progress-card">
       <div class="progress-header">
-        <h2><span>📊</span> कुल तैयारी प्रगति (Live Progress &amp; Weightage)</h2>
+        <h2><span>📊</span> <span data-i18n="progress.heading">Overall Preparation Progress</span></h2>
         <div class="progress-percentage" id="overallPercentage">0%</div>
       </div>
       <div class="progress-bar-bg">
@@ -90,23 +108,23 @@
       </div>
       <div class="progress-substats">
         <div class="substat-item">
-          <span class="substat-label">पूर्ण टॉपिक्स (Completed)</span>
+          <span class="substat-label" data-i18n="progress.completed">Completed Topics</span>
           <span class="substat-val" id="completedCount" style="color: #10b981;">0 / 0</span>
         </div>
         <div class="substat-item">
-          <span class="substat-label">प्रगति पर (In Progress)</span>
+          <span class="substat-label" data-i18n="progress.inProgress">In Progress</span>
           <span class="substat-val" id="inProgressCount" style="color: #f59e0b;">0</span>
         </div>
         <div class="substat-item">
-          <span class="substat-label">हाई-यील्ड पूर्ण (High Yield Done)</span>
+          <span class="substat-label" data-i18n="progress.highYield">High Yield Done</span>
           <span class="substat-val" id="highPriorityProgress" style="color: #ef4444;">0 / 0</span>
         </div>
         <div class="substat-item">
-          <span class="substat-label">अनुमानित अंक (Estimated Marks)</span>
-          <span class="substat-val" id="weightedMarksCovered" style="color: #818cf8;">0 / 0 अंक</span>
+          <span class="substat-label" data-i18n="progress.estMarks">Estimated Marks</span>
+          <span class="substat-val" id="weightedMarksCovered" style="color: #818cf8;">0 / 0</span>
         </div>
         <div class="substat-item">
-          <span class="substat-label">कुल रिवीजन (Total Revisions)</span>
+          <span class="substat-label" data-i18n="progress.totalRevisions">Total Revisions</span>
           <span class="substat-val" id="totalRevisionCount" style="color: #0ea5e9;">0</span>
         </div>
       </div>
@@ -118,69 +136,74 @@
       <div class="timer-display">
         <div class="timer-clock" id="timerClock">25:00</div>
         <div class="timer-info">
-          <div class="timer-mode" id="timerMode">फोकस सेशन (Pomodoro)</div>
-          <div class="timer-sessions" id="timerSessions">आज: 0 सेशन</div>
+          <div class="timer-mode" id="timerMode" data-i18n="timer.focus">Focus Session (Pomodoro)</div>
+          <div class="timer-sessions" id="timerSessions">Today: 0 sessions</div>
         </div>
       </div>
       <div class="timer-controls">
-        <button class="btn btn-primary" id="timerStartBtn" onclick="Timer.toggle()">▶ शुरू करें</button>
-        <button class="btn btn-secondary" onclick="Timer.reset(25)">25 मि</button>
-        <button class="btn btn-secondary" onclick="Timer.reset(50)">50 मि</button>
-        <button class="btn btn-secondary" onclick="Timer.reset(5)">ब्रेक 5</button>
-        <button class="btn btn-secondary" onclick="Timer.reset(0)">स्टॉपवॉच</button>
+        <button class="btn btn-primary" id="timerStartBtn" onclick="Timer.toggle()" data-i18n="timer.start">▶ Start</button>
+        <button class="btn btn-secondary" onclick="Timer.reset(25)">25</button>
+        <button class="btn btn-secondary" onclick="Timer.reset(50)">50</button>
+        <button class="btn btn-secondary" onclick="Timer.reset(5)" data-i18n="timer.break">Break 5</button>
+        <button class="btn btn-secondary" onclick="Timer.reset(0)" data-i18n="timer.stopwatchBtn">Stopwatch</button>
       </div>
     </div>
 
     <!-- Search & filters -->
     <div class="toolbar">
       <div class="search-wrap">
-        <input type="text" id="searchInput" placeholder="टॉपिक, यूनिट या नोट्स में खोजें…" oninput="Roadmap.applyFilters()">
+        <input type="text" id="searchInput" data-i18n-placeholder="toolbar.searchPh"
+               placeholder="Search topics, units or notes…" oninput="Roadmap.applyFilters()">
       </div>
       <div class="filter-group">
         <select class="filter-select" id="phaseFilter" onchange="Roadmap.applyFilters()">
-          <option value="all">सभी चरण (All Phases)</option>
+          <option value="all" data-i18n="toolbar.allPhases">All Phases</option>
         </select>
 
         <select class="filter-select" id="priorityFilter" onchange="Roadmap.applyFilters()">
-          <option value="all">सभी प्राथमिकता</option>
-          <option value="high">🔥 हाई-यील्ड</option>
-          <option value="medium">⚡ मीडियम</option>
-          <option value="standard">📌 स्टैंडर्ड</option>
+          <option value="all" data-i18n="toolbar.allPriority">All Priorities</option>
+          <option value="high" data-i18n="toolbar.high">🔥 High-Yield</option>
+          <option value="medium" data-i18n="toolbar.medium">⚡ Medium</option>
+          <option value="standard" data-i18n="toolbar.standard">📌 Standard</option>
         </select>
 
         <select class="filter-select" id="statusFilter" onchange="Roadmap.applyFilters()">
-          <option value="all">सभी स्थिति</option>
-          <option value="pending">बाकी है</option>
-          <option value="in_progress">प्रगति पर</option>
-          <option value="completed">पूर्ण</option>
-          <option value="needs_revision">रिवीजन बाकी</option>
-          <option value="low_confidence">कम कॉन्फिडेंस (≤2★)</option>
+          <option value="all" data-i18n="toolbar.allStatus">All Statuses</option>
+          <option value="pending" data-i18n="toolbar.pending">Pending</option>
+          <option value="in_progress" data-i18n="toolbar.statusInProgress">In Progress</option>
+          <option value="completed" data-i18n="toolbar.statusCompleted">Completed</option>
+          <option value="needs_revision" data-i18n="toolbar.needsRevision">Revision Due</option>
+          <option value="low_confidence" data-i18n="toolbar.lowConfidence">Low Confidence (≤2★)</option>
         </select>
 
-        <button class="btn btn-secondary" onclick="Roadmap.resetFilters()" title="फिल्टर हटाएं">↺ फिल्टर</button>
+        <button class="btn btn-secondary" onclick="Roadmap.resetFilters()"
+                data-i18n-title="toolbar.resetFiltersTitle" title="Clear filters" data-i18n="toolbar.resetFilters">↺ Filters</button>
       </div>
 
       <div class="toolbar-actions">
-        <button class="btn btn-secondary" onclick="exportProgressJSON()" title="प्रगति डाउनलोड करें">⬇ एक्सपोर्ट</button>
-        <button class="btn btn-secondary" onclick="triggerImportJSON()" title="प्रगति फाइल अपलोड करें">⬆ इम्पोर्ट</button>
-        <button class="btn btn-danger" onclick="confirmResetAll()" title="सारी प्रगति मिटाएं">🗑 रीसेट</button>
+        <button class="btn btn-secondary" onclick="exportProgressJSON()"
+                data-i18n-title="toolbar.exportTitle" title="Download your progress" data-i18n="toolbar.export">⬇ Export</button>
+        <button class="btn btn-secondary" onclick="triggerImportJSON()"
+                data-i18n-title="toolbar.importTitle" title="Upload a progress file" data-i18n="toolbar.import">⬆ Import</button>
+        <button class="btn btn-danger" onclick="confirmResetAll()"
+                data-i18n-title="toolbar.resetTitle" title="Erase all progress" data-i18n="toolbar.reset">🗑 Reset</button>
         <input type="file" id="importFileInput" accept="application/json" style="display:none;" onchange="handleImportFile(event)">
       </div>
     </div>
 
     <!-- Phased roadmap -->
     <div id="roadmapContent"></div>
-    <div class="empty-filter-state" id="emptyFilterState">
-      🔍 इन फिल्टर्स से कोई टॉपिक नहीं मिला। फिल्टर बदलकर देखें।
+    <div class="empty-filter-state" id="emptyFilterState" data-i18n="toolbar.emptyFilter">
+      🔍 No topics match these filters.
     </div>
 
   </div>
 
   <!-- Topic study drawer -->
-  <aside class="study-drawer" id="studyDrawer" aria-label="टॉपिक स्टडी पैनल">
+  <aside class="study-drawer" id="studyDrawer" data-i18n-aria-label="sd.panelAria" aria-label="Topic study panel">
     <div class="sd-header">
-      <h3>📖 स्टडी पैनल</h3>
-      <button class="sd-close" onclick="StudyDrawer.close()" aria-label="बंद करें">✕</button>
+      <h3 data-i18n="sd.panel">📖 Study Panel</h3>
+      <button class="sd-close" onclick="StudyDrawer.close()" data-i18n-aria-label="sd.close" aria-label="Close">✕</button>
     </div>
     <div id="studyDrawerBody"></div>
   </aside>
@@ -191,12 +214,13 @@
       <div class="catalog-head">
         <div class="catalog-head-top">
           <div>
-            <h2>🎯 परीक्षा रोडमैप चुनें</h2>
-            <p>अपनी परीक्षा चुनें — हर परीक्षा की प्रगति अलग-अलग सुरक्षित रहती है।</p>
+            <h2 data-i18n="catalog.title">🎯 Choose an Exam Roadmap</h2>
+            <p data-i18n="catalog.subtitle">Pick your exam — progress for each one is saved separately.</p>
           </div>
-          <button class="sd-close" onclick="Catalog.close()" aria-label="बंद करें">✕</button>
+          <button class="sd-close" onclick="Catalog.close()" data-i18n-aria-label="sd.close" aria-label="Close">✕</button>
         </div>
-        <input type="text" class="catalog-search" placeholder="परीक्षा खोजें (STET, CTET, SSC, बोर्ड…)"
+        <input type="text" class="catalog-search" data-i18n-placeholder="catalog.searchPh"
+               placeholder="Search exams (STET, CTET, SSC, Boards…)"
                oninput="Catalog.setQuery(this.value)">
       </div>
       <div class="catalog-tabs" id="catalogTabs"></div>
@@ -208,47 +232,50 @@
   <div class="modal-overlay" id="authModal" onclick="if(event.target===this) closeAuthModal()">
     <div class="modal-card">
       <div class="auth-tabs">
-        <button class="auth-tab-btn active" id="tabLoginBtn" onclick="switchAuthTab('login')">लॉगिन (Login)</button>
-        <button class="auth-tab-btn" id="tabRegisterBtn" onclick="switchAuthTab('register')">नया खाता (Sign Up)</button>
+        <button class="auth-tab-btn active" id="tabLoginBtn" onclick="switchAuthTab('login')" data-i18n="auth.tabLogin">Login</button>
+        <button class="auth-tab-btn" id="tabRegisterBtn" onclick="switchAuthTab('register')" data-i18n="auth.tabRegister">Sign Up</button>
       </div>
 
-      <p class="auth-help">
-        खाता बनाने पर आपकी प्रगति क्लाउड पर सुरक्षित रहती है और किसी भी डिवाइस से खुल जाती है।
+      <p class="auth-help" data-i18n="auth.help">
+        Creating an account keeps your progress safe in the cloud.
       </p>
 
       <div id="authAlert" class="auth-alert"></div>
 
       <form id="loginForm" onsubmit="submitLoginForm(event)">
         <div class="form-group">
-          <label class="form-label">यूज़रनेम</label>
-          <input type="text" id="loginUsername" class="form-control" placeholder="उदा. exam_aspirant" required autocomplete="username">
+          <label class="form-label" data-i18n="auth.username">Username</label>
+          <input type="text" id="loginUsername" class="form-control" data-i18n-placeholder="auth.usernamePh"
+                 placeholder="e.g. exam_aspirant" required autocomplete="username">
         </div>
         <div class="form-group">
-          <label class="form-label">पासवर्ड</label>
+          <label class="form-label" data-i18n="auth.password">Password</label>
           <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required autocomplete="current-password">
         </div>
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary" id="loginSubmitBtn">✓ लॉगिन करें</button>
-          <button type="button" class="btn btn-secondary" onclick="closeAuthModal()">रद्द करें</button>
+          <button type="submit" class="btn btn-primary" id="loginSubmitBtn" data-i18n="auth.doLogin">✓ Log in</button>
+          <button type="button" class="btn btn-secondary" onclick="closeAuthModal()" data-i18n="auth.cancel">Cancel</button>
         </div>
       </form>
 
       <form id="registerForm" style="display:none;" onsubmit="submitRegisterForm(event)">
         <div class="form-group">
-          <label class="form-label">आपका नाम</label>
-          <input type="text" id="regName" class="form-control" placeholder="उदा. रवि कुमार">
+          <label class="form-label" data-i18n="auth.yourName">Your name</label>
+          <input type="text" id="regName" class="form-control" data-i18n-placeholder="auth.namePh" placeholder="e.g. Ravi Kumar">
         </div>
         <div class="form-group">
-          <label class="form-label">यूज़रनेम</label>
-          <input type="text" id="regUsername" class="form-control" placeholder="उदा. exam_aspirant" required minlength="3" autocomplete="username">
+          <label class="form-label" data-i18n="auth.username">Username</label>
+          <input type="text" id="regUsername" class="form-control" data-i18n-placeholder="auth.usernamePh"
+                 placeholder="e.g. exam_aspirant" required minlength="3" autocomplete="username">
         </div>
         <div class="form-group">
-          <label class="form-label">पासवर्ड</label>
-          <input type="password" id="regPassword" class="form-control" placeholder="न्यूनतम 4 अक्षर" required minlength="4" autocomplete="new-password">
+          <label class="form-label" data-i18n="auth.password">Password</label>
+          <input type="password" id="regPassword" class="form-control" data-i18n-placeholder="auth.passwordMin"
+                 placeholder="At least 4 characters" required minlength="4" autocomplete="new-password">
         </div>
         <div class="form-actions">
-          <button type="submit" class="btn btn-primary" id="regSubmitBtn">✓ खाता बनाएं</button>
-          <button type="button" class="btn btn-secondary" onclick="closeAuthModal()">रद्द करें</button>
+          <button type="submit" class="btn btn-primary" id="regSubmitBtn" data-i18n="auth.doRegister">✓ Create account</button>
+          <button type="button" class="btn btn-secondary" onclick="closeAuthModal()" data-i18n="auth.cancel">Cancel</button>
         </div>
       </form>
     </div>
@@ -257,25 +284,47 @@
   <!-- Reset confirmation -->
   <div class="modal-overlay" id="resetModal" onclick="if(event.target===this) closeResetModal()">
     <div class="modal-card">
-      <h3 style="margin-bottom:10px;">⚠️ सारी प्रगति रीसेट करें?</h3>
-      <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.6; margin-bottom:18px;">
-        इस रोडमैप के सभी चेकबॉक्स, रिवीजन, रेटिंग और नोट्स मिट जाएंगे। यह वापस नहीं किया जा सकता।
-        <br><br>अन्य परीक्षाओं की प्रगति सुरक्षित रहेगी।
+      <h3 style="margin-bottom:10px;" data-i18n="reset.title">⚠️ Reset all progress?</h3>
+      <p style="color:var(--text-muted); font-size:0.88rem; line-height:1.6; margin-bottom:18px;"
+         data-i18n-html="reset.body">
+        Everything in this roadmap will be erased.
       </p>
       <div class="form-actions">
-        <button class="btn btn-danger" onclick="executeResetAll()">हाँ, रीसेट करें</button>
-        <button class="btn btn-secondary" onclick="closeResetModal()">रद्द करें</button>
+        <button class="btn btn-danger" onclick="executeResetAll()" data-i18n="reset.confirm">Yes, reset</button>
+        <button class="btn btn-secondary" onclick="closeResetModal()" data-i18n="auth.cancel">Cancel</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Onboarding wizard -->
+  <div class="onboarding-modal" id="onboardingModal" role="dialog" aria-modal="true"
+       aria-labelledby="onboardingTitle">
+    <div class="onboarding-card">
+      <div class="onboarding-head">
+        <div class="ob-brand">
+          <span class="ob-brand-mark">🎓</span>
+          <span class="ob-brand-name" id="onboardingTitle">ExamRoadmap</span>
+        </div>
+        <button class="ob-close" onclick="Onboarding.skip()"
+                data-i18n-aria-label="ob.close" aria-label="Close setup">✕</button>
+      </div>
+
+      <div class="onboarding-rail" id="onboardingRail"></div>
+      <div class="onboarding-body" id="onboardingBody"></div>
+      <div class="onboarding-footer" id="onboardingFooter"></div>
     </div>
   </div>
 
   <div class="toast-container" id="toastContainer"></div>
 
+  <script src="/js/i18n.js"></script>
   <script src="/js/state.js"></script>
   <script src="/js/timer.js"></script>
   <script src="/js/roadmap-renderer.js"></script>
   <script src="/js/study-drawer.js"></script>
   <script src="/js/catalog-modal.js"></script>
+  <script src="/js/goal-banner.js"></script>
+  <script src="/js/onboarding-wizard.js"></script>
   <script src="/js/app.js"></script>
 </body>
 </html>

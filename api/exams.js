@@ -17,14 +17,14 @@ function readJson(file) {
 }
 
 function getCatalog() {
-  if (!cache.catalog) {
-    cache.catalog = readJson(CATALOG_FILE);
+  if (process.env.NODE_ENV === 'production' && cache.catalog) {
+    return cache.catalog;
   }
-  return cache.catalog;
+  return readJson(CATALOG_FILE);
 }
 
 function getExam(examId) {
-  if (cache.exams[examId]) return cache.exams[examId];
+  if (process.env.NODE_ENV === 'production' && cache.exams[examId]) return cache.exams[examId];
 
   const catalog = getCatalog();
   const entry = catalog.exams.find(e => e.id === examId);
@@ -36,7 +36,9 @@ function getExam(examId) {
   if (!fs.existsSync(file)) return null;
 
   const exam = readJson(file);
-  cache.exams[examId] = exam;
+  if (process.env.NODE_ENV === 'production') {
+    cache.exams[examId] = exam;
+  }
   return exam;
 }
 

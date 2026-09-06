@@ -18,6 +18,60 @@
     setTimeout(function () { if (el.parentNode) el.parentNode.removeChild(el); }, 3700);
   };
 
+  /* ---------------- language ---------------- */
+
+  /**
+   * Re-paint every surface that holds translated text. The roadmap and drawer
+   * build their markup as strings, so a language change means re-rendering
+   * rather than swapping text nodes in place.
+   */
+  function applyLanguageToUI() {
+    I18n.applyStatic(document);
+    updateThemeUI();
+    updateSyncUI();
+    updateLangUI();
+
+    if (global.Roadmap && State.exam) {
+      Roadmap.renderExamHeader();
+      Roadmap.render();
+    }
+    if (global.Timer) Timer.updateDisplay();
+    if (global.GoalBanner) GoalBanner.render();
+    if (global.StudyDrawer && StudyDrawer.currentTopicId) StudyDrawer.render();
+    if (global.Catalog && State.catalog) {
+      var cm = document.getElementById('catalogModal');
+      if (cm && cm.classList.contains('open')) Catalog.render();
+    }
+  }
+
+  function updateLangUI() {
+    var btn = document.getElementById('langToggleText');
+    if (btn) {
+      // Show the language the click will switch *to*, not the current one.
+      var next = I18n.lang === 'en' ? 'hi' : 'en';
+      var meta = I18n.LANGS.filter(function (l) { return l.code === next; })[0];
+      btn.innerText = meta ? meta.native : next.toUpperCase();
+    }
+    document.querySelectorAll('[data-lang-opt]').forEach(function (el) {
+      el.classList.toggle('active', el.getAttribute('data-lang-opt') === I18n.lang);
+    });
+  }
+  global.updateLangUI = updateLangUI;
+
+  global.setAppLanguage = function (code) {
+    if (!I18n.setLang(code)) return;
+    // Remember the choice on the profile too, so it survives a cloud restore.
+    if (State.getProfile()) State.saveProfile({ appLanguage: code });
+  };
+
+  global.toggleAppLanguage = function () {
+    setAppLanguage(I18n.lang === 'en' ? 'hi' : 'en');
+  };
+
+  global.openGoalGuide = function () {
+    if (global.Onboarding) Onboarding.open(true);
+  };
+
   /* ---------------- theme ---------------- */
 
   var THEME_KEY = 'stet_theme';
@@ -36,7 +90,7 @@
   global.toggleTheme = function () {
     var next = getCurrentTheme() === 'light' ? 'dark' : 'light';
     applyTheme(next);
-    showToast(next === 'light' ? '☀️ लाइट मोड' : '🌙 डार्क मोड', 'info');
+    showToast(I18n.t(next === 'light' ? 'app.toastLight' : 'app.toastDark'), 'info');
   };
 
   function updateThemeUI(theme) {
@@ -44,7 +98,7 @@
     var icon = document.getElementById('themeToggleIcon');
     var txt = document.getElementById('themeToggleText');
     if (icon) icon.innerText = t === 'light' ? '🌙' : '☀️';
-    if (txt) txt.innerText = t === 'light' ? 'डार्क' : 'लाइट';
+    if (txt) txt.innerText = I18n.t(t === 'light' ? 'app.themeDark' : 'app.themeLight');
   }
   global.updateThemeUI = updateThemeUI;
 
@@ -60,8 +114,8 @@
 
     if (!State.authToken) {
       badge.className = 'sync-badge local';
-      text.innerText = 'लोकल मोड';
-      if (authBtn) { authBtn.style.display = ''; authBtn.innerText = '☁ लॉगिन / सिंक'; }
+      text.innerText = I18n.t('sync.local');
+      if (authBtn) { authBtn.style.display = ''; authBtn.innerText = I18n.t('sync.login'); }
       if (syncBtn) syncBtn.style.display = 'none';
       if (chip) { chip.style.display = 'none'; chip.innerHTML = ''; }
       return;
@@ -69,19 +123,19 @@
 
     if (State.isSyncing) {
       badge.className = 'sync-badge syncing';
-      text.innerText = 'सिंक हो रहा है…';
+      text.innerText = I18n.t('sync.syncing');
     } else {
       badge.className = 'sync-badge synced';
-      text.innerText = State.lastSyncedAt ? 'क्लाउड सिंक ✓' : 'क्लाउड जुड़ा';
+      text.innerText = I18n.t(State.lastSyncedAt ? 'sync.synced' : 'sync.connected');
     }
 
     if (authBtn) authBtn.style.display = 'none';
     if (syncBtn) syncBtn.style.display = '';
     if (chip) {
       chip.style.display = '';
-      var name = (State.currentUser && (State.currentUser.name || State.currentUser.username)) || 'छात्र';
+      var name = (State.currentUser && (State.currentUser.name || State.currentUser.username)) || I18n.t('auth.student');
       chip.innerHTML = '<span class="user-chip">👤 ' + Roadmap.esc(name) +
-        ' <button class="logout-btn" onclick="handleLogout()" title="लॉगआउट">⏻</button></span>';
+        ' <button class="logout-btn" onclick="handleLogout()" title="' + Roadmap.esc(I18n.t('auth.logout')) + '">⏻</button></span>';
     }
   }
   global.updateSyncUI = updateSyncUI;
@@ -124,7 +178,7 @@
   async function afterAuth(data) {
     State.setAuth(data.token, data.user);
     closeAuthModal();
-    showToast('✓ स्वागत है, ' + ((data.user && (data.user.name || data.user.username)) || 'छात्र') + '!');
+    showToast(I18n.t('auth.welcome', { name: (data.user && (data.user.name || data.user.username)) || I18n.t('auth.student') }));
     updateSyncUI();
     await State.fetchCloudProgress(State.activeExamId);
   }
@@ -134,19 +188,19 @@
     var btn = document.getElementById('loginSubmitBtn');
     var u = document.getElementById('loginUsername').value.trim();
     var p = document.getElementById('loginPassword').value;
-    if (btn) { btn.disabled = true; btn.innerText = 'लॉगिन हो रहा है…'; }
+    if (btn) { btn.disabled = true; btn.innerText = I18n.t('auth.loggingIn'); }
     try {
       var res = await fetch('/api/auth/login', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ username: u, password: p })
       });
       var data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'लॉगिन विफल');
+      if (!res.ok) throw new Error(data.error || I18n.t('auth.loginFailed'));
       await afterAuth(data);
     } catch (e) {
       showAuthAlert(e.message, true);
     } finally {
-      if (btn) { btn.disabled = false; btn.innerText = '✓ लॉगिन करें'; }
+      if (btn) { btn.disabled = false; btn.innerText = I18n.t('auth.doLogin'); }
     }
   };
 
@@ -156,26 +210,26 @@
     var name = document.getElementById('regName').value.trim();
     var u = document.getElementById('regUsername').value.trim();
     var p = document.getElementById('regPassword').value;
-    if (btn) { btn.disabled = true; btn.innerText = 'खाता बन रहा है…'; }
+    if (btn) { btn.disabled = true; btn.innerText = I18n.t('auth.creating'); }
     try {
       var res = await fetch('/api/auth/register', {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ name: name, username: u, password: p })
       });
       var data = await res.json();
-      if (!res.ok) throw new Error(data.error || 'रजिस्ट्रेशन विफल');
+      if (!res.ok) throw new Error(data.error || I18n.t('auth.registerFailed'));
       await afterAuth(data);
     } catch (e) {
       showAuthAlert(e.message, true);
     } finally {
-      if (btn) { btn.disabled = false; btn.innerText = '✓ खाता बनाएं'; }
+      if (btn) { btn.disabled = false; btn.innerText = I18n.t('auth.doRegister'); }
     }
   };
 
   global.handleLogout = function () {
     State.clearAuth();
     updateSyncUI();
-    showToast('आप लॉगआउट हो गए। प्रगति इस डिवाइस पर सुरक्षित है।', 'info');
+    showToast(I18n.t('auth.loggedOut'), 'info');
   };
 
   global.triggerManualSync = async function () {
@@ -201,7 +255,7 @@
     a.download = 'examroadmap-' + State.activeExamId + '-' + new Date().toISOString().slice(0, 10) + '.json';
     document.body.appendChild(a); a.click(); document.body.removeChild(a);
     URL.revokeObjectURL(a.href);
-    showToast('⬇ प्रगति फाइल डाउनलोड हुई');
+    showToast(I18n.t('io.exported'));
   };
 
   global.triggerImportJSON = function () {
@@ -217,22 +271,19 @@
       try {
         var data = JSON.parse(e.target.result);
         var incoming = data.userState || data;
-        if (!incoming || typeof incoming !== 'object') throw new Error('अमान्य फाइल');
+        if (!incoming || typeof incoming !== 'object') throw new Error(I18n.t('io.invalidFile'));
 
         if (data.examId && data.examId !== State.activeExamId) {
-          var ok = confirm(
-            'यह फाइल "' + (data.examTitle || data.examId) + '" की है, ' +
-            'जबकि वर्तमान रोडमैप अलग है।\n\nफिर भी इसी रोडमैप में इम्पोर्ट करें?'
-          );
+          var ok = confirm(I18n.t('io.mismatch', { title: data.examTitle || data.examId }));
           if (!ok) { ev.target.value = ''; return; }
         }
 
         State.userState = State.mergeProgress(State.userState, incoming);
         State.saveProgress();
         Roadmap.render();
-        showToast('⬆ प्रगति सफलतापूर्वक इम्पोर्ट हुई');
+        showToast(I18n.t('io.imported'));
       } catch (err) {
-        showToast('इम्पोर्ट विफल: ' + err.message, 'error');
+        showToast(I18n.t('io.importFailed', { msg: err.message }), 'error');
       }
       ev.target.value = '';
     };
@@ -254,7 +305,7 @@
     State.saveProgress();
     Roadmap.render();
     closeResetModal();
-    showToast('सभी प्रगति रीसेट कर दी गई', 'info');
+    showToast(I18n.t('reset.done'), 'info');
   };
 
   /* ---------------- PWA install ---------------- */
@@ -270,12 +321,12 @@
 
   global.installApp = async function () {
     if (!deferredPrompt) {
-      showToast('इंस्टॉल करने हेतु ब्राउज़र मेन्यू से "Add to Home Screen" चुनें', 'info');
+      showToast(I18n.t('app.installHint'), 'info');
       return;
     }
     deferredPrompt.prompt();
     var choice = await deferredPrompt.userChoice;
-    if (choice.outcome === 'accepted') showToast('📲 ऐप इंस्टॉल हो गया!');
+    if (choice.outcome === 'accepted') showToast(I18n.t('app.installed'));
     deferredPrompt = null;
     var btn = document.getElementById('installAppBtn');
     if (btn) btn.style.display = 'none';
@@ -294,30 +345,50 @@
   }
   global.addEventListener('online', function () {
     updateOnlineUI();
-    showToast('🌐 फिर से ऑनलाइन — सिंक हो रहा है', 'info');
+    showToast(I18n.t('app.backOnline'), 'info');
     if (State.authToken) State.pushCloudProgress(false);
   });
   global.addEventListener('offline', function () {
     updateOnlineUI();
-    showToast('📴 ऑफलाइन मोड — प्रगति इस डिवाइस पर सेव होती रहेगी', 'info');
+    showToast(I18n.t('app.wentOffline'), 'info');
   });
 
   /* ---------------- bootstrap ---------------- */
 
   async function boot() {
+    // Language must settle before any translated markup is produced.
+    I18n.load();
+    document.documentElement.setAttribute('lang', I18n.lang);
+    I18n.applyStatic(document);
+    I18n.onChange(applyLanguageToUI);
+
+    State.loadProfile();
+    // A profile saved on another device carries the student's chosen language.
+    var prof = State.getProfile();
+    if (prof && prof.appLanguage && prof.appLanguage !== I18n.lang) {
+      I18n.setLang(prof.appLanguage, true);
+      document.documentElement.setAttribute('lang', I18n.lang);
+      I18n.applyStatic(document);
+    }
+
     applyTheme(localStorage.getItem(THEME_KEY) || 'dark');
     updateOnlineUI();
+    updateLangUI();
     State.loadAuth();
     updateSyncUI();
 
     // Keep the UI in step with the state manager.
     State.on('progress:changed', function () { Roadmap.updateAll(); });
+    State.on('profile:changed', function () {
+      if (global.GoalBanner) GoalBanner.render();
+      if (State.exam) Roadmap.renderExamHeader();
+    });
     State.on('progress:replaced', function () { Roadmap.render(); });
     State.on('sync:changed', updateSyncUI);
     State.on('auth:changed', updateSyncUI);
-    State.on('sync:success', function () { showToast('✓ प्रगति क्लाउड पर सिंक हुई'); });
-    State.on('sync:pulled', function () { showToast('✓ क्लाउड से नवीनतम प्रगति लोड हुई'); });
-    State.on('sync:expired', function () { showToast('सत्र समाप्त — कृपया पुनः लॉगिन करें', 'error'); });
+    State.on('sync:success', function () { showToast(I18n.t('sync.pushed')); });
+    State.on('sync:pulled', function () { showToast(I18n.t('sync.pulled')); });
+    State.on('sync:expired', function () { showToast(I18n.t('sync.expired'), 'error'); });
     State.on('exam:changed', function () {
       Roadmap.renderExamHeader();
       Roadmap.render();
@@ -339,14 +410,16 @@
         try {
           await State.activateExam(State.LEGACY_EXAM_ID);
         } catch (e2) {
-          showToast('रोडमैप लोड नहीं हो सका। कृपया इंटरनेट जांचें।', 'error');
+          showToast(I18n.t('app.roadmapLoadFailed'), 'error');
         }
       } else {
-        showToast('रोडमैप लोड नहीं हो सका। कृपया इंटरनेट जांचें।', 'error');
+        showToast(I18n.t('app.roadmapLoadFailed'), 'error');
       }
     }
 
     Timer.updateDisplay();
+    if (global.GoalBanner) GoalBanner.init();
+    if (global.Onboarding) Onboarding.init();
     if (State.authToken) State.verifyAuth();
 
     // Register the service worker for offline study.
@@ -359,6 +432,8 @@
     // Close overlays with Escape.
     document.addEventListener('keydown', function (e) {
       if (e.key !== 'Escape') return;
+      // The onboarding modal deliberately ignores Escape: leaving setup
+      // half-done is a choice, made via its own "Skip for now" control.
       StudyDrawer.close();
       Catalog.close();
       closeAuthModal();

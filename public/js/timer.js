@@ -49,14 +49,14 @@
     if (mode) {
       mode.innerText = Timer.focusTopic
         ? '🎯 ' + Timer.focusTopic
-        : (Timer.isStopwatch ? 'स्टॉपवॉच (Open Study)' : 'फोकस सेशन (Pomodoro)');
+        : I18n.t(Timer.isStopwatch ? 'timer.stopwatch' : 'timer.focus');
     }
 
     var btn = document.getElementById('timerStartBtn');
-    if (btn) btn.innerText = Timer.running ? '⏸ रोकें' : '▶ शुरू करें';
+    if (btn) btn.innerText = I18n.t(Timer.running ? 'timer.pause' : 'timer.start');
 
     var sess = document.getElementById('timerSessions');
-    if (sess) sess.innerText = 'आज: ' + Timer._sessionsToday + ' सेशन';
+    if (sess) sess.innerText = I18n.t('timer.today', { n: Timer._sessionsToday });
   };
 
   Timer.tick = function () {
@@ -69,6 +69,7 @@
         Timer.stop();
         Timer._sessionsToday++;
         saveSessions();
+        if (global.GoalBanner) GoalBanner.render();
         Timer.notifyDone();
         Timer.updateDisplay();
         return;
@@ -79,7 +80,7 @@
 
   Timer.notifyDone = function () {
     if (global.showToast) {
-      showToast('🎉 फोकस सेशन पूरा हुआ! थोड़ा ब्रेक लें।', 'success');
+      showToast(I18n.t('timer.done'), 'success');
     }
     try {
       // Short beep so the student notices without needing the tab in view.
@@ -122,6 +123,11 @@
       Timer.seconds = mins * 60;
     }
     Timer.updateDisplay();
+  };
+
+  /** Focus sessions finished today — drives the goal banner's Pomodoro ring. */
+  Timer.sessionsToday = function () {
+    return Timer._sessionsToday;
   };
 
   Timer.clearFocus = function () {

@@ -89,7 +89,7 @@ The validator enforces the invariants that matter: section marks must sum to the
 exam total, topic IDs must follow `<unitId>_t<index>`, every `sectionId` must
 resolve, and IDs must be unique.
 
-Bundled: Bihar STET Psychology (94 topics), CTET Paper 2 CDP (37), SSC CGL Tier 1
+Bundled: Bihar STET Psychology (76 topics), CTET Paper 2 CDP (37), SSC CGL Tier 1
 (47), CBSE Class 12 Physics (40). UPSC Prelims GS1 and NEET Biology are listed as
 coming soon.
 

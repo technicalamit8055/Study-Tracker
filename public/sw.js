@@ -6,7 +6,7 @@
  *   - Exam roadmap JSON:   stale-while-revalidate (study offline)
  *   - Auth & progress API: network only (never cache a student's private state)
  */
-const VERSION = 'v3';
+const VERSION = 'v4';
 const SHELL_CACHE = 'examroadmap-shell-' + VERSION;
 const DATA_CACHE = 'examroadmap-data-' + VERSION;
 
@@ -16,11 +16,14 @@ const SHELL_ASSETS = [
   '/manifest.json',
   '/css/styles-base.css',
   '/css/styles-roadmap.css',
+  '/js/i18n.js',
   '/js/state.js',
   '/js/roadmap-renderer.js',
   '/js/study-drawer.js',
   '/js/catalog-modal.js',
   '/js/timer.js',
+  '/js/goal-banner.js',
+  '/js/onboarding-wizard.js',
   '/js/app.js',
   '/data/exams-catalog.json',
   '/data/exams/bihar-stet-psychology.json'

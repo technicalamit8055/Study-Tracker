@@ -20,7 +20,10 @@
     authToken: 'stet_auth_token',
     userInfo: 'stet_user_info',
     theme: 'stet_theme',
-    timerPrefix: 'examroadmap_timer_'
+    timerPrefix: 'examroadmap_timer_',
+    userProfile: 'examroadmap_user_profile',
+    appLang: 'examroadmap_app_lang',
+    onboardingDone: 'examroadmap_onboarding_done'
   };
 
   var State = {
@@ -31,6 +34,7 @@
     exam: null,           // full roadmap of the active exam
     activeExamId: null,
     userState: {},        // progress for the ACTIVE exam only
+    profile: null,        // onboarding profile: goal, medium, schedule
 
     authToken: null,
     currentUser: null,
@@ -128,7 +132,12 @@
   /* ---------------- active exam ---------------- */
 
   State.getSavedActiveExamId = function () {
-    return safeGet(KEYS.activeExam) || LEGACY_EXAM_ID;
+    // An explicit switch wins; otherwise honour the exam chosen during onboarding.
+    var explicit = safeGet(KEYS.activeExam);
+    if (explicit) return explicit;
+    var p = State.profile || State.loadProfile();
+    if (p && p.targetExamId) return p.targetExamId;
+    return LEGACY_EXAM_ID;
   };
 
   State.setActiveExamId = function (examId) {
@@ -314,6 +323,132 @@
     var n = ['r1', 'r2', 'r3'].filter(function (k) { return !!tiers[k]; }).length;
     // Older data only had the plain counter; trust whichever is larger.
     return Math.max(n, st.revisions || 0);
+  };
+
+  /* ---------------- user profile (onboarding) ---------------- */
+
+  var MEDIUMS = ['en', 'hi', 'bilingual'];
+
+  State.blankProfile = function () {
+    return {
+      name: '',
+      appLanguage: (global.I18n && I18n.DEFAULT_LANG) || 'en',
+      targetExamId: null,
+      examMedium: 'en',
+      targetDate: null,
+      dailyHours: 4,
+      dailyPomodoros: 4,
+      prepLevel: 'beginner',
+      targetScore: null,
+      onboardingDone: false,
+      createdAt: null,
+      updatedAt: null
+    };
+  };
+
+  /**
+   * Read the saved profile, backfilling any field added after it was written
+   * so an older profile never renders the goal banner with undefined values.
+   */
+  State.loadProfile = function () {
+    var raw = safeGet(KEYS.userProfile);
+    var p;
+    try {
+      p = raw ? JSON.parse(raw) : null;
+    } catch (e) {
+      console.error('Could not parse saved profile:', e);
+      p = null;
+    }
+    if (!p || typeof p !== 'object') {
+      State.profile = null;
+      return null;
+    }
+
+    var base = State.blankProfile();
+    Object.keys(base).forEach(function (k) {
+      if (p[k] === undefined) p[k] = base[k];
+    });
+    if (MEDIUMS.indexOf(p.examMedium) === -1) p.examMedium = 'en';
+    if (typeof p.dailyHours !== 'number' || p.dailyHours <= 0) p.dailyHours = base.dailyHours;
+    if (typeof p.dailyPomodoros !== 'number' || p.dailyPomodoros <= 0) p.dailyPomodoros = base.dailyPomodoros;
+
+    State.profile = p;
+    return p;
+  };
+
+  State.saveProfile = function (patch) {
+    var p = State.profile || State.loadProfile() || State.blankProfile();
+    if (patch) Object.keys(patch).forEach(function (k) { p[k] = patch[k]; });
+    if (!p.createdAt) p.createdAt = new Date().toISOString();
+    p.updatedAt = new Date().toISOString();
+
+    State.profile = p;
+    safeSet(KEYS.userProfile, JSON.stringify(p));
+    if (p.onboardingDone) safeSet(KEYS.onboardingDone, '1');
+    State.emit('profile:changed', p);
+    return p;
+  };
+
+  State.hasOnboarded = function () {
+    if (safeGet(KEYS.onboardingDone) === '1') return true;
+    var p = State.profile || State.loadProfile();
+    return !!(p && p.onboardingDone);
+  };
+
+  State.getProfile = function () {
+    return State.profile || State.loadProfile();
+  };
+
+  /** Whole days from today until the target exam date; null when unset. */
+  State.daysUntilExam = function () {
+    var p = State.getProfile();
+    if (!p || !p.targetDate) return null;
+    var target = new Date(p.targetDate + 'T00:00:00');
+    if (isNaN(target.getTime())) return null;
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+    return Math.round((target - today) / 86400000);
+  };
+
+  /**
+   * Derived study plan used by the strategy preview and the goal banner.
+   * Phase split follows 80/20: a shorter runway pushes more of the time into
+   * the high-yield phase rather than pretending full coverage is possible.
+   */
+  State.studyPlan = function (exam) {
+    var p = State.getProfile() || State.blankProfile();
+    var ex = exam || State.exam;
+    var days = State.daysUntilExam();
+    if (days == null || days < 1) days = 90;
+
+    var hours = p.dailyHours || 4;
+    var totalHours = days * hours;
+    var totalTopics = 0;
+    if (ex && ex.phases) {
+      ex.phases.forEach(function (ph) {
+        ph.units.forEach(function (u) { totalTopics += (u.topics || []).length; });
+      });
+    }
+
+    var weeks = Math.max(1, Math.round(days / 7));
+    var tight = days < 45;
+    var split = tight ? [0.25, 0.55, 0.20] : [0.35, 0.40, 0.25];
+
+    return {
+      days: days,
+      dailyHours: hours,
+      totalHours: totalHours,
+      totalTopics: totalTopics,
+      topicsPerWeek: totalTopics ? Math.max(1, Math.ceil(totalTopics / weeks)) : 0,
+      dailyPomodoros: p.dailyPomodoros || 4,
+      focusMinutes: (p.dailyPomodoros || 4) * 25,
+      tight: tight,
+      phaseDays: [
+        Math.max(1, Math.round(days * split[0])),
+        Math.max(1, Math.round(days * split[1])),
+        Math.max(1, Math.round(days * split[2]))
+      ]
+    };
   };
 
   /* ---------------- cloud sync ---------------- */

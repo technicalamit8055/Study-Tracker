@@ -23,10 +23,24 @@
     standard: { label: '📌 Standard', cls: 'standard' }
   };
 
+  /**
+   * Lecture search tuned to the medium the student will actually write in.
+   * Bilingual deliberately adds no language word: the unqualified query
+   * surfaces both English and Hindi lectures, which is the point.
+   */
+  var MEDIUM_QUERY = {
+    en: 'lecture in English',
+    hi: 'lecture in Hindi',
+    bilingual: ''
+  };
+
   Roadmap.youtubeUrl = function (unit, topicText) {
     var prefix = (State.exam && State.exam.resourcePrefix) || '';
-    var q = prefix + ' ' + (topicText || unit.title);
-    return 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q.trim());
+    var profile = State.getProfile ? State.getProfile() : null;
+    var medium = (profile && profile.examMedium) || 'en';
+    var suffix = MEDIUM_QUERY[medium] != null ? MEDIUM_QUERY[medium] : '';
+    var q = prefix + ' ' + (topicText || unit.title) + ' ' + suffix;
+    return 'https://www.youtube.com/results?search_query=' + encodeURIComponent(q.replace(/\s+/g, ' ').trim());
   };
 
   /* ---------------- header ---------------- */
@@ -37,20 +51,31 @@
     var el = document.getElementById('examHeaderInfo');
     if (!el) return;
 
+    // In English the roadmap leads with titleEn; in Hindi with title.
+    var primary = I18n.pick(ex, 'title', 'titleEn');
+    var secondary = I18n.lang === 'en' ? (ex.title || '') : (ex.titleEn || '');
+    if (secondary === primary) secondary = '';
+
+    var profile = State.getProfile ? State.getProfile() : null;
+    var mediumChip = (profile && profile.examMedium)
+      ? '<span class="exam-meta-chip medium-chip">🗣 ' + esc(t('medium.' + profile.examMedium)) + '</span>'
+      : '';
+
     el.innerHTML =
-      '<h1 class="exam-title">' + esc(ex.title) + '</h1>' +
-      '<p class="exam-subtitle">' + esc(ex.titleEn || '') + '</p>' +
+      '<h1 class="exam-title">' + esc(primary) + '</h1>' +
+      '<p class="exam-subtitle">' + esc(secondary) + '</p>' +
       '<div class="exam-meta-row">' +
         '<span class="exam-meta-chip">📚 ' + esc(ex.subject) + '</span>' +
-        '<span class="exam-meta-chip">🎯 ' + ex.totalMarks + ' अंक</span>' +
-        (ex.totalQuestions ? '<span class="exam-meta-chip">❓ ' + ex.totalQuestions + ' प्रश्न</span>' : '') +
-        (ex.durationMinutes ? '<span class="exam-meta-chip">⏱ ' + ex.durationMinutes + ' मिनट</span>' : '') +
-        (ex.passingMarks ? '<span class="exam-meta-chip">✅ उत्तीर्ण: ' + ex.passingMarks + '</span>' : '') +
+        '<span class="exam-meta-chip">🎯 ' + ex.totalMarks + ' ' + esc(t('progress.marks')) + '</span>' +
+        (ex.totalQuestions ? '<span class="exam-meta-chip">❓ ' + ex.totalQuestions + ' ' + esc(t('roadmap.questions')) + '</span>' : '') +
+        (ex.durationMinutes ? '<span class="exam-meta-chip">⏱ ' + ex.durationMinutes + ' ' + esc(t('roadmap.minutes')) + '</span>' : '') +
+        (ex.passingMarks ? '<span class="exam-meta-chip">✅ ' + esc(t('roadmap.passing')) + ': ' + ex.passingMarks + '</span>' : '') +
         (ex.negativeMarking ? '<span class="exam-meta-chip">➖ ' + esc(ex.negativeMarking) + '</span>' : '') +
+        mediumChip +
       '</div>';
 
     var badge = document.getElementById('activeExamBadgeText');
-    if (badge) badge.innerText = ex.title;
+    if (badge) badge.innerText = primary;
   };
 
   /* ---------------- roadmap body ---------------- */
@@ -107,27 +132,27 @@
             '<span class="unit-tag">' + esc(unit.unitNum) + '</span>' +
             '<span class="unit-title">' + esc(unit.title) + '</span>' +
             '<span class="badge-priority ' + prio.cls + '">' + prio.label + '</span>' +
-            '<span class="badge-weight" title="अनुमानित वेटेज">🎯 ' + esc(unit.estMarks) + '</span>' +
-            '<span class="badge-section" title="खंड">' + esc(unit.sectionName) + '</span>' +
+            '<span class="badge-weight" title="' + esc(t('roadmap.estWeightage')) + '">🎯 ' + esc(unit.estMarks) + '</span>' +
+            '<span class="badge-section" title="' + esc(t('roadmap.section')) + '">' + esc(unit.sectionName) + '</span>' +
           '</div>' +
           '<div class="unit-header-right">' +
-            '<div class="unit-ring" id="unit_ring_' + esc(unit.id) + '" title="यूनिट पूर्णता">' +
+            '<div class="unit-ring" id="unit_ring_' + esc(unit.id) + '" title="' + esc(t('roadmap.unitCompletion')) + '">' +
               '<svg viewBox="0 0 36 36"><circle class="ring-bg" cx="18" cy="18" r="15.9"></circle>' +
               '<circle class="ring-fg" id="unit_ring_fg_' + esc(unit.id) + '" cx="18" cy="18" r="15.9"></circle></svg>' +
               '<span class="ring-label" id="unit_badge_' + esc(unit.id) + '">0%</span>' +
             '</div>' +
-            '<span class="unit-status-chip" id="unit_status_' + esc(unit.id) + '">शुरू नहीं</span>' +
-            '<a href="' + ytUrl + '" target="_blank" rel="noopener noreferrer" class="unit-yt-btn" title="यूनिट लेक्चर देखें">' +
+            '<span class="unit-status-chip" id="unit_status_' + esc(unit.id) + '">' + esc(t('roadmap.notStarted')) + '</span>' +
+            '<a href="' + ytUrl + '" target="_blank" rel="noopener noreferrer" class="unit-yt-btn" title="' + esc(t('roadmap.classTitle')) + '">' +
               '<svg class="yt-icon" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>' +
-              'क्लास' +
+              esc(t('roadmap.class')) +
             '</a>' +
             '<div class="unit-actions">' +
-              '<button class="btn-xs" onclick="Roadmap.markUnit(\'' + esc(unit.id) + '\', true)" title="सभी टॉपिक पूर्ण करें">✓ सब पूर्ण</button>' +
-              '<button class="btn-xs" onclick="Roadmap.markUnit(\'' + esc(unit.id) + '\', false)" title="यूनिट रीसेट करें">↺ रीसेट</button>' +
+              '<button class="btn-xs" onclick="Roadmap.markUnit(\'' + esc(unit.id) + '\', true)" title="' + esc(t('roadmap.markAllDoneTitle')) + '">' + esc(t('roadmap.markAllDone')) + '</button>' +
+              '<button class="btn-xs" onclick="Roadmap.markUnit(\'' + esc(unit.id) + '\', false)" title="' + esc(t('roadmap.resetUnitTitle')) + '">' + esc(t('roadmap.resetUnit')) + '</button>' +
             '</div>' +
           '</div>' +
         '</div>' +
-        (unit.pyqFocus ? '<div class="unit-pyq-hint">💡 <strong>PYQ मुख्य बिंदु:</strong> ' + esc(unit.pyqFocus) + '</div>' : '') +
+        (unit.pyqFocus ? '<div class="unit-pyq-hint">💡 <strong>' + esc(t('roadmap.pyqHint')) + ':</strong> ' + esc(unit.pyqFocus) + '</div>' : '') +
         '<div class="topics-list">' + topicsHtml + '</div>' +
       '</article>';
   };
@@ -142,20 +167,20 @@
       '<div class="topic-row" id="row_' + esc(topic.id) + '" data-topic-id="' + esc(topic.id) + '" data-priority="' + esc(unit.priority) + '">' +
         '<div class="topic-main">' +
           '<input type="checkbox" class="topic-checkbox" id="chk_' + esc(topic.id) + '" ' + (done ? 'checked' : '') +
-            ' onchange="Roadmap.toggleTopic(\'' + esc(topic.id) + '\')" aria-label="टॉपिक पूर्ण चिह्नित करें">' +
+            ' onchange="Roadmap.toggleTopic(\'' + esc(topic.id) + '\')" aria-label="' + esc(t('roadmap.topicCheckbox')) + '">' +
           '<label class="topic-name ' + (done ? 'completed' : '') + '" id="lbl_' + esc(topic.id) + '" for="chk_' + esc(topic.id) + '">' +
             esc(topic.text) +
           '</label>' +
         '</div>' +
         '<div class="topic-controls">' +
           '<span class="topic-mini-stat" id="mini_' + esc(topic.id) + '">' +
-            (revs ? '<span class="mini-chip rev" title="रिवीजन">🔁 ' + revs + '</span>' : '') +
-            (st.stars ? '<span class="mini-chip star" title="कॉन्फिडेंस">★ ' + st.stars + '</span>' : '') +
-            (st.pyqDone ? '<span class="mini-chip pyq" title="PYQ हल किए">📝 PYQ</span>' : '') +
-            (hasNotes ? '<span class="mini-chip note" title="नोट्स मौजूद">🗒</span>' : '') +
+            (revs ? '<span class="mini-chip rev" title="' + esc(t('roadmap.revisions')) + '">🔁 ' + revs + '</span>' : '') +
+            (st.stars ? '<span class="mini-chip star" title="' + esc(t('roadmap.confidence')) + '">★ ' + st.stars + '</span>' : '') +
+            (st.pyqDone ? '<span class="mini-chip pyq" title="' + esc(t('roadmap.pyqSolved')) + '">📝 PYQ</span>' : '') +
+            (hasNotes ? '<span class="mini-chip note" title="' + esc(t('roadmap.hasNotes')) + '">🗒</span>' : '') +
           '</span>' +
-          '<button class="study-btn" onclick="StudyDrawer.open(\'' + esc(topic.id) + '\')" title="स्टडी पैनल खोलें (रिवीजन, नोट्स, वीडियो)">' +
-            '📖 स्टडी' +
+          '<button class="study-btn" onclick="StudyDrawer.open(\'' + esc(topic.id) + '\')" title="' + esc(t('roadmap.studyTitle')) + '">' +
+            esc(t('roadmap.study')) +
           '</button>' +
         '</div>' +
       '</div>';
@@ -192,9 +217,9 @@
       var chip = document.getElementById('unit_status_' + u.id);
       if (chip) {
         var map = {
-          not_started: { t: 'शुरू नहीं', c: 'not_started' },
-          in_progress: { t: 'जारी है', c: 'in_progress' },
-          completed: { t: 'पूर्ण ✓', c: 'completed' }
+          not_started: { t: t('roadmap.notStarted'), c: 'not_started' },
+          in_progress: { t: t('roadmap.ongoing'), c: 'in_progress' },
+          completed: { t: t('roadmap.complete'), c: 'completed' }
         };
         var m = map[us.status];
         chip.innerText = m.t;
@@ -219,7 +244,7 @@
     set('completedCount', s.completedTopics + ' / ' + s.totalTopics);
     set('inProgressCount', String(s.inProgressTopics));
     set('highPriorityProgress', s.highCompleted + ' / ' + s.highTotal);
-    set('weightedMarksCovered', s.estimatedMarks + ' / ' + s.totalMarks + ' अंक');
+    set('weightedMarksCovered', s.estimatedMarks + ' / ' + s.totalMarks + ' ' + t('progress.marks'));
     set('totalRevisionCount', String(s.totalRevisions));
 
     var ex = State.exam;
@@ -227,8 +252,8 @@
     if (passEl && ex && ex.passingMarks) {
       var ok = s.estimatedMarks >= ex.passingMarks;
       passEl.innerText = ok
-        ? '✅ अनुमानित स्कोर उत्तीर्ण अंक (' + ex.passingMarks + ') से ऊपर है'
-        : '📈 उत्तीर्ण अंक (' + ex.passingMarks + ') तक ' + (ex.passingMarks - s.estimatedMarks) + ' अंक शेष';
+        ? t('projection.above', { marks: ex.passingMarks })
+        : t('projection.gap', { marks: ex.passingMarks, gap: ex.passingMarks - s.estimatedMarks });
       passEl.className = 'pass-projection ' + (ok ? 'ok' : 'pending');
     }
   };
@@ -263,10 +288,10 @@
       var revs = State.revisionCount(st);
       var hasNotes = !!(st.notes && st.notes.trim());
       mini.innerHTML =
-        (revs ? '<span class="mini-chip rev" title="रिवीजन">🔁 ' + revs + '</span>' : '') +
-        (st.stars ? '<span class="mini-chip star" title="कॉन्फिडेंस">★ ' + st.stars + '</span>' : '') +
-        (st.pyqDone ? '<span class="mini-chip pyq" title="PYQ हल किए">📝 PYQ</span>' : '') +
-        (hasNotes ? '<span class="mini-chip note" title="नोट्स मौजूद">🗒</span>' : '');
+        (revs ? '<span class="mini-chip rev" title="' + esc(t('roadmap.revisions')) + '">🔁 ' + revs + '</span>' : '') +
+        (st.stars ? '<span class="mini-chip star" title="' + esc(t('roadmap.confidence')) + '">★ ' + st.stars + '</span>' : '') +
+        (st.pyqDone ? '<span class="mini-chip pyq" title="' + esc(t('roadmap.pyqSolved')) + '">📝 PYQ</span>' : '') +
+        (hasNotes ? '<span class="mini-chip note" title="' + esc(t('roadmap.hasNotes')) + '">🗒</span>' : '');
     }
     Roadmap.updateAll();
   };
@@ -289,7 +314,7 @@
     });
     State.saveProgress();
     if (global.showToast) {
-      showToast(complete ? '✓ यूनिट पूर्ण चिह्नित की गई' : '↺ यूनिट रीसेट हुई (नोट्स सुरक्षित हैं)', complete ? 'success' : 'info');
+      showToast(t(complete ? 'roadmap.unitDone' : 'roadmap.unitReset'), complete ? 'success' : 'info');
     }
   };
 
@@ -307,7 +332,7 @@
     var sel = document.getElementById('phaseFilter');
     if (!sel || !State.exam) return;
     var cur = sel.value || 'all';
-    sel.innerHTML = '<option value="all">सभी चरण (All Phases)</option>' +
+    sel.innerHTML = '<option value="all">' + esc(t('toolbar.allPhases')) + '</option>' +
       State.exam.phases.map(function (p) {
         return '<option value="' + esc(p.id) + '">' + esc(p.name) + '</option>';
       }).join('');
