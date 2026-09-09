@@ -290,7 +290,7 @@
     }
 
     if (withCloud && !State.authToken && global.openAuthModal) {
-      setTimeout(function () { openAuthModal(); }, 700);
+      setTimeout(function () { openAuthModal(null, 'register'); }, 700);
     }
   };
 

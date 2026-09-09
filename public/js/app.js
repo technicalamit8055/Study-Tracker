@@ -149,10 +149,13 @@
 
   /* ---------------- auth modal ---------------- */
 
-  global.openAuthModal = function (promptMsg) {
+  global.openAuthModal = function (promptMsg, defaultTab) {
     var m = document.getElementById('authModal');
     if (!m) return;
     m.classList.add('open');
+    if (defaultTab && global.switchAuthTab) {
+      global.switchAuthTab(defaultTab);
+    }
     // Tell the student up-front if cloud sync cannot work, rather than letting
     // them fill in the form and hit a wall on submit.
     if (State.cloudReady && !State.cloudReady()) { guardCloud(); return; }
@@ -496,6 +499,31 @@
         afterAuth(user);
       }
     });
+
+    // Detect OAuth errors returned in the URL (e.g. access_denied, unauthorized_client)
+    try {
+      var urlParams = new URLSearchParams(global.location.search);
+      var hashParams = new URLSearchParams((global.location.hash || '').replace(/^#/, ''));
+      var oauthErr = urlParams.get('error_description') || urlParams.get('error') ||
+                     hashParams.get('error_description') || hashParams.get('error');
+      if (oauthErr) {
+        setTimeout(function () {
+          openAuthModal(oauthErr, 'login');
+        }, 300);
+      }
+    } catch (e) { }
+
+    // If redirected to /login, /register, or /signup, open the corresponding modal tab and restore clean URL
+    var currentPath = (global.location.pathname || '').toLowerCase().replace(/\/+$/, '');
+    if (currentPath === '/login' || currentPath === '/register' || currentPath === '/signup') {
+      var pathTab = currentPath === '/login' ? 'login' : 'register';
+      setTimeout(function () {
+        if (!State.authToken) openAuthModal(null, pathTab);
+        try {
+          global.history.replaceState(null, '', '/' + (global.location.search || '') + (global.location.hash || ''));
+        } catch (e) { }
+      }, 350);
+    }
     State.on('exam:changed', function () {
       Roadmap.renderExamHeader();
       Roadmap.render();
